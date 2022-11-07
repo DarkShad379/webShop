@@ -3,7 +3,7 @@ package com.dark.webshop.entity.user;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "userDetailsCatalog")
+@Table(name = "userdetailscatalog")
 public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

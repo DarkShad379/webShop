@@ -5,7 +5,7 @@ import java.sql.Blob;
 import java.util.List;
 
 @Entity
-@Table(name = "FoodCatalog")
+@Table(name = "foodcatalog")
 public class Food {
 
     @Id
