@@ -2,6 +2,7 @@ package com.dark.webshop.DataBaseEntityTests;
 
 import com.dark.webshop.entity.food.Additional;
 import com.dark.webshop.entity.food.Food;
+import com.dark.webshop.entity.food.FoodCategory;
 import com.dark.webshop.repository.FoodRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +45,12 @@ public class DataAccessTest {
         testFood.setImage(inputStream.readAllBytes());
         testFood.setDescription("Лучшая пицца в мире");
         testFood.setCost(9999);
+        testFood.setFoodCategory(FoodCategory.PIZZA);
         int Id = (int) entityManager.persistAndGetId(testFood);
-        Optional<Food> margarita = foodRepository.findById(Id);
-        assertEquals(margarita.get().getName(), testFood.getName());
-        assertEquals(margarita.get().getDescription(), testFood.getDescription());
-        assertEquals(margarita.get().getImage(), testFood.getImage());
-        assertEquals(margarita.get().getAvailableAdditionalList().get(0),testFood.getAvailableAdditionalList().get(0));
-    }
-}
+        Food margarita = foodRepository.findById(Id).get();
+        assertEquals(margarita.getName(), testFood.getName());
+        assertEquals(margarita.getDescription(), testFood.getDescription());
+        assertEquals(margarita.getImage(), testFood.getImage());
+        assertEquals(margarita.getAvailableAdditionalList().get(0), testFood.getAvailableAdditionalList().get(0));
+        assertEquals(margarita.getFoodCategory(), FoodCategory.PIZZA);
+    }}
