@@ -9,16 +9,10 @@ import java.util.List;
 @Entity
 @Table(name = "foodcatalog")
 public class Food {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     @Column(name = "name")
     private String name;
     @Column(name = "image", columnDefinition = "LONGBLOB")
@@ -40,6 +34,9 @@ public class Food {
         this.description = description;
         this.cost = cost;
         this.availableAdditionalList = availableAdditionalList;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public byte[] getImage() {
@@ -72,7 +69,6 @@ public class Food {
     public void setName(String name) {
         this.name = name;
     }
-
 
 
     public String getDescription() {
