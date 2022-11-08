@@ -1,4 +1,4 @@
-package com.dark.webshop.DataBaseEntityTests;
+package com.dark.webshop.DAOTests;
 
 import com.dark.webshop.entity.food.Additional;
 import com.dark.webshop.entity.food.Food;
@@ -10,20 +10,17 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.core.io.ClassPathResource;
-import org.thymeleaf.dialect.AbstractDialect;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class DataAccessTest {
+public class EntitySetupTest {
     @Autowired
     private TestEntityManager entityManager;
     @Autowired
