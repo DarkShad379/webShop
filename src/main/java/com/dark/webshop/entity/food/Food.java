@@ -1,5 +1,7 @@
 package com.dark.webshop.entity.food;
 
+import org.hibernate.type.descriptor.sql.LobTypeMappings;
+
 import javax.persistence.*;
 import java.sql.Blob;
 import java.util.List;
@@ -19,8 +21,9 @@ public class Food {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "image")
-    private Blob image;
+    @Column(name = "image", columnDefinition = "LONGBLOB")
+    @Lob
+    private byte[] image;
     @Column(name = "description")
     private String description;
     @Column(name = "cost")
@@ -30,12 +33,29 @@ public class Food {
     )
     private List<Additional> availableAdditionalList;
 
-    public Food(Integer id, String name, Blob image, String description, Integer cost) {
+    public Food(Integer id, String name, byte[] image, String description, Integer cost, List<Additional> availableAdditionalList) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.description = description;
         this.cost = cost;
+        this.availableAdditionalList = availableAdditionalList;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public List<Additional> getAvailableAdditionalList() {
+        return availableAdditionalList;
+    }
+
+    public void setAvailableAdditionalList(List<Additional> availableAdditionalList) {
+        this.availableAdditionalList = availableAdditionalList;
     }
 
     public Food() {
@@ -53,13 +73,7 @@ public class Food {
         this.name = name;
     }
 
-    public Blob getImage() {
-        return image;
-    }
 
-    public void setImage(Blob image) {
-        this.image = image;
-    }
 
     public String getDescription() {
         return description;
