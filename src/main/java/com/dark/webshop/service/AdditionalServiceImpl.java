@@ -6,20 +6,28 @@ import com.dark.webshop.service.interfaces.AdditionalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
 public class AdditionalServiceImpl implements AdditionalService {
     @Autowired
     AdditionalRepository additionalRepository;
+    @Autowired
+    private EntityManager entityManager;
 
     @Override
-    public List<Additional> getAllAdditionals() {
-        return additionalRepository.findAllByOrderByNameAsc();
+    public void deleteAdditional(Additional additional) {
+        additionalRepository.delete(additional);
     }
+
+    public List<Additional> findAll(boolean isDeleted) {
+        return additionalRepository.findAllByOrderByNameAsc(isDeleted);
+    }
+
 
     @Override
     public Additional addAdditional(Additional additional) {
-        return  additionalRepository.save(additional);
+        return additionalRepository.save(additional);
     }
 }

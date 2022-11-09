@@ -1,8 +1,5 @@
 package com.dark.webshop.entity.food;
 
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.ParamDef;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
@@ -11,8 +8,6 @@ import java.util.List;
 @Entity
 @Table(name = "foodcatalog")
 @SQLDelete(sql = "UPDATE foodcatalog SET deleted = true WHERE id=?")
-@FilterDef(name = "deletedFoodFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
-@Filter(name = "deletedFoodFilter", condition = "deleted = :isDeleted")
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

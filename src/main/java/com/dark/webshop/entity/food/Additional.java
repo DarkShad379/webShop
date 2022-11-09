@@ -5,8 +5,8 @@ import org.hibernate.annotations.SQLDelete;
 import javax.persistence.*;
 
 @Entity
-@SQLDelete(sql = "UPDATE additionals SET deleted = true WHERE id=?")
 @Table(name = "additionals")
+@SQLDelete(sql = "UPDATE additionals SET deleted = true WHERE id=?")
 public class Additional {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,10 @@ public class Additional {
     public Additional() {
     }
 
-    public Additional(Integer id, String name, Integer cost) {
+    public Additional(Integer id, String name, boolean deleted, Integer cost) {
         this.id = id;
         this.name = name;
+        this.deleted = deleted;
         this.cost = cost;
     }
 

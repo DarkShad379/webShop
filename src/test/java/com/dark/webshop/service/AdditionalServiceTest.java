@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -27,4 +28,18 @@ public class AdditionalServiceTest {
         assertEquals("Сырный бортик", newAdditional.getName());
     }
 
+    @Test
+    public void testSoftDeleteAdditional() {
+        List<Additional> additionalList = additionalService.findAll(false);
+        additionalList.forEach(it -> additionalService.deleteAdditional(it));
+        assertTrue(additionalService.findAll(true).size() > 0);
+        assertEquals(0, additionalService.findAll(false).size());
+
+    }
+
+    @Test
+    public void testFindAllAdditionals() {
+        System.out.println(additionalService.findAll(false));
+
+    }
 }

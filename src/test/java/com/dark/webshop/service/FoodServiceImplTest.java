@@ -28,7 +28,7 @@ class FoodServiceImplTest {
         testFood.setName("Пицца Маргарита");
         testFood.setFoodCategory(FoodCategory.PIZZA);
         testFood.setCost(1800);
-        List<Additional> additionalList = new ArrayList<>(additionalService.getAllAdditionals());
+        List<Additional> additionalList = new ArrayList<>(additionalService.findAll(false));
         testFood.setAvailableAdditionalList(additionalList);
         testFood.setDescription("Пицца с томатной пастой и сыром");
         Food newPizza = foodService.addFood(testFood);
