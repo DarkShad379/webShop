@@ -1,7 +1,6 @@
 package com.dark.webshop.entity.food;
 
 import javax.persistence.*;
-import java.sql.Blob;
 import java.util.List;
 
 @Entity
@@ -17,6 +16,10 @@ public class OrderedFood {
     private Food food;
     @Column(name = "orderId", nullable = false)
     private Integer orderId;
+
+
+    @Column(name = "totalfoodcost", nullable = false)
+    private Integer totalfoodcost;
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "joinOrderedFoodAdditionals", joinColumns = @JoinColumn(name = "orderedFoodId"), inverseJoinColumns = @JoinColumn(name = "additionalId")
     )
@@ -25,13 +28,21 @@ public class OrderedFood {
     public OrderedFood() {
     }
 
-    public OrderedFood(Integer id, Food food, Integer orderId, List<Additional> additionalList) {
+    public OrderedFood(Integer id, Food food, Integer orderId, Integer totalfoodcost, List<Additional> additionalList) {
         this.id = id;
         this.food = food;
         this.orderId = orderId;
+        this.totalfoodcost = totalfoodcost;
         this.additionalList = additionalList;
     }
 
+    public Integer getTotalfoodcost() {
+        return totalfoodcost;
+    }
+
+    public void setTotalfoodcost(Integer totalfoodcost) {
+        this.totalfoodcost = totalfoodcost;
+    }
     public Integer getId() {
         return id;
     }
