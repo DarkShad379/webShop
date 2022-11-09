@@ -12,7 +12,7 @@ public class FoodServiceImpl implements FoodService {
     FoodRepository foodRepository;
 
     @Override
-    public void addFood(Food food) {
-        foodRepository.save(food);
+    public Food addFood(Food food) {
+        return foodRepository.save(food);
     }
 }

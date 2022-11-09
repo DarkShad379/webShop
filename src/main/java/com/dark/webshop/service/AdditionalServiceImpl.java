@@ -6,15 +6,20 @@ import com.dark.webshop.service.interfaces.AdditionalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdditionalServiceImpl implements AdditionalService {
     @Autowired
     AdditionalRepository additionalRepository;
 
     @Override
+    public List<Additional> getAllAdditionals() {
+        return additionalRepository.findAllByOrderByNameAsc();
+    }
+
+    @Override
     public Additional addAdditional(Additional additional) {
-        Additional newAdditional;
-        newAdditional = additionalRepository.save(additional);
-        return newAdditional;
+        return  additionalRepository.save(additional);
     }
 }

@@ -1,13 +1,18 @@
 package com.dark.webshop.entity.food;
 
-import org.hibernate.type.descriptor.sql.LobTypeMappings;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
-import java.sql.Blob;
 import java.util.List;
 
 @Entity
 @Table(name = "foodcatalog")
+@SQLDelete(sql = "UPDATE foodcatalog SET deleted = true WHERE id=?")
+@FilterDef(name = "deletedFoodFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
+@Filter(name = "deletedFoodFilter", condition = "deleted = :isDeleted")
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +27,13 @@ public class Food {
     private String description;
     @Column(name = "cost")
     private Integer cost;
+    @Column(name = "deleted")
+    private boolean deleted=false;
     @Column(name = "foodcategory")
     @Enumerated(EnumType.STRING)
     private FoodCategory foodCategory;
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "joinFoodCatalogAdditionals", joinColumns = @JoinColumn(name = "foodId"), inverseJoinColumns = @JoinColumn(name = "additionalId")
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(name = "joinfoodcatalogadditionals", joinColumns = @JoinColumn(name = "foodid"), inverseJoinColumns = @JoinColumn(name = "additionalid")
     )
     private List<Additional> availableAdditionalList;
 
@@ -41,6 +48,14 @@ public class Food {
         this.cost = cost;
         this.foodCategory = foodCategory;
         this.availableAdditionalList = availableAdditionalList;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public Integer getId() {

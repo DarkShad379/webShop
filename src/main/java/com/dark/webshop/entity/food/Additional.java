@@ -1,8 +1,11 @@
 package com.dark.webshop.entity.food;
 
+import org.hibernate.annotations.SQLDelete;
+
 import javax.persistence.*;
 
 @Entity
+@SQLDelete(sql = "UPDATE additionals SET deleted = true WHERE id=?")
 @Table(name = "additionals")
 public class Additional {
     @Id
@@ -15,7 +18,8 @@ public class Additional {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @Column(name = "deleted")
+    private boolean deleted=false;
     @Column(name = "cost")
     private Integer cost;
 
@@ -26,6 +30,14 @@ public class Additional {
         this.id = id;
         this.name = name;
         this.cost = cost;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public Integer getId() {
