@@ -9,4 +9,5 @@ import org.mapstruct.factory.Mappers;
 public interface AdditionalServiceMapper {
     AdditionalServiceMapper INSTANCE = Mappers.getMapper(AdditionalServiceMapper.class);
     AdditionalModel additionalToAdditionalModel(Additional additional);
+    Additional additionalModelToAdditional(AdditionalModel additionalModel);
 }

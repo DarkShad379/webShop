@@ -10,4 +10,5 @@ import org.mapstruct.factory.Mappers;
 public interface FoodServiceMapper {
     FoodServiceMapper INSTANCE = Mappers.getMapper(FoodServiceMapper.class);
    FoodModel foodToFoodModel(Food food);
+   Food foodModelToFood(FoodModel foodModel);
 }
