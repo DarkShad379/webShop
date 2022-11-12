@@ -1,4 +1,4 @@
-package com.dark.webshop.entity.user;
+package com.dark.webshop.database.entity.user;
 
 import javax.persistence.*;
 

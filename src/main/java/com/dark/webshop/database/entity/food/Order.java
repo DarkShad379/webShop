@@ -1,11 +1,12 @@
-package com.dark.webshop.entity.food;
+package com.dark.webshop.database.entity.food;
 
-import com.dark.webshop.entity.user.User;
+import com.dark.webshop.database.entity.user.User;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -23,15 +24,47 @@ public class Order {
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "orderedFood", joinColumns = @JoinColumn(name = "orderId"), inverseJoinColumns = @JoinColumn(name = "id")
     )
-    private List<OrderedFood> orderedFoodList;
+    @Column(name = "confirmed")
+    private boolean confirmed;
+    @Column(name = "datetime")
+    private Date datetime;
     public Order() {
     }
 
-    public Order(Integer id, User user, List<OrderedFood> orderedFoodList) {
+    public Order(Integer id, User user, boolean confirmed, Date datetime, List<OrderedFood> orderedFoodList) {
         this.id = id;
         this.user = user;
+        this.confirmed = confirmed;
+        this.datetime = datetime;
         this.orderedFoodList = orderedFoodList;
     }
+
+    public Date getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    private List<OrderedFood> orderedFoodList;
+
 
     public User getUser() {
         return user;

@@ -1,4 +1,4 @@
-package com.dark.webshop.entity.food;
+package com.dark.webshop.database.entity.food;
 
 import javax.persistence.*;
 import java.util.List;

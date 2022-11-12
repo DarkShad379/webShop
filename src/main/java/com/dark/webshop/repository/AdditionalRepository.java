@@ -1,6 +1,6 @@
 package com.dark.webshop.repository;
 
-import com.dark.webshop.entity.food.Additional;
+import com.dark.webshop.database.entity.food.Additional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

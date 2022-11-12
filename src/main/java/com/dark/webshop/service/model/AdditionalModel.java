@@ -1,32 +1,15 @@
-package com.dark.webshop.entity.food;
+package com.dark.webshop.service.model;
 
-import org.hibernate.annotations.SQLDelete;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "additionals")
-@SQLDelete(sql = "UPDATE additionals SET deleted = true WHERE id=?")
-public class Additional {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+public class AdditionalModel {
     private Integer id;
-    @Column(name = "name")
     private String name;
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    @Column(name = "deleted")
     private boolean deleted=false;
-    @Column(name = "cost")
     private Integer cost;
 
-    public Additional() {
+    public AdditionalModel() {
     }
 
-    public Additional(Integer id, String name, boolean deleted, Integer cost) {
+    public AdditionalModel(Integer id, String name, boolean deleted, Integer cost) {
         this.id = id;
         this.name = name;
         this.deleted = deleted;
@@ -44,6 +27,10 @@ public class Additional {
     public Integer getId() {
         return id;
     }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 
     public String getName() {
         return name;

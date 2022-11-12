@@ -1,41 +1,22 @@
-package com.dark.webshop.entity.food;
+package com.dark.webshop.service.model;
 
-import org.hibernate.annotations.SQLDelete;
 
-import javax.persistence.*;
+
+import com.dark.webshop.database.entity.food.FoodCategory;
+
 import java.util.List;
 
-@Entity
-@Table(name = "foodcatalog")
-@SQLDelete(sql = "UPDATE foodcatalog SET deleted = true WHERE id=?")
-public class Food {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+public class FoodModel {
     private Integer id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "image", columnDefinition = "LONGBLOB")
-    @Lob
     private byte[] image;
-    @Column(name = "description")
     private String description;
-    @Column(name = "cost")
     private Integer cost;
-    @Column(name = "deleted")
-    private boolean deleted=false;
-    @Column(name = "foodcategory")
-    @Enumerated(EnumType.STRING)
     private FoodCategory foodCategory;
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "joinfoodcatalogadditionals", joinColumns = @JoinColumn(name = "foodid"), inverseJoinColumns = @JoinColumn(name = "additionalid")
-    )
-    private List<Additional> availableAdditionalList;
+    private List<AdditionalModel> availableAdditionalList;
+    private boolean deleted=false;
 
-    public Food() {
-    }
-
-    public Food(Integer id, String name, byte[] image, String description, Integer cost, FoodCategory foodCategory, List<Additional> availableAdditionalList) {
+    public FoodModel(Integer id, String name, byte[] image, String description, Integer cost, FoodCategory foodCategory, List<AdditionalModel> availableAdditionalList, boolean deleted) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -43,14 +24,10 @@ public class Food {
         this.cost = cost;
         this.foodCategory = foodCategory;
         this.availableAdditionalList = availableAdditionalList;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public FoodModel() {
     }
 
     public Integer getId() {
@@ -101,11 +78,19 @@ public class Food {
         this.foodCategory = foodCategory;
     }
 
-    public List<Additional> getAvailableAdditionalList() {
+    public List<AdditionalModel> getAvailableAdditionalList() {
         return availableAdditionalList;
     }
 
-    public void setAvailableAdditionalList(List<Additional> availableAdditionalList) {
+    public void setAvailableAdditionalList(List<AdditionalModel> availableAdditionalList) {
         this.availableAdditionalList = availableAdditionalList;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
