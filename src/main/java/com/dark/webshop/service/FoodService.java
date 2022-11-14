@@ -11,6 +11,8 @@ import java.util.List;
 public interface FoodService {
      FoodModel updateFood(FoodModel food);
      void removeFood(FoodModel food);
-     List<FoodModel> findAll(boolean isDeleted);
+
+     List<FoodModel> findAll();
+
      List<FoodModel> findByCategoryPaged(FoodCategory category, Integer page, Integer size);
 }

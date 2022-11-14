@@ -24,6 +24,7 @@ public class Order {
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "orderedFood", joinColumns = @JoinColumn(name = "orderId"), inverseJoinColumns = @JoinColumn(name = "id")
     )
+    List<OrderedFood> orderedFoodList;
     @Column(name = "confirmed")
     private boolean confirmed;
     @Column(name = "datetime")
@@ -62,9 +63,6 @@ public class Order {
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
     }
-
-    private List<OrderedFood> orderedFoodList;
-
 
     public User getUser() {
         return user;

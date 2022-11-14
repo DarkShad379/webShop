@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface AdditionalRepository extends JpaRepository<Additional, Integer> {
     @Query("select add from Additional add where add.deleted =?1")
-    public List<Additional> findAllByOrderByNameAsc(boolean deleted);
+    List<Additional> findAllByOrderByNameAsc(boolean deleted);
+
+    @Query(nativeQuery = true, value = "select * from joinfoodcatalogadditionals where additionalId = ?1")
+    void removeFromAvailableAdditionals(Integer id);
 }
