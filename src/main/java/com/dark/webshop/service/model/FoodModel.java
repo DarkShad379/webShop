@@ -1,9 +1,6 @@
 package com.dark.webshop.service.model;
 
 
-
-import com.dark.webshop.database.entity.food.FoodCategory;
-
 import java.util.List;
 
 public class FoodModel {
@@ -12,11 +9,11 @@ public class FoodModel {
     private byte[] image;
     private String description;
     private Integer cost;
-    private FoodCategory foodCategory;
+    private int foodCategory;
     private List<AdditionalModel> availableAdditionalList;
     private boolean deleted=false;
 
-    public FoodModel(Integer id, String name, byte[] image, String description, Integer cost, FoodCategory foodCategory, List<AdditionalModel> availableAdditionalList, boolean deleted) {
+    public FoodModel(Integer id, String name, byte[] image, String description, Integer cost, int foodCategory, List<AdditionalModel> availableAdditionalList, boolean deleted) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -70,11 +67,12 @@ public class FoodModel {
         this.cost = cost;
     }
 
-    public FoodCategory getFoodCategory() {
+
+    public int getFoodCategory() {
         return foodCategory;
     }
 
-    public void setFoodCategory(FoodCategory foodCategory) {
+    public void setFoodCategory(int foodCategory) {
         this.foodCategory = foodCategory;
     }
 
