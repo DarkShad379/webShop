@@ -29,10 +29,9 @@ public class Food {
     @Column(name = "cost")
     private Integer cost;
     @Column(name = "deleted")
-    private boolean deleted=false;
+    private boolean deleted = false;
     @Column(name = "foodcategory")
-    @Enumerated(EnumType.STRING)
-    private FoodCategory foodCategory;
+    private int foodCategory;
     @ManyToMany
     @JoinTable(name = "joinfoodcatalogadditionals", joinColumns = @JoinColumn(name = "foodid"), inverseJoinColumns = @JoinColumn(name = "additionalid")
     )
@@ -41,7 +40,7 @@ public class Food {
     public Food() {
     }
 
-    public Food(Integer id, String name, byte[] image, String description, Integer cost, FoodCategory foodCategory, List<Additional> availableAdditionalList) {
+    public Food(Integer id, String name, byte[] image, String description, Integer cost, int foodCategory, List<Additional> availableAdditionalList) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -99,11 +98,11 @@ public class Food {
         this.cost = cost;
     }
 
-    public FoodCategory getFoodCategory() {
+    public int getFoodCategory() {
         return foodCategory;
     }
 
-    public void setFoodCategory(FoodCategory foodCategory) {
+    public void setFoodCategory(int foodCategory) {
         this.foodCategory = foodCategory;
     }
 

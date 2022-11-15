@@ -1,4 +1,4 @@
-package com.dark.webshop.service.impl;
+package com.dark.webshop.integratintest.serviceImpl;
 
 import com.dark.webshop.service.AdditionalService;
 import com.dark.webshop.service.model.AdditionalModel;
@@ -11,21 +11,21 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class AdditionalServiceImplTest {
     @Autowired
     AdditionalService additionalService;
 
     @Test
-    void updateAdditional() {
+    void testUpdateAdditional() {
         AdditionalModel additionalModel = new AdditionalModel();
-        additionalModel.setName("Шоколадная крошка");
-        additionalModel.setId(9);
-        additionalModel.setCost(350);
+        additionalModel.setName("Пепперони");
+        additionalModel.setCost(250);
         AdditionalModel newAdditionalModel = additionalService.updateAdditional(additionalModel);
         assertNotNull(newAdditionalModel);
         assertNotNull(newAdditionalModel.getId());
-        assertEquals(350, newAdditionalModel.getCost().intValue());
+        assertEquals(250, newAdditionalModel.getCost().intValue());
     }
 
     @Test

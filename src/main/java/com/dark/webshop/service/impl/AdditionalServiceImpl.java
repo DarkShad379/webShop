@@ -8,12 +8,13 @@ import com.dark.webshop.service.model.AdditionalModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class AdditionalServiceImpl implements AdditionalService {
     AdditionalRepository additionalRepository;
-    AdditionalServiceMapper additionalMapper = AdditionalServiceMapper.INSTANCE;
+    AdditionalServiceMapper additionalMapper;
 
     public AdditionalServiceImpl(AdditionalRepository additionalRepository, AdditionalServiceMapper additionalMapper) {
         this.additionalRepository = additionalRepository;
@@ -21,7 +22,13 @@ public class AdditionalServiceImpl implements AdditionalService {
     }
 
     @Override
-    public void deleteAdditional(AdditionalModel additionalModel) {
+    public AdditionalModel findAdditionalById(int id) {
+        Optional<Additional> additionalOpt = additionalRepository.findById(id);
+        return additionalOpt.map(additional -> additionalMapper.additionalToAdditionalModel(additional)).orElse(null);
+    }
+
+    @Override
+    public void removeAdditional(AdditionalModel additionalModel) {
         Additional additional = additionalMapper.additionalModelToAdditional(additionalModel);
         if (additionalRepository.findById(additional.getId()).isPresent()) {
             additionalRepository.delete(additional);
@@ -33,7 +40,6 @@ public class AdditionalServiceImpl implements AdditionalService {
     @Override
     public AdditionalModel updateAdditional(AdditionalModel additionalModel) {
         Additional additional = additionalMapper.additionalModelToAdditional(additionalModel);
-
         Additional savedAdditional = additionalRepository.save(additional);
         return additionalMapper.additionalToAdditionalModel(savedAdditional);
     }

@@ -3,10 +3,20 @@ package com.dark.webshop.service.model;
 public class AdditionalModel {
     private Integer id;
     private String name;
-    private boolean deleted=false;
+    private boolean deleted = false;
     private Integer cost;
 
     public AdditionalModel() {
+    }
+
+    @Override
+    public String toString() {
+        return "AdditionalModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", deleted=" + deleted +
+                ", cost=" + cost +
+                '}';
     }
 
     public AdditionalModel(Integer id, String name, boolean deleted, Integer cost) {

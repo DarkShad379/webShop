@@ -16,8 +16,6 @@ public class OrderedFood {
     private Food food;
     @Column(name = "orderId", nullable = false)
     private Integer orderId;
-
-
     @Column(name = "totalfoodcost", nullable = false)
     private Integer totalfoodcost;
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

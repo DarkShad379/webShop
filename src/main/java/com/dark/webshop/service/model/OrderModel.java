@@ -1,6 +1,5 @@
 package com.dark.webshop.service.model;
 
-import com.dark.webshop.database.entity.food.OrderedFood;
 import com.dark.webshop.database.entity.user.User;
 
 import java.sql.Date;
@@ -11,22 +10,17 @@ public class OrderModel {
     private User user;
     private boolean confirmed;
     private Date datetime;
+    private List<OrderedFoodModel> orderedFoodList;
+
     public OrderModel() {
     }
-    public OrderModel(Integer id, User user, boolean confirmed, Date datetime, List<OrderedFood> orderedFoodList) {
+
+    public OrderModel(Integer id, User user, boolean confirmed, Date datetime, List<OrderedFoodModel> orderedFoodList) {
         this.id = id;
         this.user = user;
         this.confirmed = confirmed;
         this.datetime = datetime;
         this.orderedFoodList = orderedFoodList;
-    }
-
-    public Date getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
     }
 
     public Integer getId() {
@@ -37,17 +31,6 @@ public class OrderModel {
         this.id = id;
     }
 
-    public boolean isConfirmed() {
-        return confirmed;
-    }
-
-    public void setConfirmed(boolean confirmed) {
-        this.confirmed = confirmed;
-    }
-
-    private List<OrderedFood> orderedFoodList;
-
-
     public User getUser() {
         return user;
     }
@@ -56,12 +39,27 @@ public class OrderModel {
         this.user = user;
     }
 
-    public List<OrderedFood> getOrderedFoodList() {
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public Date getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
+    }
+
+    public List<OrderedFoodModel> getOrderedFoodList() {
         return orderedFoodList;
     }
 
-    public void setOrderedFoodList(List<OrderedFood> orderedFoodList) {
+    public void setOrderedFoodList(List<OrderedFoodModel> orderedFoodList) {
         this.orderedFoodList = orderedFoodList;
     }
-
 }

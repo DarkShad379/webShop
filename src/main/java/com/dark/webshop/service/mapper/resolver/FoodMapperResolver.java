@@ -5,16 +5,15 @@ import com.dark.webshop.repository.FoodRepository;
 import com.dark.webshop.service.model.FoodModel;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FoodMapperResolver {
-    @Autowired
+
     private FoodRepository foodRepository;
 
-    public FoodMapperResolver() {
-
+    public FoodMapperResolver(FoodRepository foodRepository) {
+        this.foodRepository = foodRepository;
     }
 
     @ObjectFactory

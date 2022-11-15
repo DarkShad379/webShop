@@ -11,5 +11,5 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
     List<Food> findAllByOrderByNameAsc();
 
     @Query("select f from Food f where f.deleted = false AND f.foodCategory =?1 order by f.name")
-    List<Food> findByCategoryPaged(String category, Pageable pageable);
+    List<Food> findByCategoryPaged(int category, Pageable pageable);
 }

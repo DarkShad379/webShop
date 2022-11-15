@@ -5,15 +5,15 @@ import com.dark.webshop.repository.OrderRepository;
 import com.dark.webshop.service.model.OrderModel;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderResolver {
-    @Autowired
+public class OrderMapperResolver {
+
     OrderRepository orderRepository;
 
-    public OrderResolver() {
+    public OrderMapperResolver(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     @ObjectFactory
