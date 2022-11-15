@@ -8,6 +8,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring", uses = {AdditionalMapperResolver.class})
 public interface AdditionalServiceMapper {
     AdditionalServiceMapper INSTANCE = Mappers.getMapper(AdditionalServiceMapper.class);
-    AdditionalModel additionalToAdditionalModel(Additional additional);
-    Additional additionalModelToAdditional(AdditionalModel additionalModel);
+
+    AdditionalModel entityToModel(Additional additional);
+
+    Additional modelToEntity(AdditionalModel additionalModel);
 }

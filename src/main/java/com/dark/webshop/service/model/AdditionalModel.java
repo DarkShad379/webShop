@@ -9,15 +9,6 @@ public class AdditionalModel {
     public AdditionalModel() {
     }
 
-    @Override
-    public String toString() {
-        return "AdditionalModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", deleted=" + deleted +
-                ", cost=" + cost +
-                '}';
-    }
 
     public AdditionalModel(Integer id, String name, boolean deleted, Integer cost) {
         this.id = id;

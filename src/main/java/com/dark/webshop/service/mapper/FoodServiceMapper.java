@@ -9,6 +9,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring", uses = {FoodMapperResolver.class})
 public interface FoodServiceMapper {
     FoodServiceMapper INSTANCE = Mappers.getMapper(FoodServiceMapper.class);
-   FoodModel foodToFoodModel(Food food);
-   Food foodModelToFood(FoodModel foodModel);
+
+    FoodModel entityToModel(Food food);
+
+    Food modelToEntity(FoodModel foodModel);
 }

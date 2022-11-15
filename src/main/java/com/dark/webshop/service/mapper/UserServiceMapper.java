@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 public interface UserServiceMapper {
     UserServiceMapper INSTANCE = Mappers.getMapper(UserServiceMapper.class);
 
-    UserModel userToUserModel(User user);
+    UserModel entityToModel(User user);
 
-    User userModelToUser(UserModel userModel);
+    User modelToEntity(UserModel userModel);
 }

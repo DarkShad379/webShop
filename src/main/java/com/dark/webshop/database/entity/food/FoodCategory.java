@@ -8,24 +8,24 @@ public class FoodCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "categoryId", nullable = false)
-    int categoryId;
+    int id;
     @Column(name = "name")
     private String name;
 
     public FoodCategory(int categoryId, String name) {
-        this.categoryId = categoryId;
+        this.id = categoryId;
         this.name = name;
     }
 
     public FoodCategory() {
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public int getId() {
+        return id;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

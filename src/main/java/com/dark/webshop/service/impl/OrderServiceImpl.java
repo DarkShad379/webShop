@@ -25,37 +25,37 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void updateOrder(OrderModel orderModel) {
-        Order order = orderServiceMapper.orderModelToOrder(orderModel);
+        Order order = orderServiceMapper.modelToEntity(orderModel);
         orderRepository.save(order);
     }
 
     @Override
     public void deleteOrder(OrderModel orderModel) {
-        Order order = orderServiceMapper.orderModelToOrder(orderModel);
+        Order order = orderServiceMapper.modelToEntity(orderModel);
         orderRepository.delete(order);
     }
 
     @Override
     public List<OrderModel> getOrdersForUser(UserModel userModel) {
         return orderRepository.findOrdersByUserId(userModel.getId()).stream()
-                .map(orderServiceMapper::orderToOrderModel).collect(Collectors.toList());
+                .map(orderServiceMapper::entityToModel).collect(Collectors.toList());
     }
 
     @Override
     public List<OrderModel> getOrdersForUserPaged(UserModel userModel, Integer page, Integer size, String sort) {
         return orderRepository.findOrdersByUserIdPaged(userModel.getId(), PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sort)))
-                .stream().map(orderServiceMapper::orderToOrderModel).collect(Collectors.toList());
+                .stream().map(orderServiceMapper::entityToModel).collect(Collectors.toList());
     }
 
     @Override
     public List<OrderModel> getAllOrders() {
         return orderRepository.findAll().stream()
-                .map(orderServiceMapper::orderToOrderModel).collect(Collectors.toList());
+                .map(orderServiceMapper::entityToModel).collect(Collectors.toList());
     }
 
     @Override
     public List<OrderModel> getAllOrdersPaged(Integer page, Integer size, String sort) {
         return orderRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sort)))
-                .stream().map(orderServiceMapper::orderToOrderModel).collect(Collectors.toList());
+                .stream().map(orderServiceMapper::entityToModel).collect(Collectors.toList());
     }
 }

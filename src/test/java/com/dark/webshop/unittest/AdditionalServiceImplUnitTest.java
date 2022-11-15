@@ -47,9 +47,9 @@ class AdditionalServiceImplUnitTest {
         additionalModelMock.setCost(250);
         additionalModelMock.setName("Халапеньо");
         additionalModelMock.setId(0);
-        when(additionalServiceMapper.additionalToAdditionalModel(any(Additional.class))).thenReturn(additionalModelMock);
+        when(additionalServiceMapper.entityToModel(any(Additional.class))).thenReturn(additionalModelMock);
         //Мок маппера и конвертации из энтети в модель
-        when(additionalServiceMapper.additionalModelToAdditional(any(AdditionalModel.class))).thenReturn(additionalMock);
+        when(additionalServiceMapper.modelToEntity(any(AdditionalModel.class))).thenReturn(additionalMock);
         //Мок маппера и конвертации из модели в энтети
         when(additionalRepository.save(any(Additional.class))).thenReturn(additionalMock);
         //Мок запроса в репозиторий

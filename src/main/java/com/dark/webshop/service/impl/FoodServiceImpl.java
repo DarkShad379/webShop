@@ -25,30 +25,30 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public FoodModel findFoodById(int id) {
         Optional<Food> foodOpt = foodRepository.findById(id);
-        return foodOpt.map(food -> foodServiceMapper.foodToFoodModel(food)).orElse(null);
+        return foodOpt.map(food -> foodServiceMapper.entityToModel(food)).orElse(null);
     }
 
     @Override
     public FoodModel updateFood(FoodModel foodModel) {
-        Food food = foodServiceMapper.foodModelToFood(foodModel);
+        Food food = foodServiceMapper.modelToEntity(foodModel);
         Food newFood = foodRepository.save(food);
-        return foodServiceMapper.foodToFoodModel(newFood);
+        return foodServiceMapper.entityToModel(newFood);
     }
 
     @Override
     public void removeFood(FoodModel foodModel) {
-        foodRepository.delete(foodServiceMapper.foodModelToFood(foodModel));
+        foodRepository.delete(foodServiceMapper.modelToEntity(foodModel));
     }
 
     @Override
     public List<FoodModel> findAll() {
         List<Food> foodList = foodRepository.findAllByOrderByNameAsc();
-        return foodList.stream().map(foodServiceMapper::foodToFoodModel).collect(Collectors.toList());
+        return foodList.stream().map(foodServiceMapper::entityToModel).collect(Collectors.toList());
     }
 
     @Override
     public List<FoodModel> findByCategoryPaged(int category, Integer page, Integer size) {
         List<Food> foodList = foodRepository.findByCategoryPaged(category, PageRequest.of(page, size));
-        return foodList.stream().map(foodServiceMapper::foodToFoodModel).collect(Collectors.toList());
+        return foodList.stream().map(foodServiceMapper::entityToModel).collect(Collectors.toList());
     }
 }

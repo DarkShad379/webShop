@@ -8,7 +8,9 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", uses = {OrderMapperResolver.class})
 public interface OrderServiceMapper {
-    OrderServiceMapper  INSTANCE = Mappers.getMapper(OrderServiceMapper.class);
-    OrderModel orderToOrderModel(Order order);
-    Order orderModelToOrder(OrderModel orderModel);
+    OrderServiceMapper INSTANCE = Mappers.getMapper(OrderServiceMapper.class);
+
+    OrderModel entityToModel(Order order);
+
+    Order modelToEntity(OrderModel orderModel);
 }

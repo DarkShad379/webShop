@@ -24,12 +24,12 @@ public class AdditionalServiceImpl implements AdditionalService {
     @Override
     public AdditionalModel findAdditionalById(int id) {
         Optional<Additional> additionalOpt = additionalRepository.findById(id);
-        return additionalOpt.map(additional -> additionalMapper.additionalToAdditionalModel(additional)).orElse(null);
+        return additionalOpt.map(additional -> additionalMapper.entityToModel(additional)).orElse(null);
     }
 
     @Override
     public void removeAdditional(AdditionalModel additionalModel) {
-        Additional additional = additionalMapper.additionalModelToAdditional(additionalModel);
+        Additional additional = additionalMapper.modelToEntity(additionalModel);
         if (additionalRepository.findById(additional.getId()).isPresent()) {
             additionalRepository.delete(additional);
             additionalRepository.removeFromAvailableAdditionals(additional.getId());
@@ -39,14 +39,14 @@ public class AdditionalServiceImpl implements AdditionalService {
 
     @Override
     public AdditionalModel updateAdditional(AdditionalModel additionalModel) {
-        Additional additional = additionalMapper.additionalModelToAdditional(additionalModel);
+        Additional additional = additionalMapper.modelToEntity(additionalModel);
         Additional savedAdditional = additionalRepository.save(additional);
-        return additionalMapper.additionalToAdditionalModel(savedAdditional);
+        return additionalMapper.entityToModel(savedAdditional);
     }
 
     @Override
     public List<AdditionalModel> findAll(boolean isDeleted) {
         List<Additional> additionalList = additionalRepository.findAllByOrderByNameAsc(isDeleted);
-        return additionalList.stream().map(additionalMapper::additionalToAdditionalModel).collect(Collectors.toList());
+        return additionalList.stream().map(additionalMapper::entityToModel).collect(Collectors.toList());
     }
 }
