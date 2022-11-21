@@ -1,11 +1,20 @@
-package com.dark.webshop.exception_handling.DTO;
+package com.dark.webshop.DTO;
 
+import com.dark.webshop.validation.CheckImage;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class AdditionalDTO {
     private Integer id;
+    @NotBlank(message = "Поле не может быть пустым")
+    @Size(min = 2, message = "Название должно быть не короче 2х символов!")
     private String name;
+    @Min(value = 0, message = "Цена не может быть отрицательным числом!")
     private Integer cost;
+    @CheckImage(message = "Должно иметь изображение!")
     private MultipartFile imageFile;
 
     public AdditionalDTO(Integer id, String name, Integer cost, MultipartFile imageFile) {

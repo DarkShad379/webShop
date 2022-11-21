@@ -1,6 +1,6 @@
-package com.dark.webshop.exception_handling.DTO.mapper;
+package com.dark.webshop.DTO.mapper;
 
-import com.dark.webshop.exception_handling.DTO.AdditionalDTO;
+import com.dark.webshop.DTO.AdditionalDTO;
 import com.dark.webshop.service.model.AdditionalModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
