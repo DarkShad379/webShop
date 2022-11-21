@@ -14,23 +14,31 @@ public class Additional {
     private Integer id;
     @Column(name = "name")
     private String name;
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @Column(name = "image", columnDefinition = "LONGBLOB")
+    @Lob
+    private byte[] image;
     @Column(name = "deleted")
-    private boolean deleted=false;
+    private boolean deleted = false;
     @Column(name = "cost")
     private Integer cost;
 
     public Additional() {
     }
 
-    public Additional(Integer id, String name, boolean deleted, Integer cost) {
+    public Additional(Integer id, String name, byte[] image, boolean deleted, Integer cost) {
         this.id = id;
         this.name = name;
+        this.image = image;
         this.deleted = deleted;
         this.cost = cost;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public boolean isDeleted() {
@@ -44,6 +52,11 @@ public class Additional {
     public Integer getId() {
         return id;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 
     public String getName() {
         return name;

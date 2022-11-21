@@ -7,7 +7,7 @@ import java.util.List;
 public interface AdditionalService {
      void removeAdditional(AdditionalModel additionalModel);
 
-     AdditionalModel updateAdditional(AdditionalModel additionalModel);
+     AdditionalModel saveOrUpdateAdditional(AdditionalModel additionalModel);
 
      List<AdditionalModel> findAll(boolean isDeleted);
 

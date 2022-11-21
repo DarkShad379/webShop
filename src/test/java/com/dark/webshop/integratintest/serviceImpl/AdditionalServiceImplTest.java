@@ -22,7 +22,7 @@ class AdditionalServiceImplTest {
         AdditionalModel additionalModel = new AdditionalModel();
         additionalModel.setName("Пепперони");
         additionalModel.setCost(250);
-        AdditionalModel newAdditionalModel = additionalService.updateAdditional(additionalModel);
+        AdditionalModel newAdditionalModel = additionalService.saveOrUpdateAdditional(additionalModel);
         assertNotNull(newAdditionalModel);
         assertNotNull(newAdditionalModel.getId());
         assertEquals(250, newAdditionalModel.getCost().intValue());

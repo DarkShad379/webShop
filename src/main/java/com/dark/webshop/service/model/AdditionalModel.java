@@ -5,16 +5,25 @@ public class AdditionalModel {
     private String name;
     private boolean deleted = false;
     private Integer cost;
+    private byte[] image;
 
     public AdditionalModel() {
     }
 
-
-    public AdditionalModel(Integer id, String name, boolean deleted, Integer cost) {
+    public AdditionalModel(Integer id, String name, boolean deleted, Integer cost, byte[] image) {
         this.id = id;
         this.name = name;
         this.deleted = deleted;
         this.cost = cost;
+        this.image = image;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public boolean isDeleted() {

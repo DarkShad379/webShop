@@ -29,7 +29,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public FoodModel updateFood(FoodModel foodModel) {
+    public FoodModel saveOrUpdateFood(FoodModel foodModel) {
         Food food = foodServiceMapper.modelToEntity(foodModel);
         Food newFood = foodRepository.save(food);
         return foodServiceMapper.entityToModel(newFood);

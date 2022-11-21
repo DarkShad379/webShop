@@ -38,7 +38,7 @@ public class AdditionalServiceImpl implements AdditionalService {
     }
 
     @Override
-    public AdditionalModel updateAdditional(AdditionalModel additionalModel) {
+    public AdditionalModel saveOrUpdateAdditional(AdditionalModel additionalModel) {
         Additional additional = additionalMapper.modelToEntity(additionalModel);
         Additional savedAdditional = additionalRepository.save(additional);
         return additionalMapper.entityToModel(savedAdditional);

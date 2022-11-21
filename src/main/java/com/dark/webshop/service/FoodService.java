@@ -8,7 +8,7 @@ import com.dark.webshop.service.model.FoodModel;
 import java.util.List;
 
 public interface FoodService {
-     FoodModel updateFood(FoodModel food);
+     FoodModel saveOrUpdateFood(FoodModel food);
 
      void removeFood(FoodModel food);
 

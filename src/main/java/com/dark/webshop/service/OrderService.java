@@ -6,7 +6,7 @@ import com.dark.webshop.service.model.UserModel;
 import java.util.List;
 
 public interface OrderService {
-    void updateOrder(OrderModel orderModel);
+    void saveOrUpdateOrder(OrderModel orderModel);
 
     void deleteOrder(OrderModel orderModel);
 

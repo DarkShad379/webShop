@@ -1,6 +1,5 @@
 package com.dark.webshop.integratintest.serviceImpl;
 
-import com.dark.webshop.database.entity.food.FoodCategory;
 import com.dark.webshop.service.AdditionalService;
 import com.dark.webshop.service.FoodService;
 import com.dark.webshop.service.model.AdditionalModel;
@@ -21,17 +20,15 @@ public class FoodServiceImplTest {
     FoodService foodService;
     @Autowired
     AdditionalService additionalService;
-
     @Test
     public void testUpdateFood() {
         FoodModel foodModel = new FoodModel();
-        foodModel.setFoodCategory(FoodCategory.PIZZA);
         foodModel.setCost(2500);
         foodModel.setName("Пицца Четыре сыра");
         foodModel.setDescription("Сочетание четырех сыров и слезы программиста, придают этой пицце изысканный вкус");
         List<AdditionalModel> availableAdditionalList = additionalService.findAll(false);
         foodModel.setAvailableAdditionalList(availableAdditionalList);
-        FoodModel newFoodModel = foodService.updateFood(foodModel);
+        FoodModel newFoodModel = foodService.saveOrUpdateFood(foodModel);
         assertNotNull(newFoodModel.getId());
         assertEquals(foodModel.getName(), newFoodModel.getName());
         assertEquals(foodModel.getAvailableAdditionalList().get(0).toString(), newFoodModel.getAvailableAdditionalList().get(0).toString());

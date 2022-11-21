@@ -53,7 +53,7 @@ class AdditionalServiceImplUnitTest {
         //Мок маппера и конвертации из модели в энтети
         when(additionalRepository.save(any(Additional.class))).thenReturn(additionalMock);
         //Мок запроса в репозиторий
-        AdditionalModel newAdditionalModel = additionalService.updateAdditional(additionalModel);
+        AdditionalModel newAdditionalModel = additionalService.saveOrUpdateAdditional(additionalModel);
         assertNotNull(newAdditionalModel);
         assertNotNull(newAdditionalModel.getId());
         assertEquals("Халапеньо", newAdditionalModel.getName());

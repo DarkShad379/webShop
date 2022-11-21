@@ -24,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateOrder(OrderModel orderModel) {
+    public void saveOrUpdateOrder(OrderModel orderModel) {
         Order order = orderServiceMapper.modelToEntity(orderModel);
         orderRepository.save(order);
     }
