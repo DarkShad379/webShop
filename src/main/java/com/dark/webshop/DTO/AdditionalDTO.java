@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class AdditionalDTO {
@@ -12,6 +13,7 @@ public class AdditionalDTO {
     @NotBlank(message = "Поле не может быть пустым")
     @Size(min = 2, message = "Название должно быть не короче 2х символов!")
     private String name;
+    @NotNull(message = "Поле не может быть пустым")
     @Min(value = 0, message = "Цена не может быть отрицательным числом!")
     private Integer cost;
     @CheckImage(message = "Должно иметь изображение!")

@@ -20,7 +20,7 @@ img {
   width: 250px;
 }
 
-.table {
+.table-style {
   border: 1px solid #327a81;
   border-radius: 10px;
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
@@ -139,5 +139,11 @@ table tr:nth-child(2n+1) {
     box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
     margin: 0.5rem 0;
     padding: 0;
+  }
+
+  .table-users {
+    border: none;
+    box-shadow: none;
+    overflow: visible;
   }
 }

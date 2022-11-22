@@ -19,7 +19,7 @@
 
 <body>
 <!-- partial:index.partial.html -->
-<div class="table">
+<div class="table-style">
     <div class="header">Добавки</div>
     <table cellspacing="0">
         <tr>
@@ -33,11 +33,11 @@
             <td th:text="${add.cost}">TEST</td>
             <td><img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(add.image)}"></td>
             <td>
+                <form th:action="@{/additionals/edit/{id}(id=${add.id})}" method="get">
+                    <button class="btn btn-primary" type="submit" value="Submit">Редактировать</button>
+                </form>
                 <form th:action="@{/additionals/remove/{id}(id=${add.id})}" method="post">
                     <button class="btn btn-danger" type="submit" value="Submit">Удалить</button>
-                </form>
-                <form th:action="@{/additionals/edit/{id}(id=${add.id})}" method="post">
-                    <button class="btn btn-primary" type="submit" value="Submit">Редактировать</button>
                 </form>
             </td>
         </tr>

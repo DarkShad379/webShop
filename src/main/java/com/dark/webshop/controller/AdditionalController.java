@@ -33,10 +33,16 @@ public class AdditionalController {
         return "additionals/add";
     }
 
-    @GetMapping("/remove/{id}")
+    @GetMapping("/edit/{id}")
     public String editAdditional(@PathVariable int id, Model model) {
         AdditionalModel additionalModel = additionalService.findAdditionalById(id);
-        model.addAttribute("editAdditional", additionalModel);
+        AdditionalDTO additionalDTO = new AdditionalDTO();
+        additionalDTO.setId(additionalModel.getId());
+        additionalDTO.setCost(additionalModel.getCost());
+        additionalDTO.setName(additionalModel.getName());
+        model.addAttribute("additionalDTO", additionalDTO);
+        model.addAttribute("imageArray", additionalModel.getImage());
+        model.addAttribute("imgUtil", new ImageUtil());
         return "additionals/edit";
     }
 
@@ -47,8 +53,28 @@ public class AdditionalController {
             AdditionalModel additionalModel = additionalDTOMapper.DTOtoModel(additionalDTO);
             additionalService.saveOrUpdateAdditional(additionalModel);
             return "redirect:";
+        } else return "additionals/add";
+    }
+
+    @Validated
+    @PostMapping("/edit/{id}")
+    public String editAdditional(@Valid @ModelAttribute("additionalDTO") AdditionalDTO additionalDTO, BindingResult bindingResult, @PathVariable int id, Model model) {
+        if (!bindingResult.hasErrors()) {
+            if (id == additionalDTO.getId()) {
+                AdditionalModel additionalModel = additionalDTOMapper.DTOtoModel(additionalDTO);
+                additionalService.saveOrUpdateAdditional(additionalModel);
+                return "redirect:..";
+            } else {
+                throw new IllegalArgumentException();
+            }
         } else {
-            return "additionals/add";
+            AdditionalModel additionalModel = additionalService.findAdditionalById(id);
+            additionalDTO.setCost(additionalModel.getCost());
+            additionalDTO.setName(additionalModel.getName());
+            model.addAttribute("additionalDTO", additionalDTO);
+            model.addAttribute("imageArray", additionalModel.getImage());
+            model.addAttribute("imgUtil", new ImageUtil());
+            return "additionals/edit";
         }
     }
 

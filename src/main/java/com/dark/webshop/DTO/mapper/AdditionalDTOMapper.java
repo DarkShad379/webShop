@@ -16,9 +16,9 @@ public interface AdditionalDTOMapper {
 
     @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage")
     AdditionalModel DTOtoModel(AdditionalDTO additionalDTO);
-
     @Named("fileToImage")
     static byte[] fileToImage(MultipartFile file) throws IOException {
         return file.getBytes();
     }
+
 }
