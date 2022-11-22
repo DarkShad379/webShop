@@ -1,6 +1,7 @@
 package com.dark.webshop.request_model;
 
 import com.dark.webshop.validation.CheckImage;
+import com.dark.webshop.validation.marker_interface.OnCreate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
@@ -14,7 +15,7 @@ public class AdditionalReq {
     @Min(value = 0, message = "Цена не может быть отрицательным числом!")
     @Max(value = 1000000, message = "Слишком большая цена! Кто такое купит?!?!")
     private Integer cost;
-    @CheckImage(message = "Должно иметь изображение!")
+    @CheckImage(groups = OnCreate.class, message = "Должно иметь изображение!")
     private MultipartFile imageFile;
 
     public AdditionalReq(Integer id, String name, Integer cost, MultipartFile imageFile) {
