@@ -1,6 +1,6 @@
-package com.dark.webshop.DTO.mapper;
+package com.dark.webshop.request_model.mapper;
 
-import com.dark.webshop.DTO.AdditionalDTO;
+import com.dark.webshop.request_model.AdditionalReq;
 import com.dark.webshop.service.model.AdditionalModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,11 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Mapper(componentModel = "spring")
-public interface AdditionalDTOMapper {
-    AdditionalDTOMapper INSTANCE = Mappers.getMapper(AdditionalDTOMapper.class);
+public interface AdditionalReqMapper {
+    AdditionalReqMapper INSTANCE = Mappers.getMapper(AdditionalReqMapper.class);
 
     @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage")
-    AdditionalModel DTOtoModel(AdditionalDTO additionalDTO);
+    AdditionalModel ReqToModel(AdditionalReq additionalReq);
+
     @Named("fileToImage")
     static byte[] fileToImage(MultipartFile file) throws IOException {
         return file.getBytes();

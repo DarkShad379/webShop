@@ -1,13 +1,13 @@
 package com.dark.webshop.service.model;
 
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class FoodCategoryModel {
     int id;
-    @NotEmpty
-    @Size(min = 2, message = "Название должно быть не короче 2х символов!")
+    @NotBlank(message = "Поле не может быть пустым")
+    @Size(min = 3, message = "Название должно быть не короче 2х символов!")
     private String name;
 
     public FoodCategoryModel(int categoryId, String name) {

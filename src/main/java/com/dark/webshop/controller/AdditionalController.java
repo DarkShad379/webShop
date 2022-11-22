@@ -1,8 +1,8 @@
 package com.dark.webshop.controller;
 
-import com.dark.webshop.DTO.AdditionalDTO;
-import com.dark.webshop.DTO.mapper.AdditionalDTOMapper;
 import com.dark.webshop.exception_handling.NoSuchEntryInDatabase;
+import com.dark.webshop.request_model.AdditionalReq;
+import com.dark.webshop.request_model.mapper.AdditionalReqMapper;
 import com.dark.webshop.service.AdditionalService;
 import com.dark.webshop.service.model.AdditionalModel;
 import com.dark.webshop.utils.ImageUtil;
@@ -18,28 +18,28 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/additionals")
 public class AdditionalController {
-    AdditionalDTOMapper additionalDTOMapper;
+    AdditionalReqMapper additionalReqMapper;
     AdditionalService additionalService;
 
-    public AdditionalController(AdditionalDTOMapper additionalDTOMapper, AdditionalService additionalService) {
-        this.additionalDTOMapper = additionalDTOMapper;
+    public AdditionalController(AdditionalReqMapper additionalReqMapper, AdditionalService additionalService) {
+        this.additionalReqMapper = additionalReqMapper;
         this.additionalService = additionalService;
     }
 
     @GetMapping("/add")
     public String addAdditionalPage(Model model) {
-        model.addAttribute("additionalDTO", new AdditionalDTO());
+        model.addAttribute("additionalDTO", new AdditionalReq());
         return "additionals/add";
     }
 
     @GetMapping("/edit/{id}")
     public String editAdditional(@PathVariable int id, Model model) {
         AdditionalModel additionalModel = additionalService.findAdditionalById(id);
-        AdditionalDTO additionalDTO = new AdditionalDTO();
-        additionalDTO.setId(additionalModel.getId());
-        additionalDTO.setCost(additionalModel.getCost());
-        additionalDTO.setName(additionalModel.getName());
-        model.addAttribute("additionalDTO", additionalDTO);
+        AdditionalReq additionalReq = new AdditionalReq();
+        additionalReq.setId(additionalModel.getId());
+        additionalReq.setCost(additionalModel.getCost());
+        additionalReq.setName(additionalModel.getName());
+        model.addAttribute("additionalDTO", additionalReq);
         model.addAttribute("imageArray", additionalModel.getImage());
         model.addAttribute("imgUtil", new ImageUtil());
         return "additionals/edit";
@@ -47,9 +47,9 @@ public class AdditionalController {
 
     @Validated
     @PostMapping("/add")
-    public String addAdditional(@Valid @ModelAttribute("additionalDTO") AdditionalDTO additionalDTO, BindingResult bindingResult) {
+    public String addAdditional(@Valid @ModelAttribute("additionalDTO") AdditionalReq additionalReq, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            AdditionalModel additionalModel = additionalDTOMapper.DTOtoModel(additionalDTO);
+            AdditionalModel additionalModel = additionalReqMapper.ReqToModel(additionalReq);
             additionalService.saveOrUpdateAdditional(additionalModel);
             return "redirect:";
         } else return "additionals/add";
@@ -57,19 +57,19 @@ public class AdditionalController {
 
     @Validated
     @PostMapping("/edit/{id}")
-    public String editAdditional(@Valid @ModelAttribute("additionalDTO") AdditionalDTO additionalDTO, BindingResult bindingResult, @PathVariable int id, Model model) {
+    public String editAdditional(@Valid @ModelAttribute("additionalDTO") AdditionalReq additionalReq, BindingResult bindingResult, @PathVariable int id, Model model) {
         if (!bindingResult.hasErrors() || bindingResult.hasFieldErrors("imageFile") && bindingResult.getAllErrors().size() == 1) {
-            AdditionalModel additionalModel = additionalDTOMapper.DTOtoModel(additionalDTO);
-            if (additionalDTO.getImageFile().isEmpty()) {
+            AdditionalModel additionalModel = additionalReqMapper.ReqToModel(additionalReq);
+            if (additionalReq.getImageFile().isEmpty()) {
                 additionalModel.setImage(additionalService.findAdditionalById(id).getImage());
             }
             additionalService.saveOrUpdateAdditional(additionalModel);
             return "redirect:..";
         } else {
             AdditionalModel additionalModel = additionalService.findAdditionalById(id);
-            additionalDTO.setCost(additionalModel.getCost());
-            additionalDTO.setName(additionalModel.getName());
-            model.addAttribute("additionalDTO", additionalDTO);
+            additionalReq.setCost(additionalModel.getCost());
+            additionalReq.setName(additionalModel.getName());
+            model.addAttribute("additionalDTO", additionalReq);
             model.addAttribute("imageArray", additionalModel.getImage());
             model.addAttribute("imgUtil", new ImageUtil());
             return "additionals/edit";

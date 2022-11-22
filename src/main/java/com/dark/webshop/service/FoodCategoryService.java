@@ -10,4 +10,6 @@ public interface FoodCategoryService {
     FoodCategoryModel findById(int Id);
 
     List<FoodCategoryModel> findAll();
+
+    void removeCategory(FoodCategoryModel foodCategoryModel);
 }

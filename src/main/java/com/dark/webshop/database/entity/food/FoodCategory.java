@@ -3,11 +3,11 @@ package com.dark.webshop.database.entity.food;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "foodCategory")
+@Table(name = "foodcategory")
 public class FoodCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "categoryId", nullable = false)
+    @Column(name = "id", nullable = false)
     int id;
     @Column(name = "name")
     private String name;

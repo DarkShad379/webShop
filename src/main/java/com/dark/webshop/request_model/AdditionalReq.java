@@ -1,11 +1,11 @@
-package com.dark.webshop.DTO;
+package com.dark.webshop.request_model;
 
 import com.dark.webshop.validation.CheckImage;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 
-public class AdditionalDTO {
+public class AdditionalReq {
     private Integer id;
     @NotBlank(message = "Поле не может быть пустым")
     @Size(min = 2, message = "Название должно быть не короче 2х символов!")
@@ -17,14 +17,14 @@ public class AdditionalDTO {
     @CheckImage(message = "Должно иметь изображение!")
     private MultipartFile imageFile;
 
-    public AdditionalDTO(Integer id, String name, Integer cost, MultipartFile imageFile) {
+    public AdditionalReq(Integer id, String name, Integer cost, MultipartFile imageFile) {
         this.id = id;
         this.name = name;
         this.cost = cost;
         this.imageFile = imageFile;
     }
 
-    public AdditionalDTO() {
+    public AdditionalReq() {
     }
 
     public Integer getId() {

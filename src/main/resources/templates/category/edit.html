@@ -56,6 +56,7 @@ div {
     <form action="#" th:action="@{/category/edit/{id}(id=${categoryModel.id})}" th:object="${categoryModel}" method="post">
         <input type="hidden" th:field="*{id}">
         <p>Название категории: <input type="text" th:field="*{name}"/></p>
+        <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
         <p><input type="submit" value="Подтвердить"/>
     </form>
     <form th:action="@{/category/}" method="get">

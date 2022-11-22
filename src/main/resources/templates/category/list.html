@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Редактирование добавок</title>
+    <title>Редактирование категорий</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
@@ -24,17 +24,15 @@
     <table cellspacing="0">
         <tr>
             <th>Название</th>
-            <th>Цена</th>
-            <th>Изображение</th>
         </tr>
         <tr>
         <tr th:each="category: ${categoryList}">
             <td th:text="${category.name}"> TEST</td>
             <td>
-                <form th:action="@{/category/edit/{id}(id=${add.id})}" method="get">
+                <form th:action="@{/category/edit/{id}(id=${category.id})}" method="get">
                     <button class="btn btn-primary" type="submit" value="Submit">Редактировать</button>
                 </form>
-                <form th:action="@{/category/remove/{id}(id=${add.id})}" method="post">
+                <form th:action="@{/category/remove/{id}(id=${category.id})}" method="post">
                     <button class="btn btn-danger" type="submit" value="Submit">Удалить</button>
                 </form>
             </td>

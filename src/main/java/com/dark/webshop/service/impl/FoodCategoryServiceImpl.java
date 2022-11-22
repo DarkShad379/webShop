@@ -6,11 +6,13 @@ import com.dark.webshop.repository.FoodCategoryRepository;
 import com.dark.webshop.service.FoodCategoryService;
 import com.dark.webshop.service.mapper.FoodCategoryServiceMapper;
 import com.dark.webshop.service.model.FoodCategoryModel;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class FoodCategoryServiceImpl implements FoodCategoryService {
     FoodCategoryRepository foodCategoryRepository;
     FoodCategoryServiceMapper foodCategoryServiceMapper;
@@ -41,5 +43,10 @@ public class FoodCategoryServiceImpl implements FoodCategoryService {
     public List<FoodCategoryModel> findAll() {
         List<FoodCategory> foodCategories = foodCategoryRepository.findAllByOrderByNameAsc();
         return foodCategories.stream().map(foodCategoryServiceMapper::entityToModel).collect(Collectors.toList());
+    }
+
+    @Override
+    public void removeCategory(FoodCategoryModel foodCategoryModel) {
+        foodCategoryRepository.delete(foodCategoryServiceMapper.modelToEntity(foodCategoryModel));
     }
 }
