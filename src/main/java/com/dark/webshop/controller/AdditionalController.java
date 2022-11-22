@@ -18,7 +18,6 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/additionals")
 public class AdditionalController {
-
     AdditionalDTOMapper additionalDTOMapper;
     AdditionalService additionalService;
 
@@ -59,14 +58,13 @@ public class AdditionalController {
     @Validated
     @PostMapping("/edit/{id}")
     public String editAdditional(@Valid @ModelAttribute("additionalDTO") AdditionalDTO additionalDTO, BindingResult bindingResult, @PathVariable int id, Model model) {
-        if (!bindingResult.hasErrors()) {
-            if (id == additionalDTO.getId()) {
-                AdditionalModel additionalModel = additionalDTOMapper.DTOtoModel(additionalDTO);
-                additionalService.saveOrUpdateAdditional(additionalModel);
-                return "redirect:..";
-            } else {
-                throw new IllegalArgumentException();
+        if (!bindingResult.hasErrors() || bindingResult.hasFieldErrors("imageFile") && bindingResult.getAllErrors().size() == 1) {
+            AdditionalModel additionalModel = additionalDTOMapper.DTOtoModel(additionalDTO);
+            if (additionalDTO.getImageFile().isEmpty()) {
+                additionalModel.setImage(additionalService.findAdditionalById(id).getImage());
             }
+            additionalService.saveOrUpdateAdditional(additionalModel);
+            return "redirect:..";
         } else {
             AdditionalModel additionalModel = additionalService.findAdditionalById(id);
             additionalDTO.setCost(additionalModel.getCost());

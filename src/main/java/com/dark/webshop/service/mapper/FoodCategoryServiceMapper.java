@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 public interface FoodCategoryServiceMapper {
     FoodCategoryServiceMapper INSTANCE = Mappers.getMapper(FoodCategoryServiceMapper.class);
 
-    FoodCategoryModel modelToEntity(FoodCategory foodCategory);
+    FoodCategoryModel entityToModel(FoodCategory foodCategory);
 
-    FoodCategory entityToModel(FoodCategoryModel foodCategoryModel);
+    FoodCategory modelToEntity(FoodCategoryModel foodCategoryModel);
 }

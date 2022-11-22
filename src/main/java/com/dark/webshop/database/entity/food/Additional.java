@@ -4,6 +4,7 @@ import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "additionals")
 @SQLDelete(sql = "UPDATE additionals SET deleted = true WHERE id=?")

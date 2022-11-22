@@ -3,10 +3,7 @@ package com.dark.webshop.DTO;
 import com.dark.webshop.validation.CheckImage;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class AdditionalDTO {
     private Integer id;
@@ -15,6 +12,7 @@ public class AdditionalDTO {
     private String name;
     @NotNull(message = "Поле не может быть пустым")
     @Min(value = 0, message = "Цена не может быть отрицательным числом!")
+    @Max(value = 1000000, message = "Слишком большая цена! Кто такое купит?!?!")
     private Integer cost;
     @CheckImage(message = "Должно иметь изображение!")
     private MultipartFile imageFile;
