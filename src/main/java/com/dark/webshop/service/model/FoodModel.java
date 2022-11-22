@@ -9,11 +9,11 @@ public class FoodModel {
     private byte[] image;
     private String description;
     private Integer cost;
-    private int foodCategory;
+    private FoodCategoryModel foodCategory;
     private List<AdditionalModel> availableAdditionalList;
-    private boolean deleted=false;
+    private boolean deleted = false;
 
-    public FoodModel(Integer id, String name, byte[] image, String description, Integer cost, int foodCategory, List<AdditionalModel> availableAdditionalList, boolean deleted) {
+    public FoodModel(Integer id, String name, byte[] image, String description, Integer cost, FoodCategoryModel foodCategory, List<AdditionalModel> availableAdditionalList, boolean deleted) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -67,12 +67,11 @@ public class FoodModel {
         this.cost = cost;
     }
 
-
-    public int getFoodCategory() {
+    public FoodCategoryModel getFoodCategory() {
         return foodCategory;
     }
 
-    public void setFoodCategory(int foodCategory) {
+    public void setFoodCategory(FoodCategoryModel foodCategory) {
         this.foodCategory = foodCategory;
     }
 

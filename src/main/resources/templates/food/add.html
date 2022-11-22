@@ -53,7 +53,7 @@ div {
 </head>
 <body>
 <div>
-    <form action="#" th:action="@{/additionals/add}" th:object="${additionalReq}" method="post" enctype="multipart/form-data">
+    <form action="#" th:action="@{/food/add}" th:object="${foodReq}" method="post" enctype="multipart/form-data">
         <p>Имя добавки: <input type="text" th:field="*{name}"/></p>
         <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
         <p>Цена: <input type="text" th:field="*{cost}"/></p>
@@ -61,6 +61,9 @@ div {
         <p>Изображение: <input type="file" th:field="*{imageFile}" accept="image/png, image/jpeg" onchange="loadFile(event)">
             <img id="output"/>
         <p th:if="${#fields.hasErrors('imageFile')}" th:errorclass="error" th:errors="*{imageFile}"></p>
+        <select th:field="*{category}">
+            <option th:each="cat: ${foodCategory}" th:value="${cat}" th:text="${cat.name}"></option>
+        </select>
         <p><input type="submit" value="Подтвердить"/>
     </form>
     <form th:action="@{/additionals/}" method="get">
