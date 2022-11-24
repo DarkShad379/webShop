@@ -66,7 +66,7 @@ div {
             <img id="output"/>
         <p th:if="${#fields.hasErrors('imageFile')}" th:errorclass="error" th:errors="*{imageFile}"></p>
         <p>Категория:</p>
-        <select class="form-control" th:field="*{foodCategory.id}">
+        <select class="form-control" th:field="*{foodCategoryId}">
             <option th:each="cat: ${categoryList}" th:value="${cat.id}" th:text="${cat.name} "></option>
         </select>
         <label>Доступные добавки:
@@ -79,7 +79,7 @@ div {
         </label>
         <p><input type="submit" value="Подтвердить"/>
     </form>
-    <form th:action="@{/additionals/}" method="get">
+    <form th:action="@{/food/}" method="get">
         <button class="btn btn-primary" type="submit" value="Submit">Вернуться назад</button>
     </form>
 </div>

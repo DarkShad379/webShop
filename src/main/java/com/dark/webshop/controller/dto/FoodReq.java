@@ -1,6 +1,5 @@
 package com.dark.webshop.controller.dto;
 
-import com.dark.webshop.service.model.FoodCategoryModel;
 import com.dark.webshop.validation.CheckImage;
 import com.dark.webshop.validation.marker_interface.OnCreate;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,23 +23,31 @@ public class FoodReq {
     @Min(value = 0, message = "Цена не может быть отрицательным числом!")
     @Max(value = 1000000, message = "Слишком большая цена! Кто такое купит?!?!")
     private Integer cost;
-    private FoodCategoryModel foodCategory;
+    private Integer foodCategoryId;
     private List<Integer> availableAdditionalListId = new ArrayList<>();
     private boolean deleted = false;
 
-    public FoodReq() {
-    }
-
-    public FoodReq(Integer id, String name, MultipartFile imageFile, byte[] image, String description, Integer cost, FoodCategoryModel foodCategory, List<Integer> availableAdditionalListId, boolean deleted) {
+    public FoodReq(Integer id, String name, MultipartFile imageFile, byte[] image, String description, Integer cost, Integer foodCategoryId, List<Integer> availableAdditionalListId, boolean deleted) {
         this.id = id;
         this.name = name;
         this.imageFile = imageFile;
         this.image = image;
         this.description = description;
         this.cost = cost;
-        this.foodCategory = foodCategory;
+        this.foodCategoryId = foodCategoryId;
         this.availableAdditionalListId = availableAdditionalListId;
         this.deleted = deleted;
+    }
+
+    public FoodReq() {
+    }
+
+    public Integer getFoodCategoryId() {
+        return foodCategoryId;
+    }
+
+    public void setFoodCategoryId(Integer foodCategoryId) {
+        this.foodCategoryId = foodCategoryId;
     }
 
     public byte[] getImage() {
@@ -50,15 +57,6 @@ public class FoodReq {
     public void setImage(byte[] image) {
         this.image = image;
     }
-
-    public FoodCategoryModel getFoodCategory() {
-        return foodCategory;
-    }
-
-    public void setFoodCategory(FoodCategoryModel foodCategory) {
-        this.foodCategory = foodCategory;
-    }
-
 
     public Integer getId() {
         return id;

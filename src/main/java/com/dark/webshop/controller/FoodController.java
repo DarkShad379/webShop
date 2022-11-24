@@ -5,7 +5,6 @@ import com.dark.webshop.controller.dto.mapper.FoodReqMapper;
 import com.dark.webshop.service.AdditionalService;
 import com.dark.webshop.service.FoodCategoryService;
 import com.dark.webshop.service.FoodService;
-import com.dark.webshop.service.model.AdditionalModel;
 import com.dark.webshop.service.model.FoodModel;
 import com.dark.webshop.utils.ImageUtil;
 import com.dark.webshop.validation.marker_interface.OnCreate;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/food")
@@ -34,8 +34,16 @@ public class FoodController {
         this.foodReqMapper = foodReqMapper;
     }
 
-    public List<FoodModel> getFood() {
-        return foodService.findAll();
+
+    @GetMapping
+    public String getFoods(Model model) {
+        List<FoodModel> foodModelList = foodService.findAll(false);
+        List<FoodReq> foodReqList = foodModelList.stream().map(foodReqMapper::modelToReq).collect(Collectors.toList());
+        model.addAttribute("foodList", foodReqList);
+        model.addAttribute("foodCategory", foodCategoryService.findAll());
+        model.addAttribute("additionals", additionalService.findAll(false));
+        model.addAttribute("imgUtil", new ImageUtil());
+        return "food/list";
     }
 
     @GetMapping("/add")
@@ -48,26 +56,12 @@ public class FoodController {
 
     @Validated({OnCreate.class})
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute("foodReq") FoodReq foodReq) {
-        FoodModel foodModel = foodReqMapper.reqToModel(foodReq);
-        foodService.saveOrUpdateFood(foodModel);
-        return "food/add";
-    }
-
-    @GetMapping("/details/{id}")
-    public String getFoodDetails(@PathVariable int id, Model model) {
-        FoodModel foodModel = foodService.findFoodById(id);
-        model.addAttribute("foodModel", foodModel);
-        model.addAttribute("additionalList", additionalService.findAll(false));
-        model.addAttribute("currentAdd", new AdditionalModel());
-        model.addAttribute("imgUtil", new ImageUtil());
-        return "/food/details/" + id;
-    }
-
-    @PostMapping("/details/{id}")
-    public String setFoodDetails(@PathVariable int id, Model model, @ModelAttribute FoodModel foodModel, @ModelAttribute AdditionalModel currentAdd) {
-        foodModel.getAvailableAdditionalList().add(currentAdd);
-        return "/food/details/" + id;
+    public String add(@Valid @ModelAttribute("foodReq") FoodReq foodReq, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            FoodModel foodModel = foodReqMapper.reqToModel(foodReq);
+            foodService.saveOrUpdateFood(foodModel);
+            return "redirect:";
+        } else return "food/add";
     }
 
     @GetMapping("/edit/{id}")
@@ -75,19 +69,12 @@ public class FoodController {
         FoodModel foodModel = foodService.findFoodById(id);
         FoodReq foodReq = foodReqMapper.modelToReq(foodModel);
         model.addAttribute("foodReq", foodReq);
-        model.addAttribute("imageArray", foodModel.getImage());
         model.addAttribute("imgUtil", new ImageUtil());
         model.addAttribute("categoryList", foodCategoryService.findAll());
         model.addAttribute("additionalList", additionalService.findAll(false));
         return "food/edit";
     }
 
-    @GetMapping
-    public String getFoods(Model model) {
-        model.addAttribute("imgUtil", new ImageUtil());
-        model.addAttribute("foodList", foodService.findAll());
-        return "additionals/list";
-    }
 
     @Validated
     @PostMapping("/edit/{id}")
@@ -104,7 +91,17 @@ public class FoodController {
             model.addAttribute("foodReq", foodReq);
             model.addAttribute("imageArray", foodModel.getImage());
             model.addAttribute("imgUtil", new ImageUtil());
-            return "additionals/edit";
+            return "food/edit";
         }
     }
+
+    @PostMapping("/remove/{id}")
+    public String removeFood(@PathVariable int id) {
+        FoodModel foodModel = foodService.findFoodById(id);
+        if (foodModel != null) {
+            foodService.removeFood(foodModel);
+        }
+        return "redirect:..";
+    }
+
 }

@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface FoodRepository extends JpaRepository<Food, Integer> {
-    List<Food> findAllByOrderByNameAsc();
+
+    @Query("select f from Food f where f.deleted = ?1 order by f.name")
+    List<Food> findAllByOrderByNameAsc(boolean deleted);
 
     @Query("select f from Food f where f.deleted = false AND f.foodCategory =?1 order by f.name")
     List<Food> findByCategoryPaged(int category, Pageable pageable);

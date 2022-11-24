@@ -41,8 +41,8 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<FoodModel> findAll() {
-        List<Food> foodList = foodRepository.findAllByOrderByNameAsc();
+    public List<FoodModel> findAll(boolean deleted) {
+        List<Food> foodList = foodRepository.findAllByOrderByNameAsc(deleted);
         return foodList.stream().map(foodServiceMapper::entityToModel).collect(Collectors.toList());
     }
 

@@ -25,18 +25,19 @@
             <th>Описание</th>
             <th>Цена</th>
             <th>Изображение</th>
-            <th>Добавки</th>
+            <th>Категория</th>
         </tr>
         <tr>
-        <tr th:each="food: ${foodList}">
+        <tr th:each="food:${foodList}">
             <td th:text="${food.name}"> TEST</td>
+            <td th:text="${food.description}"> TEST</td>
             <td th:text="${food.cost}">TEST</td>
-            <td th:text="${food.description}">TEST</td>
-            <td th:each="add: ${food.availableAdditionalList}"
-                th:text="*{add.name}">TEST
-            </td>
-            <td><img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(add.image)}"></td>
+            <td><img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(food.image)}"></td>
+            <th:block th:with="categoryId=${food.foodCategoryId}">
+                <td th:text="${foodCategory.^[id==#root.categoryId].name}">Отсутствует</td>
+            </th:block>
             <td>
+
                 <form th:action="@{/food/edit/{id}(id=${food.id})}" method="get">
                     <button class="btn btn-primary" type="submit" value="Submit">Редактировать</button>
                 </form>
@@ -47,7 +48,7 @@
         </tr>
         </tr>
     </table>
-    <form th:action="@{/additionals/add}" method="get">
+    <form th:action="@{/food/add}" method="get">
         <button class="btn btn-success" type="submit" value="Submit">Добавить новую</button>
     </form>
 </div>

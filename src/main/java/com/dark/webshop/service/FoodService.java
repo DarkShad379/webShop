@@ -12,7 +12,7 @@ public interface FoodService {
 
      void removeFood(FoodModel food);
 
-     List<FoodModel> findAll();
+     List<FoodModel> findAll(boolean deleted);
 
      List<FoodModel> findByCategoryPaged(int category, Integer page, Integer size);
 

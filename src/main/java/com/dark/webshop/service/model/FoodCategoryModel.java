@@ -20,11 +20,6 @@ public class FoodCategoryModel {
     }
 
     @Override
-    public String toString() {
-        return this.name;
-    }
-
-    @Override
     public int hashCode() {
         return Objects.hash(id, name);
     }
@@ -32,6 +27,15 @@ public class FoodCategoryModel {
     public FoodCategoryModel(int categoryId, String name) {
         this.id = categoryId;
         this.name = name;
+    }
+
+    public FoodCategoryModel(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(id);
     }
 
     public FoodCategoryModel() {

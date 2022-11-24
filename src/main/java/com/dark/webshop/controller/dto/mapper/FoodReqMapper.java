@@ -2,6 +2,7 @@ package com.dark.webshop.controller.dto.mapper;
 
 import com.dark.webshop.controller.dto.FoodReq;
 import com.dark.webshop.service.model.AdditionalModel;
+import com.dark.webshop.service.model.FoodCategoryModel;
 import com.dark.webshop.service.model.FoodModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,9 +21,11 @@ public interface FoodReqMapper {
 
     @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(source = "availableAdditionalListId", target = "availableAdditionalList", qualifiedByName = "listIdToListModel")
+    @Mapping(target = "foodCategory", source = "foodCategoryId", qualifiedByName = "idToCategory")
     FoodModel reqToModel(FoodReq foodReq);
 
     @Mapping(target = "imageFile", ignore = true)
+    @Mapping(target = "foodCategoryId", source = "foodCategory", qualifiedByName = "categoryToId")
     @Mapping(source = "availableAdditionalList", target = "availableAdditionalListId", qualifiedByName = "listModelToListId")
     FoodReq modelToReq(FoodModel foodModel);
 
@@ -43,5 +46,15 @@ public interface FoodReqMapper {
         List<Integer> listId = new ArrayList<>();
         listFood.forEach(it -> listId.add(it.getId()));
         return listId;
+    }
+
+    @Named("idToCategory")
+    static FoodCategoryModel idToCategory(int id) {
+        return new FoodCategoryModel(id);
+    }
+
+    @Named("categoryToId")
+    static int categoryToId(FoodCategoryModel foodCategoryModel) {
+        return foodCategoryModel.getId();
     }
 }
