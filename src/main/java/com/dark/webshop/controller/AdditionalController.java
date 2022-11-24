@@ -1,6 +1,5 @@
 package com.dark.webshop.controller;
 
-import com.dark.webshop.exception_handling.NoSuchEntryInDatabase;
 import com.dark.webshop.request_model.AdditionalReq;
 import com.dark.webshop.request_model.mapper.AdditionalReqMapper;
 import com.dark.webshop.service.AdditionalService;
@@ -37,7 +36,7 @@ public class AdditionalController {
     @PostMapping("/add")
     public String addAdditional(@Valid @ModelAttribute("additionalReq") AdditionalReq additionalReq, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            AdditionalModel additionalModel = additionalReqMapper.ReqToModel(additionalReq);
+            AdditionalModel additionalModel = additionalReqMapper.reqToModel(additionalReq);
             additionalService.saveOrUpdateAdditional(additionalModel);
             return "redirect:";
         } else return "additionals/add";
@@ -46,10 +45,7 @@ public class AdditionalController {
     @GetMapping("/edit/{id}")
     public String editAdditional(@PathVariable int id, Model model) {
         AdditionalModel additionalModel = additionalService.findAdditionalById(id);
-        AdditionalReq additionalReq = new AdditionalReq();
-        additionalReq.setId(additionalModel.getId());
-        additionalReq.setCost(additionalModel.getCost());
-        additionalReq.setName(additionalModel.getName());
+        AdditionalReq additionalReq = additionalReqMapper.modelToReq(additionalModel);
         model.addAttribute("additionalReq", additionalReq);
         model.addAttribute("imageArray", additionalModel.getImage());
         model.addAttribute("imgUtil", new ImageUtil());
@@ -59,8 +55,8 @@ public class AdditionalController {
     @Validated
     @PostMapping("/edit/{id}")
     public String editAdditional(@Valid @ModelAttribute("additionalReq") AdditionalReq additionalReq, BindingResult bindingResult, @PathVariable int id, Model model) {
-        if (!bindingResult.hasErrors() || bindingResult.hasFieldErrors("imageFile") && bindingResult.getAllErrors().size() == 1) {
-            AdditionalModel additionalModel = additionalReqMapper.ReqToModel(additionalReq);
+        if (!bindingResult.hasErrors()) {
+            AdditionalModel additionalModel = additionalReqMapper.reqToModel(additionalReq);
             if (additionalReq.getImageFile().isEmpty()) {
                 additionalModel.setImage(additionalService.findAdditionalById(id).getImage());
             }
@@ -92,17 +88,5 @@ public class AdditionalController {
         return "additionals/list";
     }
 
-
-    @GetMapping("/{additionalId}")
-    public String getAdditionalById(@PathVariable int additionalId, Model model) {
-        AdditionalModel additionalModel = additionalService.findAdditionalById(additionalId);
-        if (additionalModel == null) {
-            throw new NoSuchEntryInDatabase("Exception: Not found additional with Id " + additionalId);
-        }
-        model.addAttribute("imgUtil", new ImageUtil());
-        model.addAttribute("additionalList", additionalService.findAll(false));
-        model.addAttribute("additional", additionalModel);
-        return "/" + additionalId;
-    }
 }
 

@@ -1,12 +1,12 @@
 package com.dark.webshop.request_model;
 
-import com.dark.webshop.service.model.AdditionalModel;
 import com.dark.webshop.service.model.FoodCategoryModel;
 import com.dark.webshop.validation.CheckImage;
 import com.dark.webshop.validation.marker_interface.OnCreate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoodReq {
@@ -24,21 +24,21 @@ public class FoodReq {
     @Max(value = 1000000, message = "Слишком большая цена! Кто такое купит?!?!")
     private Integer cost;
     private FoodCategoryModel foodCategory;
-    private List<AdditionalModel> availableAdditionalList;
+    private List<Integer> availableAdditionalListId = new ArrayList<>();
     private boolean deleted = false;
 
-    public FoodReq(Integer id, String name, MultipartFile imageFile, String description, Integer cost, FoodCategoryModel foodCategory, List<AdditionalModel> availableAdditionalList, boolean deleted) {
+    public FoodReq() {
+    }
+
+    public FoodReq(Integer id, String name, MultipartFile imageFile, String description, Integer cost, FoodCategoryModel foodCategory, List<Integer> availableAdditionalListId, boolean deleted) {
         this.id = id;
         this.name = name;
         this.imageFile = imageFile;
         this.description = description;
         this.cost = cost;
         this.foodCategory = foodCategory;
-        this.availableAdditionalList = availableAdditionalList;
+        this.availableAdditionalListId = availableAdditionalListId;
         this.deleted = deleted;
-    }
-
-    public FoodReq() {
     }
 
     public FoodCategoryModel getFoodCategory() {
@@ -48,6 +48,7 @@ public class FoodReq {
     public void setFoodCategory(FoodCategoryModel foodCategory) {
         this.foodCategory = foodCategory;
     }
+
 
     public Integer getId() {
         return id;
@@ -90,12 +91,12 @@ public class FoodReq {
     }
 
 
-    public List<AdditionalModel> getAvailableAdditionalList() {
-        return availableAdditionalList;
+    public List<Integer> getAvailableAdditionalListId() {
+        return availableAdditionalListId;
     }
 
-    public void setAvailableAdditionalList(List<AdditionalModel> availableAdditionalList) {
-        this.availableAdditionalList = availableAdditionalList;
+    public void setAvailableAdditionalListId(List<Integer> availableAdditionalListId) {
+        this.availableAdditionalListId = availableAdditionalListId;
     }
 
     public boolean isDeleted() {

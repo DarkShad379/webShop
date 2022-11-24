@@ -7,6 +7,7 @@ import com.dark.webshop.service.mapper.AdditionalServiceMapper;
 import com.dark.webshop.service.model.AdditionalModel;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,12 +28,13 @@ public class AdditionalServiceImpl implements AdditionalService {
         return additionalOpt.map(additional -> additionalMapper.entityToModel(additional)).orElse(null);
     }
 
+    @Transactional
     @Override
     public void removeAdditional(AdditionalModel additionalModel) {
         Additional additional = additionalMapper.modelToEntity(additionalModel);
         if (additionalRepository.findById(additional.getId()).isPresent()) {
-            additionalRepository.delete(additional);
             additionalRepository.removeFromAvailableAdditionals(additional.getId());
+            additionalRepository.delete(additional);
         }
 
     }

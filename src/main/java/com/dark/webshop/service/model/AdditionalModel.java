@@ -10,6 +10,10 @@ public class AdditionalModel {
     public AdditionalModel() {
     }
 
+    public AdditionalModel(Integer id) {
+        this.id = id;
+    }
+
     public AdditionalModel(Integer id, String name, boolean deleted, Integer cost, byte[] image) {
         this.id = id;
         this.name = name;

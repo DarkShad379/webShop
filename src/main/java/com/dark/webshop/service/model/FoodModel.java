@@ -1,6 +1,7 @@
 package com.dark.webshop.service.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoodModel {
@@ -10,8 +11,9 @@ public class FoodModel {
     private String description;
     private Integer cost;
     private FoodCategoryModel foodCategory;
-    private List<AdditionalModel> availableAdditionalList;
+    private List<AdditionalModel> availableAdditionalList = new ArrayList<>();
     private boolean deleted = false;
+
 
     public FoodModel(Integer id, String name, byte[] image, String description, Integer cost, FoodCategoryModel foodCategory, List<AdditionalModel> availableAdditionalList, boolean deleted) {
         this.id = id;
@@ -25,6 +27,14 @@ public class FoodModel {
     }
 
     public FoodModel() {
+    }
+
+    public FoodCategoryModel getFoodCategory() {
+        return foodCategory;
+    }
+
+    public void setFoodCategory(FoodCategoryModel foodCategory) {
+        this.foodCategory = foodCategory;
     }
 
     public Integer getId() {
@@ -67,13 +77,7 @@ public class FoodModel {
         this.cost = cost;
     }
 
-    public FoodCategoryModel getFoodCategory() {
-        return foodCategory;
-    }
 
-    public void setFoodCategory(FoodCategoryModel foodCategory) {
-        this.foodCategory = foodCategory;
-    }
 
     public List<AdditionalModel> getAvailableAdditionalList() {
         return availableAdditionalList;

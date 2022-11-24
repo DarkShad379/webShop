@@ -30,8 +30,7 @@ public class Food {
     private Integer cost;
     @Column(name = "deleted")
     private boolean deleted = false;
-    @Column(name = "foodcategory")
-    @OneToMany
+    @OneToOne
     @JoinTable(name = "joinfoodcategory", joinColumns = @JoinColumn(name = "foodid"), inverseJoinColumns = @JoinColumn(name = "categoryid"))
     private FoodCategory foodCategory;
     @ManyToMany

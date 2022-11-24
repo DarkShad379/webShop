@@ -9,7 +9,6 @@ input[type=text], select {
   border-radius: 4px;
   box-sizing: border-box;
 }
-
 input[type=submit] {
   width: 100%;
   background-color: #4CAF50;
@@ -24,7 +23,11 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #45a049;
 }
-
+label {
+  display: block;
+  padding-left: 15px;
+  text-indent: -15px;
+}
 div {
     border-radius: 50px;
     background-color: #d5dfe6;
@@ -33,7 +36,6 @@ div {
     padding-bottom: 50px;
     padding-left: 250px;
 }
-
 
 
 </style>
@@ -54,16 +56,27 @@ div {
 <body>
 <div>
     <form action="#" th:action="@{/food/add}" th:object="${foodReq}" method="post" enctype="multipart/form-data">
-        <p>Имя добавки: <input type="text" th:field="*{name}"/></p>
+        <p>Имя Еды: <input type="text" th:field="*{name}"/></p>
         <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
+        <p>Описание: <input type="text" th:field="*{description}"/></p>
+        <p th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}"></p>
         <p>Цена: <input type="text" th:field="*{cost}"/></p>
         <p th:if="${#fields.hasErrors('cost')}" th:errorclass="error" th:errors="*{cost}"></p>
         <p>Изображение: <input type="file" th:field="*{imageFile}" accept="image/png, image/jpeg" onchange="loadFile(event)">
             <img id="output"/>
         <p th:if="${#fields.hasErrors('imageFile')}" th:errorclass="error" th:errors="*{imageFile}"></p>
-        <select th:field="*{category}">
-            <option th:each="cat: ${foodCategory}" th:value="${cat}" th:text="${cat.name}"></option>
+        <p>Категория:</p>
+        <select class="form-control" th:field="*{foodCategory.id}">
+            <option th:each="cat: ${categoryList}" th:value="${cat.id}" th:text="${cat.name} "></option>
         </select>
+        <label>Доступные добавки:
+            <input type="checkbox" name="additionals"
+                   th:each="add : ${additionalList}"
+                   th:text="${add.name}"
+                   th:value="${add.id}"
+                   th:field="*{availableAdditionalListId}"
+            />
+        </label>
         <p><input type="submit" value="Подтвердить"/>
     </form>
     <form th:action="@{/additionals/}" method="get">
@@ -71,7 +84,7 @@ div {
     </form>
 </div>
 </body>
-<script>
+<script th:inline="javascript">
   var loadFile = function(event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);

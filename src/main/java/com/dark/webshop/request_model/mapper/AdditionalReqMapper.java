@@ -15,7 +15,11 @@ public interface AdditionalReqMapper {
     AdditionalReqMapper INSTANCE = Mappers.getMapper(AdditionalReqMapper.class);
 
     @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage")
-    AdditionalModel ReqToModel(AdditionalReq additionalReq);
+    @Mapping(target = "deleted", ignore = true)
+    AdditionalModel reqToModel(AdditionalReq additionalReq);
+
+    @Mapping(target = "imageFile", ignore = true)
+    AdditionalReq modelToReq(AdditionalModel additionalModel);
 
     @Named("fileToImage")
     static byte[] fileToImage(MultipartFile file) throws IOException {

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Редактирование добавок</title>
+    <title>Редактирование еды</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
@@ -19,23 +18,29 @@
 <body>
 <!-- partial:index.partial.html -->
 <div class="table-style">
-    <div class="header">Добавки</div>
+    <div class="header">Еда</div>
     <table cellspacing="0">
         <tr>
             <th>Название</th>
+            <th>Описание</th>
             <th>Цена</th>
             <th>Изображение</th>
+            <th>Добавки</th>
         </tr>
         <tr>
-        <tr th:each="add: ${additionalList}">
-            <td th:text="${add.name}"> TEST</td>
-            <td th:text="${add.cost}">TEST</td>
+        <tr th:each="food: ${foodList}">
+            <td th:text="${food.name}"> TEST</td>
+            <td th:text="${food.cost}">TEST</td>
+            <td th:text="${food.description}">TEST</td>
+            <td th:each="add: ${food.availableAdditionalList}"
+                th:text="*{add.name}">TEST
+            </td>
             <td><img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(add.image)}"></td>
             <td>
-                <form th:action="@{/additionals/edit/{id}(id=${add.id})}" method="get">
+                <form th:action="@{/food/edit/{id}(id=${food.id})}" method="get">
                     <button class="btn btn-primary" type="submit" value="Submit">Редактировать</button>
                 </form>
-                <form th:action="@{/additionals/remove/{id}(id=${add.id})}" method="post">
+                <form th:action="@{/food/remove/{id}(id=${food.id})}" method="post">
                     <button class="btn btn-danger" type="submit" value="Submit">Удалить</button>
                 </form>
             </td>
