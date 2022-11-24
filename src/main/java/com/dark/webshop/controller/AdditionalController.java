@@ -13,6 +13,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/additionals")
@@ -83,7 +85,9 @@ public class AdditionalController {
     @GetMapping
     public String getAdditionals(Model model) {
         model.addAttribute("imgUtil", new ImageUtil());
-        model.addAttribute("additionalList", additionalService.findAll(false));
+        List<AdditionalModel> additionalModelList = additionalService.findAll(false);
+        List<AdditionalReq> additionalReqList = additionalModelList.stream().map(additionalReqMapper::modelToReq).collect(Collectors.toList());
+        model.addAttribute("additionalList", additionalReqList);
         return "additionals/list";
     }
 
