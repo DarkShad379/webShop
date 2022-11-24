@@ -1,7 +1,7 @@
 package com.dark.webshop.controller;
 
-import com.dark.webshop.request_model.AdditionalReq;
-import com.dark.webshop.request_model.mapper.AdditionalReqMapper;
+import com.dark.webshop.controller.dto.AdditionalReq;
+import com.dark.webshop.controller.dto.mapper.AdditionalReqMapper;
 import com.dark.webshop.service.AdditionalService;
 import com.dark.webshop.service.model.AdditionalModel;
 import com.dark.webshop.utils.ImageUtil;
@@ -47,7 +47,6 @@ public class AdditionalController {
         AdditionalModel additionalModel = additionalService.findAdditionalById(id);
         AdditionalReq additionalReq = additionalReqMapper.modelToReq(additionalModel);
         model.addAttribute("additionalReq", additionalReq);
-        model.addAttribute("imageArray", additionalModel.getImage());
         model.addAttribute("imgUtil", new ImageUtil());
         return "additionals/edit";
     }

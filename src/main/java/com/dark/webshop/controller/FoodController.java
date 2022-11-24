@@ -1,7 +1,7 @@
 package com.dark.webshop.controller;
 
-import com.dark.webshop.request_model.FoodReq;
-import com.dark.webshop.request_model.mapper.FoodReqMapper;
+import com.dark.webshop.controller.dto.FoodReq;
+import com.dark.webshop.controller.dto.mapper.FoodReqMapper;
 import com.dark.webshop.service.AdditionalService;
 import com.dark.webshop.service.FoodCategoryService;
 import com.dark.webshop.service.FoodService;

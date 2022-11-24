@@ -1,4 +1,4 @@
-package com.dark.webshop.request_model;
+package com.dark.webshop.controller.dto;
 
 import com.dark.webshop.service.model.FoodCategoryModel;
 import com.dark.webshop.validation.CheckImage;
@@ -16,6 +16,7 @@ public class FoodReq {
     private String name;
     @CheckImage(groups = OnCreate.class, message = "Должно иметь изображение!")
     private MultipartFile imageFile;
+    private byte[] image;
     @NotBlank(message = "Поле не может быть пустым")
     @Size(min = 2, message = "Описание должно быть не короче 2х символов!")
     private String description;
@@ -30,15 +31,24 @@ public class FoodReq {
     public FoodReq() {
     }
 
-    public FoodReq(Integer id, String name, MultipartFile imageFile, String description, Integer cost, FoodCategoryModel foodCategory, List<Integer> availableAdditionalListId, boolean deleted) {
+    public FoodReq(Integer id, String name, MultipartFile imageFile, byte[] image, String description, Integer cost, FoodCategoryModel foodCategory, List<Integer> availableAdditionalListId, boolean deleted) {
         this.id = id;
         this.name = name;
         this.imageFile = imageFile;
+        this.image = image;
         this.description = description;
         this.cost = cost;
         this.foodCategory = foodCategory;
         this.availableAdditionalListId = availableAdditionalListId;
         this.deleted = deleted;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public FoodCategoryModel getFoodCategory() {

@@ -1,10 +1,11 @@
-package com.dark.webshop.request_model.mapper;
+package com.dark.webshop.controller.dto.mapper;
 
-import com.dark.webshop.request_model.AdditionalReq;
+import com.dark.webshop.controller.dto.AdditionalReq;
 import com.dark.webshop.service.model.AdditionalModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +15,7 @@ import java.io.IOException;
 public interface AdditionalReqMapper {
     AdditionalReqMapper INSTANCE = Mappers.getMapper(AdditionalReqMapper.class);
 
-    @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage")
+    @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "deleted", ignore = true)
     AdditionalModel reqToModel(AdditionalReq additionalReq);
 

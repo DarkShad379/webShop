@@ -1,4 +1,4 @@
-package com.dark.webshop.request_model;
+package com.dark.webshop.controller.dto;
 
 import com.dark.webshop.validation.CheckImage;
 import com.dark.webshop.validation.marker_interface.OnCreate;
@@ -17,12 +17,22 @@ public class AdditionalReq {
     private Integer cost;
     @CheckImage(groups = OnCreate.class, message = "Должно иметь изображение!")
     private MultipartFile imageFile;
+    private byte[] image;
 
-    public AdditionalReq(Integer id, String name, Integer cost, MultipartFile imageFile) {
+    public AdditionalReq(Integer id, String name, Integer cost, MultipartFile imageFile, byte[] image) {
         this.id = id;
         this.name = name;
         this.cost = cost;
         this.imageFile = imageFile;
+        this.image = image;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public AdditionalReq() {

@@ -1,11 +1,12 @@
-package com.dark.webshop.request_model.mapper;
+package com.dark.webshop.controller.dto.mapper;
 
-import com.dark.webshop.request_model.FoodReq;
+import com.dark.webshop.controller.dto.FoodReq;
 import com.dark.webshop.service.model.AdditionalModel;
 import com.dark.webshop.service.model.FoodModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public interface FoodReqMapper {
     FoodReqMapper INSTANCE = Mappers.getMapper(FoodReqMapper.class);
 
-    @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage")
+    @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(source = "availableAdditionalListId", target = "availableAdditionalList", qualifiedByName = "listIdToListModel")
     FoodModel reqToModel(FoodReq foodReq);
 
