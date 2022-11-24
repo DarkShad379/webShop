@@ -41,7 +41,7 @@ public class FoodController {
         List<FoodReq> foodReqList = foodModelList.stream().map(foodReqMapper::modelToReq).collect(Collectors.toList());
         model.addAttribute("foodList", foodReqList);
         model.addAttribute("foodCategory", foodCategoryService.findAll());
-        model.addAttribute("additionals", additionalService.findAll(false));
+        model.addAttribute("additionalList", additionalService.findAll(false));
         model.addAttribute("imgUtil", new ImageUtil());
         return "food/list";
     }
@@ -78,18 +78,13 @@ public class FoodController {
 
     @Validated
     @PostMapping("/edit/{id}")
-    public String editFood(@Valid @ModelAttribute("foodReq") FoodReq foodReq, BindingResult bindingResult, @PathVariable int id, Model model) {
+    public String editFood(@Valid @ModelAttribute("foodReq") FoodReq foodReq, BindingResult bindingResult, Model model) {
         if (!bindingResult.hasErrors()) {
             FoodModel foodModel = foodReqMapper.reqToModel(foodReq);
-            if (foodReq.getImageFile().isEmpty()) {
-                foodModel.setImage(additionalService.findAdditionalById(id).getImage());
-            }
             foodService.saveOrUpdateFood(foodModel);
             return "redirect:..";
         } else {
-            FoodModel foodModel = foodService.findFoodById(id);
             model.addAttribute("foodReq", foodReq);
-            model.addAttribute("imageArray", foodModel.getImage());
             model.addAttribute("imgUtil", new ImageUtil());
             return "food/edit";
         }

@@ -60,7 +60,7 @@ div {
         <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
         <p>Описание: <input type="text" th:field="*{description}"/></p>
         <p th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}"></p>
-        <p>Цена: <input type="text" th:field="*{cost}"/></p>
+        <p>Цена: <input type="number" th:field="*{cost}"/></p>
         <p th:if="${#fields.hasErrors('cost')}" th:errorclass="error" th:errors="*{cost}"></p>
         <p>Изображение: <input type="file" th:field="*{imageFile}" accept="image/png, image/jpeg" onchange="loadFile(event)">
             <img id="output" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(foodReq.image)}">

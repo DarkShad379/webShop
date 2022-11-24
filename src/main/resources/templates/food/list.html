@@ -26,6 +26,7 @@
             <th>Цена</th>
             <th>Изображение</th>
             <th>Категория</th>
+            <th>Добавки</th>
         </tr>
         <tr>
         <tr th:each="food:${foodList}">
@@ -37,7 +38,11 @@
                 <td th:text="${foodCategory.^[id==#root.categoryId].name}">Отсутствует</td>
             </th:block>
             <td>
-
+                <th:block th:each="add:${food.availableAdditionalListId}" th:with="addId=${add}">
+                    <p th:text="${additionalList.^[id==#root.addId].name}"></p>
+                </th:block>
+            </td>
+            <td>
                 <form th:action="@{/food/edit/{id}(id=${food.id})}" method="get">
                     <button class="btn btn-primary" type="submit" value="Submit">Редактировать</button>
                 </form>

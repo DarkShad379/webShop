@@ -54,7 +54,7 @@ div {
     <form action="#" th:action="@{/additionals/add}" th:object="${additionalReq}" method="post" enctype="multipart/form-data">
         <p>Имя добавки: <input type="text" th:field="*{name}"/></p>
         <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
-        <p>Цена: <input type="text" th:field="*{cost}"/></p>
+        <p>Цена: <input type="number" th:field="*{cost}"/></p>
         <p th:if="${#fields.hasErrors('cost')}" th:errorclass="error" th:errors="*{cost}"></p>
         <p>Изображение: <input type="file" th:field="*{imageFile}" accept="image/png, image/jpeg" onchange="loadFile(event)">
             <img id="output"/>

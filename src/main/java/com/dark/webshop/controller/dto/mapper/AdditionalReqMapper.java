@@ -5,7 +5,6 @@ import com.dark.webshop.service.model.AdditionalModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,7 +14,8 @@ import java.io.IOException;
 public interface AdditionalReqMapper {
     AdditionalReqMapper INSTANCE = Mappers.getMapper(AdditionalReqMapper.class);
 
-    @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+
+    @Mapping(source = "imageFile", target = "image", qualifiedByName = "fileToImage", conditionExpression = "java(!additionalReq.getImageFile().isEmpty())")
     @Mapping(target = "deleted", ignore = true)
     AdditionalModel reqToModel(AdditionalReq additionalReq);
 

@@ -66,7 +66,6 @@ public class AdditionalController {
         } else {
             AdditionalModel additionalModel = additionalService.findAdditionalById(id);
             model.addAttribute("additionalReq", additionalReq);
-            model.addAttribute("imageArray", additionalModel.getImage());
             model.addAttribute("imgUtil", new ImageUtil());
             return "additionals/edit";
         }
