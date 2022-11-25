@@ -5,7 +5,6 @@ import com.dark.webshop.repository.FoodRepository;
 import com.dark.webshop.service.FoodService;
 import com.dark.webshop.service.mapper.FoodServiceMapper;
 import com.dark.webshop.service.model.FoodModel;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,8 +46,8 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<FoodModel> findByCategoryPaged(int category, Integer page, Integer size) {
-        List<Food> foodList = foodRepository.findByCategoryPaged(category, PageRequest.of(page, size));
+    public List<FoodModel> findByCategory(int category) {
+        List<Food> foodList = foodRepository.findByCategory(category);
         return foodList.stream().map(foodServiceMapper::entityToModel).collect(Collectors.toList());
     }
 }

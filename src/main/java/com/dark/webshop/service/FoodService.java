@@ -14,7 +14,7 @@ public interface FoodService {
 
      List<FoodModel> findAll(boolean deleted);
 
-     List<FoodModel> findByCategoryPaged(int category, Integer page, Integer size);
+     List<FoodModel> findByCategory(int category);
 
      FoodModel findFoodById(int id);
 }
