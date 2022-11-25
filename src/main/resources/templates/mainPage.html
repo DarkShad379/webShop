@@ -111,11 +111,9 @@
     </div>
 </div>
 <script>
-var currentModal=0
 function openModal(id)
 {
 var modal = document.getElementById("Modal"+id);
-currentModal = id
   modal.style.display = "block";
 }
 function closeModal(id)
@@ -127,10 +125,9 @@ modal.style.display="none"
 
 
 window.onclick = function(event) {
-  if (event.target.id.contains("modal")) {
-
-  var modal = document.getElementById("Modal"+currentModal);
-    modal.style.display = "none";
+  if (event.target.id.includes("Modal")) {
+  var modal = document.getElementById(event.target.id)
+    modal.style.display = "none"
   }
 }
 
