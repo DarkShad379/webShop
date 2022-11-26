@@ -16,9 +16,6 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userDetailsId")
     private UserDetails userDetails;
-    @OneToOne
-    @JoinColumn(name = "AuthHG")
-    private String authGroup;
 
     public User() {
     }

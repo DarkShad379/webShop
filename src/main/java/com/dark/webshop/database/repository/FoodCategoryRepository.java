@@ -1,4 +1,4 @@
-package com.dark.webshop.repository;
+package com.dark.webshop.database.repository;
 
 import com.dark.webshop.database.entity.food.FoodCategory;
 import org.springframework.data.jpa.repository.JpaRepository;

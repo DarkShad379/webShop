@@ -1,7 +1,7 @@
 package com.dark.webshop.service.mapper.resolver;
 
 import com.dark.webshop.database.entity.food.Order;
-import com.dark.webshop.repository.OrderRepository;
+import com.dark.webshop.database.repository.OrderRepository;
 import com.dark.webshop.service.model.OrderModel;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;

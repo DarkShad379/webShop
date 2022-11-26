@@ -1,0 +1,63 @@
+package com.dark.webshop.config;
+
+
+import com.dark.webshop.security.UserSecDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig {
+
+    @Autowired
+    UserSecDetailsService userSecDetailsService;
+
+
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.authenticationProvider(authenticationProvider());
+        return authenticationManagerBuilder.build();
+    }
+
+    @Bean
+    DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userSecDetailsService);
+        provider.setPasswordEncoder(new BCryptPasswordEncoder(11));
+        return provider;
+    }
+
+    @Bean
+    public GrantedAuthoritiesMapper authoritiesMapper() {
+        SimpleAuthorityMapper authorityMapper = new SimpleAuthorityMapper();
+        authorityMapper.setConvertToUpperCase(true);
+        authorityMapper.setDefaultAuthority("USER");
+        return authorityMapper;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/menu*", "/additionals*").permitAll()
+                .and()
+                .httpBasic();
+        return http.build();
+    }
+}

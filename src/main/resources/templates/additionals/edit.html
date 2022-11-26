@@ -58,7 +58,7 @@ div {
         <p>Цена: <input type="number" th:field="*{cost}"/></p>
         <p th:if="${#fields.hasErrors('cost')}" th:errorclass="error" th:errors="*{cost}"></p>
         <p>Изображение: <input type="file" th:field="*{imageFile}" accept="image/png, image/jpeg" onchange="loadFile(event)">
-            <img id="output" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(add.image)}">
+            <img id="output" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(additionalReq.image)}">
         <p th:if="${#fields.hasErrors('imageFile')}" th:errorclass="error" th:errors="*{imageFile}"></p>
         <p><input type="submit" value="Подтвердить"/>
     </form>
