@@ -5,13 +5,13 @@ import com.dark.webshop.database.entity.user.UserDetails;
 
 public class UserModel {
     private Integer id;
-    private String login;
+    private String username;
     private String password;
     private UserDetails userDetails;
 
     public UserModel(Integer id, String login, String password, UserDetails userDetails) {
         this.id = id;
-        this.login = login;
+        this.username = login;
         this.password = password;
         this.userDetails = userDetails;
     }
@@ -25,11 +25,11 @@ public class UserModel {
     }
 
     public String getLogin() {
-        return login;
+        return username;
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.username = login;
     }
 
     public String getPassword() {

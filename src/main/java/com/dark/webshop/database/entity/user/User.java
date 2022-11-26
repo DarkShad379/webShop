@@ -9,20 +9,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "login")
-    private String login;
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
     @Column(name = "password")
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userDetailsId")
     private UserDetails userDetails;
+    @OneToOne
+    @JoinColumn(name = "AuthHG")
+    private String authGroup;
 
     public User() {
     }
 
-    public User(Integer id, String login, String password, UserDetails userDetails) {
+    public User(Integer id, String username, String password, UserDetails userDetails) {
         this.id = id;
-        this.login = login;
+        this.username = username;
         this.password = password;
         this.userDetails = userDetails;
     }
@@ -35,12 +38,12 @@ public class User {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

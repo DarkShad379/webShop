@@ -16,20 +16,24 @@ public class Order {
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
-    @OneToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "orderedFood", joinColumns = @JoinColumn(name = "orderId"), inverseJoinColumns = @JoinColumn(name = "id"))
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "joinOrderedFoodOrder", joinColumns = @JoinColumn(name = "orderId"), inverseJoinColumns = @JoinColumn(name = "orderedFoodId"))
     List<OrderedFood> orderedFoodList;
     @Column(name = "datetime")
     private Date datetime;
+    @Column(name = "adress")
+    private String adress;
 
-    public Order(Integer id, User user, List<OrderedFood> orderedFoodList, Date datetime) {
-        this.id = id;
-        this.user = user;
-        this.orderedFoodList = orderedFoodList;
-        this.datetime = datetime;
-    }
 
     public Order() {
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     public Date getDatetime() {

@@ -14,8 +14,6 @@ public class OrderedFood {
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "foodId")
     private Food food;
-    @Column(name = "orderId", nullable = false)
-    private Integer orderId;
     @Column(name = "totalfoodcost", nullable = false)
     private Integer totalfoodcost;
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -26,13 +24,6 @@ public class OrderedFood {
     public OrderedFood() {
     }
 
-    public OrderedFood(Integer id, Food food, Integer orderId, Integer totalfoodcost, List<Additional> additionalList) {
-        this.id = id;
-        this.food = food;
-        this.orderId = orderId;
-        this.totalfoodcost = totalfoodcost;
-        this.additionalList = additionalList;
-    }
 
     public Integer getTotalfoodcost() {
         return totalfoodcost;
@@ -57,13 +48,6 @@ public class OrderedFood {
         this.food = food;
     }
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
 
     public List<Additional> getAdditionalList() {
         return additionalList;
