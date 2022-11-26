@@ -1,7 +1,7 @@
 package com.dark.webshop.service.mapper.resolver;
 
 import com.dark.webshop.database.entity.food.Additional;
-import com.dark.webshop.repository.AdditionalRepository;
+import com.dark.webshop.database.repository.AdditionalRepository;
 import com.dark.webshop.service.model.AdditionalModel;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;

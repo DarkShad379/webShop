@@ -1,4 +1,4 @@
-package com.dark.webshop.repository;
+package com.dark.webshop.database.repository;
 
 import com.dark.webshop.database.entity.food.Order;
 import org.springframework.data.domain.Page;

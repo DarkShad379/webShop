@@ -1,8 +1,8 @@
 package com.dark.webshop.service.impl;
 
 import com.dark.webshop.database.entity.food.FoodCategory;
+import com.dark.webshop.database.repository.FoodCategoryRepository;
 import com.dark.webshop.exception_handling.NoSuchEntryInDatabase;
-import com.dark.webshop.repository.FoodCategoryRepository;
 import com.dark.webshop.service.FoodCategoryService;
 import com.dark.webshop.service.mapper.FoodCategoryServiceMapper;
 import com.dark.webshop.service.model.FoodCategoryModel;

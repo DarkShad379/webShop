@@ -1,7 +1,7 @@
 package com.dark.webshop.service.mapper.resolver;
 
 import com.dark.webshop.database.entity.user.User;
-import com.dark.webshop.repository.UserRepository;
+import com.dark.webshop.database.repository.UserRepository;
 import com.dark.webshop.service.model.UserModel;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;

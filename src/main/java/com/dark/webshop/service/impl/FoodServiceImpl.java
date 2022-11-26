@@ -1,7 +1,7 @@
 package com.dark.webshop.service.impl;
 
 import com.dark.webshop.database.entity.food.Food;
-import com.dark.webshop.repository.FoodRepository;
+import com.dark.webshop.database.repository.FoodRepository;
 import com.dark.webshop.service.FoodService;
 import com.dark.webshop.service.mapper.FoodServiceMapper;
 import com.dark.webshop.service.model.FoodModel;
