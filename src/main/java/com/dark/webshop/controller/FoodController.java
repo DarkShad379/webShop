@@ -8,6 +8,7 @@ import com.dark.webshop.service.FoodService;
 import com.dark.webshop.service.model.FoodModel;
 import com.dark.webshop.utils.ImageUtil;
 import com.dark.webshop.validation.marker_interface.OnCreate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/food")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class FoodController {
 
     FoodService foodService;

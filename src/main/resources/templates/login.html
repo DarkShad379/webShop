@@ -31,18 +31,21 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form th:action="@{/login}" th:object="${userReq}" method="post" class="login100-form validate-form p-l-55 p-r-55 p-t-178">
+            <form th:action="@{/login}" method="post" class="login100-form validate-form p-l-55 p-r-55 p-t-178">
 					<span class="login100-form-title">
 						Авторизация
 					</span>
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">
+                        Неверное имя пользователя или пароль
+                    </div>
+                </div>
                 <div class="wrap-input100 validate-input m-b-16" data-validate="Введите имя пользователя">
-                    <input class="input100" type="text" name="username" placeholder="Username" th:field="*{username}"/>
-                    <p th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></p>
+                    <input class="input100" type="text" id="username" name="username" placeholder="Username "/>
                     <span class="focus-input100"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Please enter password">
-                    <input class="input100" type="password" name="password" placeholder="Password" th:field="*{password}"/>
-                    <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
+                    <input class="input100" type="password" id="password" name="password" placeholder="Password"/>
                     <span class="focus-input100"></span>
                 </div>
 

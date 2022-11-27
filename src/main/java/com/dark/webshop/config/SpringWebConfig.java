@@ -42,7 +42,7 @@ public class SpringWebConfig
     /* ******************************************************************* */
     @Bean
     public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(10);
     }
 
     @Override

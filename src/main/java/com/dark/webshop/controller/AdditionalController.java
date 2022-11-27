@@ -6,6 +6,7 @@ import com.dark.webshop.service.AdditionalService;
 import com.dark.webshop.service.model.AdditionalModel;
 import com.dark.webshop.utils.ImageUtil;
 import com.dark.webshop.validation.marker_interface.OnCreate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/additionals")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdditionalController {
     AdditionalReqMapper additionalReqMapper;
     AdditionalService additionalService;

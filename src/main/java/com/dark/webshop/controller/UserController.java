@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,22 +29,7 @@ public class UserController {
 
     @GetMapping(value = "login")
     public String getLoginPage(Model model) {
-        model.addAttribute("userReq", new UserReq());
         return "login";
-    }
-
-    @PostMapping(value = "login")
-    public String loginUser(@Valid @ModelAttribute("userReq") UserReq userReq, BindingResult bindingResult) {
-        if (!bindingResult.hasErrors()) {
-            if (userService.userPasswordIsValid(userReqMapper.reqToModel(userReq))) {
-                userDetailsService.loadUserByUsername(userReq.getUsername());
-                return "redirect:menu";
-            } else {
-                bindingResult.addError(new ObjectError("password", "password incorrect"));
-                return "login";
-
-            }
-        } else return "login";
     }
 
     @GetMapping(value = "registration")
