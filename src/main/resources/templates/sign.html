@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+	<head>
+		<meta charset="UTF-8">
+		<title>Pizza House Sign In</title>
+		<link rel="stylesheet" href="./css/signInStyle.css" type="text/css">
+
+	</head>
+<body>
+<!-- partial:index.partial.html -->
+<!--
+Author: Colorlib
+Author URL: https://colorlib.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pizza House </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- Custom Theme files -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<!-- //Custom Theme files -->
+	<!-- web font -->
+	<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+	<!-- //web font -->
+</head>
+<body>
+<!-- main -->
+<div class="main-w3layouts wrapper">
+	<h1>Регистрация</h1>
+	<div class="main-agileinfo">
+		<div class="agileits-top">
+			<form th:action="@{/registration}" th:object="${userReq}" method="post">
+				<input class="text" type="text" name="Username" placeholder="Username" th:field="*{username}"/>
+				<p th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></p>
+				<input class="text" type="password" name="password" placeholder="Password" th:field="*{password}"/>
+				<p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
+				<input class="text" type="text" name="PhoneNumber" placeholder="Номер телефона" th:field="*{PhoneNumber}"/>
+				<p th:if="${#fields.hasErrors('PhoneNumber')}" th:errorclass="error" th:errors="*{PhoneNumber}"></p>
+				<input class="text" type="text" name="Adress" placeholder="Адрес" th:field="*{Adress}"/>
+				<p th:if="${#fields.hasErrors('Adress')}" th:errorclass="error" th:errors="*{Adress}"></p>
+				<div class="wthree-text">
+					<div class="clear"></div>
+				</div>
+				<input type="submit" value="Зарегистрироваться">
+			</form>
+			<p>Уже есть аккаунт? <a th:href="@{/login}"> Авторизуйтесь!</a></p>
+		</div>
+	</div>
+	<!-- copyright -->
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+</div>
+<!-- //main -->
+</body>
+</html>
+<!-- partial -->
+
+</body>
+</html>

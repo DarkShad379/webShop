@@ -15,6 +15,7 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -50,14 +51,18 @@ public class SecurityConfig {
         return authorityMapper;
     }
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/menu*", "/additionals*").permitAll()
-                .and()
-                .httpBasic();
+                .antMatchers("/menu**", "/login", "/registration", "/css/**", "/sass/**", "/vendor/**", "/js/**", "/img/**", "/images/**", "/lib/**", "/fonts/**", "/static/**").permitAll()
+                .anyRequest().authenticated().and()
+                .formLogin().loginPage("/login").permitAll().usernameParameter("username").passwordParameter("password").and()
+                .logout().invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         return http.build();
     }
 }

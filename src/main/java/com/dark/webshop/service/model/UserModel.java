@@ -1,19 +1,40 @@
 package com.dark.webshop.service.model;
 
-import com.dark.webshop.database.entity.user.UserDetails;
 
 
 public class UserModel {
     private Integer id;
     private String username;
     private String password;
-    private UserDetails userDetails;
+    private String PhoneNumber;
+    private String Adress;
 
-    public UserModel(Integer id, String login, String password, UserDetails userDetails) {
-        this.id = id;
-        this.username = login;
-        this.password = password;
-        this.userDetails = userDetails;
+
+    public UserModel() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
+    public String getAdress() {
+        return Adress;
+    }
+
+    public void setAdress(String adress) {
+        Adress = adress;
     }
 
     public Integer getId() {
@@ -40,11 +61,4 @@ public class UserModel {
         this.password = password;
     }
 
-    public UserDetails getUserDetails() {
-        return userDetails;
-    }
-
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
-    }
 }

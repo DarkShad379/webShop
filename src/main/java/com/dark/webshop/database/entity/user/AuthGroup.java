@@ -3,10 +3,10 @@ package com.dark.webshop.database.entity.user;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "authUserGroup")
+@Table(name = "authusergroup")
 public class AuthGroup {
     @Id
-    @Column(name = "authUserGroupId")
+    @Column(name = "authgroupid")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(name = "username")

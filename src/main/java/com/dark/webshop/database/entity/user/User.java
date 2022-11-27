@@ -13,18 +13,28 @@ public class User {
     private String username;
     @Column(name = "password")
     private String password;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userDetailsId")
-    private UserDetails userDetails;
+    @Column(name = "phonenumber")
+    private String PhoneNumber;
+    @Column(name = "adress")
+    private String Adress;
 
     public User() {
     }
 
-    public User(Integer id, String username, String password, UserDetails userDetails) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.userDetails = userDetails;
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
+    public String getAdress() {
+        return Adress;
+    }
+
+    public void setAdress(String adress) {
+        Adress = adress;
     }
 
     public Integer getId() {
@@ -51,12 +61,5 @@ public class User {
         this.password = password;
     }
 
-    public UserDetails getUserDetails() {
-        return userDetails;
-    }
-
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
-    }
 
 }
