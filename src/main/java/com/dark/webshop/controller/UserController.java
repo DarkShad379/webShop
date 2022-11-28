@@ -32,6 +32,11 @@ public class UserController {
         return "login";
     }
 
+    @GetMapping(value = "logout")
+    public String logOut() {
+        return "/";
+    }
+
     @GetMapping(value = "registration")
     public String getSignPage(Model model) {
         model.addAttribute("userReq", new UserReq());

@@ -64,5 +64,7 @@ public class SecurityConfig {
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         return http.build();
+
+
     }
 }
