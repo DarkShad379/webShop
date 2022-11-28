@@ -13,7 +13,8 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("category")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasAuthority('ADMIN')")
+
 public class CategoryController {
     FoodCategoryService foodCategoryService;
 

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("menu")
+@RequestMapping("/")
 public class MenuController {
     FoodService foodService;
     FoodCategoryService foodCategoryService;

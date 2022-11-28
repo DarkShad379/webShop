@@ -57,7 +57,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/menu**", "/login", "/registration", "/css/**", "/sass/**", "/vendor/**", "/js/**", "/img/**", "/images/**", "/lib/**", "/fonts/**", "/static/**").permitAll()
+                .antMatchers("/**", "/error", "/login", "/registration", "/css/**", "/sass/**", "/vendor/**", "/js/**", "/img/**", "/images/**", "/lib/**", "/fonts/**", "/static/**").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin().loginPage("/login").permitAll().usernameParameter("username").passwordParameter("password").and()
                 .logout().invalidateHttpSession(true)

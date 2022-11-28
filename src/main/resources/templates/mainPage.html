@@ -144,7 +144,6 @@ window.onclick = function(event) {
             <div class="header__cart">
                 <div class="header__top__right__auth">
                     <a sec:authorize="isAnonymous()" th:href="@{/login}"><i class="fa fa-user"></i> Login</a>
-                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i class="fa fa-user"></i> Logout</a>
                 </div>
                 <div class="header__cart__price">Корзина: <span>0 T</span></div>
                 <ul>
@@ -170,7 +169,7 @@ window.onclick = function(event) {
                     </div>
                     <ul>
                         <li th:each="category:${categoryList}">
-                            <a th:href="@{/menu(catId=${category.id})}" th:text="*{category.name}">Fresh Meat</a></li>
+                            <a th:href="@{/(catId=${category.id})}" th:text="*{category.name}">Fresh Meat</a></li>
                     </ul>
                 </div>
             </div>
@@ -198,7 +197,40 @@ window.onclick = function(event) {
         </div>
     </div>
 </section>
-
+<section class="contact spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_phone"></span>
+                    <h4>Заказывайте по номеру</h4>
+                    <p>+8-800-535-3535</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_pin_alt"></span>
+                    <h4>Наш адресс</h4>
+                    <p>Г. Нурсултан Ул. Нурсултана</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_clock_alt"></span>
+                    <h4>Время работы</h4>
+                    <p>С 12:00 До 23:00</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_mail_alt"></span>
+                    <h4>Email</h4>
+                    <p>housepizza@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- Js Plugins -->
 <script src="./js/jquery-3.3.1.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
