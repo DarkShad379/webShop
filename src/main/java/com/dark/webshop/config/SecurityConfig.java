@@ -2,7 +2,6 @@ package com.dark.webshop.config;
 
 
 import com.dark.webshop.security.UserSecDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,9 +22,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    @Autowired
-    UserSecDetailsService userSecDetailsService;
 
+    private final UserSecDetailsService userSecDetailsService;
+
+    public SecurityConfig(UserSecDetailsService userSecDetailsService) {
+        this.userSecDetailsService = userSecDetailsService;
+    }
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
@@ -57,7 +59,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**", "/error", "/login", "/registration", "/css/**", "/sass/**", "/vendor/**", "/js/**", "/img/**", "/images/**", "/lib/**", "/fonts/**", "/static/**").permitAll()
+                .antMatchers("/error", "/login", "/registration", "/css/**", "/sass/**", "/vendor/**", "/js/**", "/img/**", "/images/**", "/lib/**", "/fonts/**", "/static/**", "/**").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin().loginPage("/login").permitAll().usernameParameter("username").passwordParameter("password").and()
                 .logout().invalidateHttpSession(true)

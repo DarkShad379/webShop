@@ -19,10 +19,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class MenuController {
-    FoodService foodService;
-    FoodCategoryService foodCategoryService;
-    AdditionalService additionalService;
-    FoodReqMapper foodReqMapper;
+    private final FoodService foodService;
+    private final FoodCategoryService foodCategoryService;
+    private final AdditionalService additionalService;
+    private final FoodReqMapper foodReqMapper;
 
     public MenuController(FoodService foodService, FoodCategoryService foodCategoryService, AdditionalService additionalService, FoodReqMapper foodReqMapper) {
         this.foodService = foodService;

@@ -6,9 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PhoneIsCorrectValidator implements ConstraintValidator<PhoneIsCorrect, String> {
-    private Pattern pattern;
-    private Matcher matcher;
-    private static final String PhonePattern = "^[0-9\\-\\+]{11}$";
+    private static final String phonePattern = "^[0-9\\-\\+]{11}$";
 
     @Override
     public void initialize(PhoneIsCorrect constraintAnnotation) {
@@ -20,8 +18,8 @@ public class PhoneIsCorrectValidator implements ConstraintValidator<PhoneIsCorre
     }
 
     private boolean validatePhone(String phoneNumber) {
-        pattern = Pattern.compile(PhonePattern);
-        matcher = pattern.matcher(phoneNumber);
+        Pattern pattern = Pattern.compile(phonePattern);
+        Matcher matcher = pattern.matcher(phoneNumber);
         return matcher.matches();
     }
 }

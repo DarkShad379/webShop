@@ -14,13 +14,6 @@ public class AdditionalModel {
         this.id = id;
     }
 
-    public AdditionalModel(Integer id, String name, boolean deleted, Integer cost, byte[] image) {
-        this.id = id;
-        this.name = name;
-        this.deleted = deleted;
-        this.cost = cost;
-        this.image = image;
-    }
 
     public byte[] getImage() {
         return image;

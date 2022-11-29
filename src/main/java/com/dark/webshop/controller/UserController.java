@@ -17,9 +17,9 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
-    UserDetailsService userDetailsService;
-    UserReqMapper userReqMapper;
-    UserService userService;
+    private final UserDetailsService userDetailsService;
+    private final UserReqMapper userReqMapper;
+    private final UserService userService;
 
     public UserController(UserDetailsService userDetailsService, UserReqMapper userReqMapper, UserService userService) {
         this.userDetailsService = userDetailsService;
@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping(value = "login")
-    public String getLoginPage(Model model) {
+    public String getLoginPage() {
         return "login";
     }
 

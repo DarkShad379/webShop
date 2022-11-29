@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "authusergroup")
-public class AuthGroup {
+public class AuthenGroup {
     @Id
     @Column(name = "authgroupid")
     @GeneratedValue(strategy = GenerationType.AUTO)

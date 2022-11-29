@@ -15,17 +15,6 @@ public class FoodModel {
     private boolean deleted = false;
 
 
-    public FoodModel(Integer id, String name, byte[] image, String description, Integer cost, FoodCategoryModel foodCategory, List<AdditionalModel> availableAdditionalList, boolean deleted) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.description = description;
-        this.cost = cost;
-        this.foodCategory = foodCategory;
-        this.availableAdditionalList = availableAdditionalList;
-        this.deleted = deleted;
-    }
-
     public FoodModel() {
     }
 

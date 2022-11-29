@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @PreAuthorize("hasAuthority('ADMIN')")
 
 public class CategoryController {
-    FoodCategoryService foodCategoryService;
+    private final FoodCategoryService foodCategoryService;
 
     public CategoryController(FoodCategoryService foodCategoryService) {
         this.foodCategoryService = foodCategoryService;

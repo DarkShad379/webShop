@@ -19,14 +19,6 @@ public class AdditionalReq {
     private MultipartFile imageFile;
     private byte[] image;
 
-    public AdditionalReq(Integer id, String name, Integer cost, MultipartFile imageFile, byte[] image) {
-        this.id = id;
-        this.name = name;
-        this.cost = cost;
-        this.imageFile = imageFile;
-        this.image = image;
-    }
-
     public byte[] getImage() {
         return image;
     }

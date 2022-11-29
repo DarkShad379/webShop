@@ -16,9 +16,14 @@ import java.util.Locale;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
-    private UserServiceMapper userServiceMapper;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final UserServiceMapper userServiceMapper;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public boolean userExist(String username) {
+        return userRepository.findByUsername(username) != null;
+    }
 
     public UserServiceImpl(UserRepository userRepository, UserServiceMapper userServiceMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;

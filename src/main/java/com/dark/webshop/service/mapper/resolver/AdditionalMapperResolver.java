@@ -7,9 +7,11 @@ import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class AdditionalMapperResolver {
-    private AdditionalRepository additionalRepository;
+    private final AdditionalRepository additionalRepository;
 
     public AdditionalMapperResolver(AdditionalRepository additionalRepository) {
         this.additionalRepository = additionalRepository;
@@ -17,7 +19,7 @@ public class AdditionalMapperResolver {
 
     @ObjectFactory
     public Additional resolve(AdditionalModel additionalModel, @TargetType Class<Additional> type) {
-        return additionalModel != null && additionalModel.getId() != null && additionalRepository.findById(additionalModel.getId()).isPresent()
-                ? additionalRepository.findById(additionalModel.getId()).get() : new Additional();
+        Optional<Additional> optionalAdditional = additionalRepository.findById(additionalModel.getId());
+        return optionalAdditional.orElseGet(Additional::new);
     }
 }

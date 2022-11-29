@@ -7,6 +7,8 @@ import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class FoodMapperResolver {
 
@@ -18,7 +20,7 @@ public class FoodMapperResolver {
 
     @ObjectFactory
     public Food resolve(FoodModel foodModel, @TargetType Class<Food> type) {
-        return foodModel != null && foodModel.getId() != null && foodRepository.findById(foodModel.getId()).isPresent()
-                ? foodRepository.findById(foodModel.getId()).get() : new Food();
+        Optional<Food> foodOptional = foodRepository.findById(foodModel.getId());
+        return foodOptional.orElseGet(Food::new);
     }
 }

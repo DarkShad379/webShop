@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class FoodServiceImpl implements FoodService {
-    FoodRepository foodRepository;
-    FoodServiceMapper foodServiceMapper;
+    private final FoodRepository foodRepository;
+    private final FoodServiceMapper foodServiceMapper;
 
     public FoodServiceImpl(FoodRepository foodRepository, FoodServiceMapper foodServiceMapper) {
         this.foodRepository = foodRepository;

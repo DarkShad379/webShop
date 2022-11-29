@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class FoodController {
 
-    FoodService foodService;
-    FoodCategoryService foodCategoryService;
-    AdditionalService additionalService;
-    FoodReqMapper foodReqMapper;
+    private final FoodService foodService;
+    private final FoodCategoryService foodCategoryService;
+    private final AdditionalService additionalService;
+    private final FoodReqMapper foodReqMapper;
 
     public FoodController(FoodService foodService, FoodCategoryService foodCategoryService, AdditionalService additionalService, FoodReqMapper foodReqMapper) {
         this.foodService = foodService;
@@ -56,14 +56,19 @@ public class FoodController {
         return "food/add";
     }
 
-    @Validated({OnCreate.class})
+    @Validated(OnCreate.class)
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute("foodReq") FoodReq foodReq, BindingResult bindingResult) {
+    public String add(@Valid @ModelAttribute("foodReq") FoodReq foodReq, BindingResult bindingResult, Model model) {
         if (!bindingResult.hasErrors()) {
             FoodModel foodModel = foodReqMapper.reqToModel(foodReq);
             foodService.saveOrUpdateFood(foodModel);
             return "redirect:";
-        } else return "food/add";
+        } else {
+            model.addAttribute("imgUtil", new ImageUtil());
+            model.addAttribute("categoryList", foodCategoryService.findAll());
+            model.addAttribute("additionalList", additionalService.findAll(false));
+            return "food/add";
+        }
     }
 
     @GetMapping("/edit/{id}")

@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class FoodCategoryServiceImpl implements FoodCategoryService {
-    FoodCategoryRepository foodCategoryRepository;
-    FoodCategoryServiceMapper foodCategoryServiceMapper;
+    private final FoodCategoryRepository foodCategoryRepository;
+    private final FoodCategoryServiceMapper foodCategoryServiceMapper;
 
     public FoodCategoryServiceImpl(FoodCategoryRepository foodCategoryRepository, FoodCategoryServiceMapper foodCategoryServiceMapper) {
         this.foodCategoryRepository = foodCategoryRepository;

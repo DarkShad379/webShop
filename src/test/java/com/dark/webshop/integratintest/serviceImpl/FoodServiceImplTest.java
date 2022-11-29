@@ -14,14 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-
-public class FoodServiceImplTest {
+class FoodServiceImplTest {
     @Autowired
     FoodService foodService;
     @Autowired
     AdditionalService additionalService;
+
     @Test
-    public void testUpdateFood() {
+    void testUpdateFood() {
         FoodModel foodModel = new FoodModel();
         foodModel.setCost(2500);
         foodModel.setName("Пицца Четыре сыра");

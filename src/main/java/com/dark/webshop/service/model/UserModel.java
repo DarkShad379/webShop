@@ -6,8 +6,8 @@ public class UserModel {
     private Integer id;
     private String username;
     private String password;
-    private String PhoneNumber;
-    private String Adress;
+    private String phoneNumber;
+    private String address;
 
 
     public UserModel() {
@@ -22,19 +22,19 @@ public class UserModel {
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAdress() {
-        return Adress;
+        return address;
     }
 
     public void setAdress(String adress) {
-        Adress = adress;
+        address = adress;
     }
 
     public Integer getId() {
@@ -43,14 +43,6 @@ public class UserModel {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getLogin() {
-        return username;
-    }
-
-    public void setLogin(String login) {
-        this.username = login;
     }
 
     public String getPassword() {

@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class AdditionalServiceImpl implements AdditionalService {
-    AdditionalRepository additionalRepository;
-    AdditionalServiceMapper additionalMapper;
+    private final AdditionalRepository additionalRepository;
+    private final AdditionalServiceMapper additionalMapper;
 
     public AdditionalServiceImpl(AdditionalRepository additionalRepository, AdditionalServiceMapper additionalMapper) {
         this.additionalRepository = additionalRepository;

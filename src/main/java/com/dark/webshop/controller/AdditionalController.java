@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/additionals")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdditionalController {
-    AdditionalReqMapper additionalReqMapper;
-    AdditionalService additionalService;
+    private final AdditionalReqMapper additionalReqMapper;
+    private final AdditionalService additionalService;
 
     public AdditionalController(AdditionalReqMapper additionalReqMapper, AdditionalService additionalService) {
         this.additionalReqMapper = additionalReqMapper;
@@ -36,7 +36,7 @@ public class AdditionalController {
     }
 
 
-    @Validated({OnCreate.class})
+    @Validated(OnCreate.class)
     @PostMapping("/add")
     public String addAdditional(@Valid @ModelAttribute("additionalReq") AdditionalReq additionalReq, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
@@ -66,7 +66,6 @@ public class AdditionalController {
             additionalService.saveOrUpdateAdditional(additionalModel);
             return "redirect:..";
         } else {
-            AdditionalModel additionalModel = additionalService.findAdditionalById(id);
             model.addAttribute("additionalReq", additionalReq);
             model.addAttribute("imgUtil", new ImageUtil());
             return "additionals/edit";

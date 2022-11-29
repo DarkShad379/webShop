@@ -13,13 +13,6 @@ public class OrderedFoodModel {
     public OrderedFoodModel() {
     }
 
-    public OrderedFoodModel(Integer id, FoodModel food, Integer orderId, Integer totalfoodcost, List<AdditionalModel> additionalList) {
-        this.id = id;
-        this.food = food;
-        this.orderId = orderId;
-        this.totalfoodcost = totalfoodcost;
-        this.additionalList = additionalList;
-    }
 
     public Integer getId() {
         return id;

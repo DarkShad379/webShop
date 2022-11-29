@@ -27,17 +27,6 @@ public class FoodReq {
     private List<Integer> availableAdditionalListId = new ArrayList<>();
     private boolean deleted = false;
 
-    public FoodReq(Integer id, String name, MultipartFile imageFile, byte[] image, String description, Integer cost, Integer foodCategoryId, List<Integer> availableAdditionalListId, boolean deleted) {
-        this.id = id;
-        this.name = name;
-        this.imageFile = imageFile;
-        this.image = image;
-        this.description = description;
-        this.cost = cost;
-        this.foodCategoryId = foodCategoryId;
-        this.availableAdditionalListId = availableAdditionalListId;
-        this.deleted = deleted;
-    }
 
     public FoodReq() {
     }

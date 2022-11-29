@@ -1,7 +1,6 @@
 package com.dark.webshop.validation;
 
-import com.dark.webshop.database.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dark.webshop.service.UserService;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -12,11 +11,15 @@ public class UserNotExistValidator implements ConstraintValidator<UserNotExist, 
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
-    @Autowired
-    UserRepository userRepository;
+
+    private final UserService userService;
+
+    public UserNotExistValidator(com.dark.webshop.service.UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        return userRepository.findByUsername(s.toLowerCase()) == null;
+        return userService.userExist(s.toLowerCase());
     }
 }

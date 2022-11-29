@@ -1,6 +1,6 @@
 package com.dark.webshop.security;
 
-import com.dark.webshop.database.entity.user.AuthGroup;
+import com.dark.webshop.database.entity.user.AuthenGroup;
 import com.dark.webshop.database.entity.user.User;
 import com.dark.webshop.database.repository.AuthGroupRepository;
 import com.dark.webshop.database.repository.UserRepository;
@@ -27,7 +27,7 @@ public class UserSecDetailsService implements UserDetailsService {
         if (null == user) {
             throw new UsernameNotFoundException("cannot find username" + username);
         }
-        List<AuthGroup> authGroups = this.authGroupRepository.findByUsername(username);
-        return new UserPrincipal(user, authGroups);
+        List<AuthenGroup> authenGroups = this.authGroupRepository.findByUsername(username);
+        return new UserPrincipal(user, authenGroups);
     }
 }

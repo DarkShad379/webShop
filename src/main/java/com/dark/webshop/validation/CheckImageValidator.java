@@ -13,6 +13,6 @@ public class CheckImageValidator implements ConstraintValidator<CheckImage, Mult
 
     @Override
     public boolean isValid(MultipartFile file, ConstraintValidatorContext constraintValidatorContext) {
-        return !file.isEmpty();
+        return !file.getName().equals("") && !file.isEmpty() && file.getSize() > 0;
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public interface FoodCategoryService {
     FoodCategoryModel saveOrUpdateCategory(FoodCategoryModel foodCategoryModel);
 
-    FoodCategoryModel findById(int Id);
+    FoodCategoryModel findById(int id);
 
     List<FoodCategoryModel> findAll();
 

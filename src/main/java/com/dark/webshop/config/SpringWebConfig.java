@@ -23,8 +23,6 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 public class SpringWebConfig
         extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
-    private ApplicationContext applicationContext;
-
 
     public SpringWebConfig() {
         super();
@@ -33,7 +31,6 @@ public class SpringWebConfig
 
     public void setApplicationContext(final ApplicationContext applicationContext)
             throws BeansException {
-        this.applicationContext = applicationContext;
     }
 
 

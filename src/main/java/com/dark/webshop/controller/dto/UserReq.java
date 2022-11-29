@@ -22,10 +22,10 @@ public class UserReq {
     @NotEmpty(message = "Обязательное поле", groups = OnCreate.class)
     @PhoneIsCorrect(groups = OnCreate.class)
     @Size(min = 11, max = 11, message = "Длина не соответствует", groups = OnCreate.class)
-    private String PhoneNumber;
+    private String phoneNumber;
     @NotNull(groups = OnCreate.class)
     @NotEmpty(message = "Обязательное поле", groups = OnCreate.class)
-    private String Adress;
+    private String address;
 
     public Integer getId() {
         return id;
@@ -52,18 +52,18 @@ public class UserReq {
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getAdress() {
-        return Adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        Adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

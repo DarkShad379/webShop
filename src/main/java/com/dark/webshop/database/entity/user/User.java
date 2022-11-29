@@ -14,27 +14,27 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "phonenumber")
-    private String PhoneNumber;
+    private String phoneNumber;
     @Column(name = "adress")
-    private String Adress;
+    private String address;
 
     public User() {
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getAdress() {
-        return Adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        Adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Integer getId() {

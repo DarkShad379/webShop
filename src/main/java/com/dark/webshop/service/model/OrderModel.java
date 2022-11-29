@@ -15,13 +15,6 @@ public class OrderModel {
     public OrderModel() {
     }
 
-    public OrderModel(Integer id, User user, boolean confirmed, Date datetime, List<OrderedFoodModel> orderedFoodList) {
-        this.id = id;
-        this.user = user;
-        this.confirmed = confirmed;
-        this.datetime = datetime;
-        this.orderedFoodList = orderedFoodList;
-    }
 
     public Integer getId() {
         return id;

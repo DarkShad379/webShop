@@ -41,17 +41,6 @@ public class Food {
     public Food() {
     }
 
-    public Food(Integer id, String name, byte[] image, String description, Integer cost, boolean deleted, FoodCategory foodCategory, List<Additional> availableAdditionalList) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.description = description;
-        this.cost = cost;
-        this.deleted = deleted;
-        this.foodCategory = foodCategory;
-        this.availableAdditionalList = availableAdditionalList;
-    }
-
     public boolean isDeleted() {
         return deleted;
     }
