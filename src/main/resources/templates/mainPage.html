@@ -22,6 +22,13 @@
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 </head>
 <style>
+input[type="checkbox"] {
+  /* ...existing styles */
+  display: grid;
+  place-content: center;
+    width: 0.65em;
+  height: 0.65em;
+}
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -73,6 +80,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
+
                             <img class="product__details__pic__item"
                                  th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(foodMod.image)}" alt="">
                         </div>
@@ -95,7 +103,12 @@
                     <div th:each="add:${foodMod.availableAdditionalList}" class="col-lg-3 col-md-4 col-sm-6">
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg" data-setbg="${imgUtil.getImgData(foodMod.image)}">
-                                <img class='featured__item__pic set-bg' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(add.image)}">
+                                <div class="custom-control custom-checkbox image-checkbox">
+                                    <input type="checkbox" class="custom-control-input" th:attr="id=Modal+${foodMod.id}+${add.id}">
+                                    <label class="custom-control-label" th:attr="for=Modal+${foodMod.id}+${add.id}">
+                                        <img class='featured__item__pic set-bg' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(add.image)}">
+                                    </label>
+                                </div>
                                 <ul class="featured__item__pic__hover">
                                 </ul>
                             </div>

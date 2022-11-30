@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/food")
@@ -40,10 +39,7 @@ public class FoodController {
     @GetMapping
     public String getFoods(Model model) {
         List<FoodModel> foodModelList = foodService.findAll(false);
-        List<FoodReq> foodReqList = foodModelList.stream().map(foodReqMapper::modelToReq).collect(Collectors.toList());
-        model.addAttribute("foodList", foodReqList);
-        model.addAttribute("foodCategory", foodCategoryService.findAll());
-        model.addAttribute("additionalList", additionalService.findAll(false));
+        model.addAttribute("foodList", foodModelList);
         model.addAttribute("imgUtil", new ImageUtil());
         return "food/list";
     }
