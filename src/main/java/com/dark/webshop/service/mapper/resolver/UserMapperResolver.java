@@ -20,8 +20,10 @@ public class UserMapperResolver {
 
     @ObjectFactory
     public User resolve(UserModel userModel, @TargetType Class<User> type) {
-        Optional<User> optionalUser = userRepository.findById(userModel.getId());
-        return optionalUser.orElseGet(User::new);
+        if (userModel.getId() != null) {
+            Optional<User> optionalUser = userRepository.findById(userModel.getId());
+            return optionalUser.orElseGet(User::new);
+        } else return new User();
     }
 
 }

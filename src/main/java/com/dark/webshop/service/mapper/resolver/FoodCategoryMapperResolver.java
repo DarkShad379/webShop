@@ -19,7 +19,9 @@ public class FoodCategoryMapperResolver {
 
     @ObjectFactory
     public FoodCategory resolve(FoodCategoryModel foodCategoryModel, @TargetType Class<FoodCategory> type) {
-        Optional<FoodCategory> optionalFoodCategory = foodCategoryRepository.findById(foodCategoryModel.getId());
-        return optionalFoodCategory.orElseGet(FoodCategory::new);
+        if (foodCategoryModel.getId() != null) {
+            Optional<FoodCategory> optionalFoodCategory = foodCategoryRepository.findById(foodCategoryModel.getId());
+            return optionalFoodCategory.orElseGet(FoodCategory::new);
+        } else return new FoodCategory();
     }
 }

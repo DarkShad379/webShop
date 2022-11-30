@@ -15,10 +15,10 @@ import java.util.List;
 public interface OrderedFoodReqMapper {
 
     @Mapping(source = "additionalListId", target = "additionalList", qualifiedByName = "listIdToListModel")
-    @Mapping(target = "food", source = "foodId", qualifiedByName = "idToCategory")
+    @Mapping(target = "food", source = "foodId", qualifiedByName = "idToFood")
     OrderedFoodModel reqToModel(OrderedFoodReq orderedFoodReq);
 
-    @Mapping(target = "foodId", source = "food", qualifiedByName = "categoryToId")
+    @Mapping(target = "foodId", source = "food", qualifiedByName = "FoodToId")
     @Mapping(source = "additionalList", target = "additionalListId", qualifiedByName = "listModelToListId")
     OrderedFoodReq modelToReq(OrderedFoodModel orderedFoodModel);
 

@@ -20,7 +20,9 @@ public class FoodMapperResolver {
 
     @ObjectFactory
     public Food resolve(FoodModel foodModel, @TargetType Class<Food> type) {
-        Optional<Food> foodOptional = foodRepository.findById(foodModel.getId());
-        return foodOptional.orElseGet(Food::new);
+        if (foodModel.getId() != null) {
+            Optional<Food> foodOptional = foodRepository.findById(foodModel.getId());
+            return foodOptional.orElseGet(Food::new);
+        } else return new Food();
     }
 }

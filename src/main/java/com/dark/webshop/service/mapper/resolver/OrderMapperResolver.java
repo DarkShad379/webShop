@@ -20,7 +20,9 @@ public class OrderMapperResolver {
 
     @ObjectFactory
     public Order resolve(OrderModel orderModel, @TargetType Class<Order> type) {
-        Optional<Order> orderOptional = orderRepository.findById(orderModel.getId());
-        return orderOptional.orElseGet(Order::new);
+        if (orderModel.getId() != null) {
+            Optional<Order> orderOptional = orderRepository.findById(orderModel.getId());
+            return orderOptional.orElseGet(Order::new);
+        } else return new Order();
     }
 }

@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class FoodCategoryModel {
-    int id;
+    Integer id;
     @NotBlank(message = "Поле не может быть пустым")
     @Size(min = 3, message = "Название должно быть не короче 2х символов!")
     private String name;
@@ -16,7 +16,7 @@ public class FoodCategoryModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FoodCategoryModel that = (FoodCategoryModel) o;
-        return id == that.id && Objects.equals(name, that.name);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
     }
 
     @Override
@@ -41,11 +41,11 @@ public class FoodCategoryModel {
     public FoodCategoryModel() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

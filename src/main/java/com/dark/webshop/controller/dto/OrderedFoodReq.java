@@ -1,5 +1,6 @@
 package com.dark.webshop.controller.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderedFoodReq {
@@ -7,7 +8,7 @@ public class OrderedFoodReq {
     private Integer foodId;
     private Integer orderId;
     private Integer totalfoodcost;
-    private List<Integer> additionalListId;
+    private List<Integer> additionalListId = new ArrayList<>();
 
     public OrderedFoodReq() {
     }

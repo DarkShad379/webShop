@@ -19,7 +19,10 @@ public class AdditionalMapperResolver {
 
     @ObjectFactory
     public Additional resolve(AdditionalModel additionalModel, @TargetType Class<Additional> type) {
-        Optional<Additional> optionalAdditional = additionalRepository.findById(additionalModel.getId());
-        return optionalAdditional.orElseGet(Additional::new);
+        if (additionalModel.getId() != null) {
+            Optional<Additional> optionalAdditional = additionalRepository.findById(additionalModel.getId());
+            return optionalAdditional.orElseGet(Additional::new);
+        } else return new Additional();
+
     }
 }
