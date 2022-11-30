@@ -44,6 +44,7 @@ public class MenuController {
             }
             foodModelList.addAll(foodService.findByCategory(catId));
         }
+        model.addAttribute("currentOrderedFood");
         model.addAttribute("imgUtil", new ImageUtil());
         model.addAttribute("foodModelList", foodModelList);
         return "mainPage";

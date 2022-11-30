@@ -18,6 +18,10 @@ public class FoodModel {
     public FoodModel() {
     }
 
+    public FoodModel(Integer id) {
+        this.id = id;
+    }
+
     public FoodCategoryModel getFoodCategory() {
         return foodCategory;
     }

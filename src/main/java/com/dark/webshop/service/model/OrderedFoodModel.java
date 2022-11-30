@@ -6,7 +6,6 @@ public class OrderedFoodModel {
 
     private Integer id;
     private FoodModel food;
-    private Integer orderId;
     private Integer totalfoodcost;
     private List<AdditionalModel> additionalList;
 
@@ -30,13 +29,6 @@ public class OrderedFoodModel {
         this.food = food;
     }
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
 
     public Integer getTotalFoodCost() {
         return totalfoodcost;
