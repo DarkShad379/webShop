@@ -56,13 +56,9 @@
             <td th:text="${food.description}"> TEST</td>
             <td th:text="${food.cost}">TEST</td>
             <td><img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(food.image)}"></td>
-            <th:block th:with="categoryId=${food.foodCategoryId}">
-                <td th:text="${foodCategory.^[id==#root.categoryId].name}">Отсутствует</td>
-            </th:block>
+                <td th:text="${food.foodCategory.name}">Отсутствует</td>
             <td>
-                <th:block th:each="add:${food.availableAdditionalListId}" th:with="addId=${add}">
-                    <p th:text="${additionalList.^[id==#root.addId].name}"></p>
-                </th:block>
+                <p th:each="add:${food.availableAdditionalList}" th:text="${add.name}">Нет добавок</p>
             </td>
             <td>
                 <form th:action="@{/food/edit/{id}(id=${food.id})}" method="get">

@@ -75,53 +75,57 @@ input[type="checkbox"] {
 <div th:each="foodMod:${foodModelList}" th:attr="id=Modal+${foodMod.id}" class="modal">
     <div class="modal-content">
         <span th:onclick="closeModal([[${foodMod.id}]])" class="close">&times;</span>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="product__details__pic">
-                        <div class="product__details__pic__item">
-
-                            <img class="product__details__pic__item"
-                                 th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(foodMod.image)}" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="product__details__text">
-                        <h3 th:text="${foodMod.name}">Null name</h3>
-                        <div th:text="${foodMod.cost}+T" class="product__details__price">0 Price</div>
-                        <p th:text="${foodMod.description}">Null desc</p>
-                        <ul>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-9">
+        <form method="POST" th:action="@{/order/addToCard/${foodMod.id}" th:object="${currentOrderedFood}">
             <div class="container">
-                <div class="row featured__filter">
-                    <div th:each="add:${foodMod.availableAdditionalList}" class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="featured__item">
-                            <div class="featured__item__pic set-bg" data-setbg="${imgUtil.getImgData(foodMod.image)}">
-                                <div class="custom-control custom-checkbox image-checkbox">
-                                    <input type="checkbox" class="custom-control-input" th:attr="id=Modal+${foodMod.id}+${add.id}">
-                                    <label class="custom-control-label" th:attr="for=Modal+${foodMod.id}+${add.id}">
-                                        <img class='featured__item__pic set-bg' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(add.image)}">
-                                    </label>
-                                </div>
-                                <ul class="featured__item__pic__hover">
-                                </ul>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product__details__pic">
+                            <div class="product__details__pic__item">
+
+                                <img class="product__details__pic__item"
+                                     th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(foodMod.image)}" alt="">
                             </div>
-                            <div class="featured__item__text">
-                                <h6><a href="#" th:text="${add.name}">Crab Pool Security</a></h6>
-                                <h5 th:text="${add.cost}+T">$30.00</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product__details__text">
+                            <h3 th:text="${foodMod.name}">Null name</h3>
+                            <div th:text="${foodMod.cost}+T" class="product__details__price">0 Price</div>
+                            <p th:text="${foodMod.description}">Null desc</p>
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="container">
+                    <div class="row featured__filter">
+                        <div th:each="add:${foodMod.availableAdditionalList}" class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg" data-setbg="${imgUtil.getImgData(foodMod.image)}">
+                                    <div class="custom-control custom-checkbox image-checkbox">
+                                        <input type="checkbox" class="custom-control-input" th:field="*{additionalListId}" th:value="${add.id}"
+                                               th:attr="id=Modal+${foodMod.id}+${add.id} ">
+                                        <label class="custom-control-label" th:attr="for=Modal+${foodMod.id}+${add.id}">
+                                            <img class='featured__item__pic set-bg' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(add.image)}">
+                                        </label>
+                                    </div>
+                                    <ul class="featured__item__pic__hover">
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="#" th:text="${add.name}">Crab Pool Security</a></h6>
+                                    <h5 th:text="${add.cost}+T">$30.00</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <a href="#" class="primary-btn">Добавить в корзину</a>
+
+            <button type="submit" class="primary-btn" name="submit">Добавить в корзину</button>
+        </form>
     </div>
 </div>
 <script>
@@ -153,7 +157,7 @@ window.onclick = function(event) {
     <div class="container">
         <div class="col-lg-3">
             <div class="header__logo">
-                <a href="./index.html"><img src="./img/logo.png" alt=""></a>
+                <a href="./"><img src="./img/logo.png" alt=""></a>
             </div>
             <div class="header__cart">
                 <div class="header__top__right__auth">
