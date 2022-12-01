@@ -1,5 +1,6 @@
 package com.dark.webshop.controller;
 
+import com.dark.webshop.controller.dto.OrderedFoodReq;
 import com.dark.webshop.controller.dto.mapper.FoodReqMapper;
 import com.dark.webshop.service.AdditionalService;
 import com.dark.webshop.service.FoodCategoryService;
@@ -44,9 +45,10 @@ public class MenuController {
             }
             foodModelList.addAll(foodService.findByCategory(catId));
         }
-        model.addAttribute("currentOrderedFood");
+        model.addAttribute("currentOrderedFood", new OrderedFoodReq());
         model.addAttribute("imgUtil", new ImageUtil());
         model.addAttribute("foodModelList", foodModelList);
+        model.addAttribute("catId", catId.toString());
         return "mainPage";
     }
 

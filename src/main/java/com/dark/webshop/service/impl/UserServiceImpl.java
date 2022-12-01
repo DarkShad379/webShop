@@ -21,6 +21,11 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    public UserModel findUserByUsername(String username) {
+        return userServiceMapper.entityToModel(userRepository.findByUsername(username));
+    }
+
+    @Override
     public boolean userExist(String username) {
         return userRepository.findByUsername(username) != null;
     }
@@ -40,7 +45,7 @@ public class UserServiceImpl implements UserService {
     public UserModel registerNewUserAccount(UserModel userModel) throws EntryAlreadyExistException {
         userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
         userModel.setUsername(userModel.getUsername().toLowerCase(Locale.ROOT));
-        if (usernameExists(userModel.getUsername())) {
+        if (userExist(userModel.getUsername())) {
             throw new EntryAlreadyExistException("There is an account with that username: "
                     + userModel.getUsername());
         }
@@ -56,7 +61,4 @@ public class UserServiceImpl implements UserService {
         return userServiceMapper.entityToModel(registeredUser);
     }
 
-    private boolean usernameExists(String username) {
-        return userRepository.findByUsername(username) != null;
-    }
 }

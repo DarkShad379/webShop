@@ -1,6 +1,8 @@
 package com.dark.webshop.service.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserModel {
     private Integer id;
@@ -8,9 +10,26 @@ public class UserModel {
     private String password;
     private String phoneNumber;
     private String address;
+    List<OrderedFoodModel> orderedFoodCard = new ArrayList<>();
 
 
     public UserModel() {
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<OrderedFoodModel> getOrderedFoodCard() {
+        return orderedFoodCard;
+    }
+
+    public void setOrderedFoodCard(List<OrderedFoodModel> orderedFoodCard) {
+        this.orderedFoodCard = orderedFoodCard;
     }
 
     public String getUsername() {
@@ -29,13 +48,7 @@ public class UserModel {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAdress() {
-        return address;
-    }
 
-    public void setAdress(String adress) {
-        address = adress;
-    }
 
     public Integer getId() {
         return id;

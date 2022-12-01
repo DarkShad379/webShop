@@ -1,6 +1,9 @@
 package com.dark.webshop.database.entity.user;
 
+import com.dark.webshop.database.entity.food.OrderedFood;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "usercatalog")
@@ -17,8 +20,19 @@ public class User {
     private String phoneNumber;
     @Column(name = "adress")
     private String address;
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "joinOrderedFoodUserCard", joinColumns = @JoinColumn(name = "userId"))
+    List<OrderedFood> orderedFoodCard;
 
     public User() {
+    }
+
+    public List<OrderedFood> getOrderedFoodCard() {
+        return orderedFoodCard;
+    }
+
+    public void setOrderedFoodCard(List<OrderedFood> orderedFoodCard) {
+        this.orderedFoodCard = orderedFoodCard;
     }
 
     public String getPhoneNumber() {

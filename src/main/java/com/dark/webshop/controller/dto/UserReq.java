@@ -7,6 +7,8 @@ import com.dark.webshop.validation.marker_interface.OnCreate;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserReq {
     private Integer id;
@@ -26,7 +28,7 @@ public class UserReq {
     @NotNull(groups = OnCreate.class)
     @NotEmpty(message = "Обязательное поле", groups = OnCreate.class)
     private String address;
-
+    List<OrderedFoodReq> orderedFoodCard = new ArrayList<>();
     public Integer getId() {
         return id;
     }
@@ -65,5 +67,9 @@ public class UserReq {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<OrderedFoodReq> getOrderedFoodCard() {
+        return orderedFoodCard;
     }
 }
