@@ -24,7 +24,7 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public FoodModel findFoodById(int id) {
         Optional<Food> foodOpt = foodRepository.findById(id);
-        return foodOpt.map(food -> foodServiceMapper.entityToModel(food)).orElse(null);
+        return foodOpt.map(foodServiceMapper::entityToModel).orElse(null);
     }
 
     @Override

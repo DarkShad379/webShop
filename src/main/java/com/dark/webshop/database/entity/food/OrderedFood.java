@@ -4,20 +4,19 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "orderedfood")
+@Table(name = "orderedfoodcatalog")
 public class OrderedFood {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "foodId")
+    @OneToOne
+    @JoinColumn(name = "foodid", referencedColumnName = "id")
     private Food food;
     @Column(name = "totalfoodcost", nullable = false)
     private Integer totalfoodcost;
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "joinOrderedFoodAdditionals", joinColumns = @JoinColumn(name = "orderedFoodId"), inverseJoinColumns = @JoinColumn(name = "additionalId")
+    @ManyToMany
+    @JoinTable(name = "joinorderedfoodadditionals", joinColumns = @JoinColumn(name = "orderedfoodid"), inverseJoinColumns = @JoinColumn(name = "additionalid")
     )
     private List<Additional> additionalList;
 
@@ -32,6 +31,7 @@ public class OrderedFood {
     public void setTotalfoodcost(Integer totalfoodcost) {
         this.totalfoodcost = totalfoodcost;
     }
+
     public Integer getId() {
         return id;
     }

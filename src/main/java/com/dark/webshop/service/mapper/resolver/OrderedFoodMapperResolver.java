@@ -5,9 +5,11 @@ import com.dark.webshop.database.repository.OrderedFoodRepository;
 import com.dark.webshop.service.model.OrderedFoodModel;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class OrderedFoodMapperResolver {
     OrderedFoodRepository orderRepository;
 

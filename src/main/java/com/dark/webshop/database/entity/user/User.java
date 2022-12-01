@@ -21,7 +21,7 @@ public class User {
     @Column(name = "adress")
     private String address;
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "joinOrderedFoodUserCard", joinColumns = @JoinColumn(name = "userId"))
+    @JoinTable(name = "joinorderedfoodusercard", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "orderedfoodid"))
     List<OrderedFood> orderedFoodCard;
 
     public User() {

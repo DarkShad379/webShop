@@ -3,6 +3,7 @@ package com.dark.webshop.controller;
 import com.dark.webshop.controller.dto.OrderedFoodReq;
 import com.dark.webshop.controller.dto.mapper.OrderedFoodReqMapper;
 import com.dark.webshop.service.OrderService;
+import com.dark.webshop.service.model.OrderedFoodModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,10 +31,9 @@ public class OrderController {
         if (principal == null) {
             return "redirect:../../../login";
         }
-        System.out.println(principal.getName());
-//        orderedFoodReq.setFoodId(foodId);
-//        OrderedFoodModel orderedFood = orderedFoodReqMapper.reqToModel(orderedFoodReq);
-//        orderService.addOrderedFoodToUserCard(principal.getUsername(), orderedFood);
+        orderedFoodReq.setFoodId(foodId);
+        OrderedFoodModel orderedFood = orderedFoodReqMapper.reqToModel(orderedFoodReq);
+        orderService.addOrderedFoodToUserCard(principal.getName(), orderedFood);
         return "redirect:../../../?catId=" + foodCat;
     }
 }

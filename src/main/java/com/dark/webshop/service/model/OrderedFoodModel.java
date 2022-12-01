@@ -17,6 +17,14 @@ public class OrderedFoodModel {
         return id;
     }
 
+    public Integer getTotalfoodcost() {
+        return totalfoodcost;
+    }
+
+    public void setTotalfoodcost(Integer totalfoodcost) {
+        this.totalfoodcost = totalfoodcost;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -30,13 +38,6 @@ public class OrderedFoodModel {
     }
 
 
-    public Integer getTotalFoodCost() {
-        return totalfoodcost;
-    }
-
-    public void setTotalFoodCost(Integer totalFoodCost) {
-        this.totalfoodcost = totalFoodCost;
-    }
 
     public List<AdditionalModel> getAdditionalList() {
         return additionalList;

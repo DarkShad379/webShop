@@ -48,7 +48,6 @@ public class MenuController {
         model.addAttribute("currentOrderedFood", new OrderedFoodReq());
         model.addAttribute("imgUtil", new ImageUtil());
         model.addAttribute("foodModelList", foodModelList);
-        model.addAttribute("catId", catId.toString());
         return "mainPage";
     }
 
