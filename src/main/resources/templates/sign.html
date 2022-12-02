@@ -41,10 +41,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<p th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></p>
 				<input class="text" type="password" name="password" placeholder="Password" th:field="*{password}"/>
 				<p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
-				<input class="text" type="text" name="PhoneNumber" placeholder="Номер телефона" th:field="*{PhoneNumber}"/>
-				<p th:if="${#fields.hasErrors('PhoneNumber')}" th:errorclass="error" th:errors="*{PhoneNumber}"></p>
-				<input class="text" type="text" name="Adress" placeholder="Адрес" th:field="*{Adress}"/>
-				<p th:if="${#fields.hasErrors('Adress')}" th:errorclass="error" th:errors="*{Adress}"></p>
 				<div class="wthree-text">
 					<div class="clear"></div>
 				</div>

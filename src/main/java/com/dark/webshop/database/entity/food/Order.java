@@ -23,9 +23,18 @@ public class Order {
     private Date datetime;
     @Column(name = "adress")
     private String adress;
-
+    @Column(name = "phone")
+    private String phone;
 
     public Order() {
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAdress() {

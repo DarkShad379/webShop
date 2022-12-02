@@ -10,31 +10,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 
 <body>
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
 
 <!-- Humberger Begin -->
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="./img/logo.png" alt=""></a>
+        <a href="#"><img src="/img/logo.png" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
         <ul>
-            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
         </ul>
         <div class="header__cart__price">item: <span>$150.00</span></div>
@@ -47,7 +42,7 @@
     <div class="container">
         <div class="col-lg-3">
             <div class="header__logo">
-                <a href="./"><img src="./img/logo.png" alt=""></a>
+                <a href="/"><img src="/img/logo.png" alt=""></a>
             </div>
             <div class="header__cart">
                 <div class="header__top__right__auth">
@@ -73,14 +68,13 @@
     </div>
 </header>
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="../img/breadcrumb.jpg">
+<section class="breadcrumb-section set-bg">
     <div class="container">
         <div class="row">
+            <img src="/img/breadcrumb.jpg">
             <div class="col-lg-12 text-center">
-                <div class="breadcrumb__text">
-                    <h2>Корзина</h2>
-                    <div class="breadcrumb__option">
-                    </div>
+                <h2>Корзина</h2>
+                <div class="breadcrumb__option">
                 </div>
             </div>
         </div>
@@ -90,75 +84,79 @@
 
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shoping__cart__table">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th class="shoping__product">Еда</th>
-                            <th>Добавки</th>
-                            <th>Цена</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="ordFood:${cartList}">
-                            <td class="shoping__cart__item">
-                                <img width="150" height="150" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(ordFood.food.image)}">
-                                <h5 th:text=${ordFood.food.name}>Vegetable’s Package</h5>
-                            </td>
-                            <td class="shoping__cart__quantity">
-                                <div th:each="add:${ordFood.additionalList}">
-                                    <h5 th:text="${add.name}">Добавка</h5>
-                                </div>
-                            </td>
-                            <td th:text="${ordFood.totalfoodcost}" class="shoping__cart__price">
-                                $55.00
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <form th:action="@{cart/remove(ordFoodId=${ordFood.id})}" method="post">
-                                    <button class="btn btn-danger" type="submit" value="Submit">Убрать</button>
-                                </form>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">Продолжить покупки</a>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Адрес</h5>
-                        <form action="#">
-                            <input type="text" th:text="${address}" placeholder="Введите место доставки">
-                        </form>
-                        <h5>Телефон</h5>
-                        <form action="#">
-                            <input type="text" th:text="${phone}" placeholder="Введите номер для контакта">
-                        </form>
+    <form th:action="@{/cart/confirm}" method="post" th:object="${orderDetailsReq}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="shoping__product">Еда</th>
+                                <th>Добавки</th>
+                                <th>Цена</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="ordFood:${cartList}">
+                                <td class="shoping__cart__item">
+                                    <img width="150" height="150" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(ordFood.food.image)}">
+                                    <h5 th:text=${ordFood.food.name}>Vegetable’s Package</h5>
+                                </td>
+                                <td class="shoping__cart__quantity">
+                                    <div th:each="add:${ordFood.additionalList}">
+                                        <h5 th:text="${add.name}">Добавка</h5>
+                                    </div>
+                                </td>
+                                <td th:text="${ordFood.totalfoodcost}" class="shoping__cart__price">
+                                    $55.00
+                                </td>
+                                <td class="shoping__cart__item__close">
+                                    <form th:action="@{cart/remove(ordFoodId=${ordFood.id})}" method="post">
+                                        <button class="btn btn-danger" type="submit" value="Submit">Убрать</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="shoping__checkout">
-                    <h5>Всего:</h5>
-                    <ul>
-                        <span th:text="${cartPrice}+T">$454.98</span>
-                    </ul>
-                    <a href="#" class="primary-btn">Подтвердить заказ</a>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a th:href="@{/}" class="primary-btn cart-btn">Продолжить покупки</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                            <h5>Адрес</h5>
+                            <input type="text" th:field="*{address}" placeholder="Введите место доставки">
+                            <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}"></p>
+
+                            <h5>Телефон</h5>
+                            <input type="text" th:field="*{phoneNumber}" placeholder="Введите номер для контакта">
+                            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="error" th:errors="*{phoneNumber}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout">
+                        <h5>Всего:</h5>
+                        <ul>
+                            <span th:text="${cartPrice}+T">$454.98</span>
+                        </ul>
+                        <ul>
+                            <span>После подтверждение заказа ожидайте звонка нашего менджера</span>
+                        </ul>
+                        <button type="submit" th:if="${not #lists.isEmpty(cartList)}" class="primary-btn">Подтвердить заказ</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </section>
 <!-- Shoping Cart Section End -->
 

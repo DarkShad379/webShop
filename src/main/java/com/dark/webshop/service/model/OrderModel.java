@@ -1,13 +1,14 @@
 package com.dark.webshop.service.model;
 
-import com.dark.webshop.database.entity.user.User;
 
 import java.sql.Date;
 import java.util.List;
 
 public class OrderModel {
     private Integer id;
-    private User user;
+    private UserModel user;
+    private String phone;
+    private String address;
     private boolean confirmed;
     private Date datetime;
     private List<OrderedFoodModel> orderedFoodList;
@@ -15,6 +16,29 @@ public class OrderModel {
     public OrderModel() {
     }
 
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public Integer getId() {
         return id;
@@ -24,13 +48,6 @@ public class OrderModel {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public boolean isConfirmed() {
         return confirmed;

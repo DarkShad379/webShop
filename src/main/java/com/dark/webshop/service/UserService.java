@@ -12,8 +12,4 @@ public interface UserService {
     boolean userExist(String username);
 
     boolean userPasswordIsValid(UserModel userModel);
-
-    String getUserAddress(String username);
-
-    String getUserPhone(String username);
 }

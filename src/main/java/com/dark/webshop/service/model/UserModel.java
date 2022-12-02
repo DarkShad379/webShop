@@ -8,20 +8,10 @@ public class UserModel {
     private Integer id;
     private String username;
     private String password;
-    private String phoneNumber;
-    private String address;
     List<OrderedFoodModel> orderedFoodCard = new ArrayList<>();
 
 
     public UserModel() {
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public List<OrderedFoodModel> getOrderedFoodCard() {
@@ -40,13 +30,7 @@ public class UserModel {
         this.username = username;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
 
 

@@ -47,7 +47,6 @@ public class UserController {
     @PostMapping(value = "registration")
     public String registerUser(@Valid @ModelAttribute("userReq") UserReq userReq, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-
             userService.registerNewUserAccount(userReqMapper.reqToModel(userReq));
             return "redirect:login";
         } else return "sign";

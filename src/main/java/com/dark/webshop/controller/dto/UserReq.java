@@ -1,6 +1,5 @@
 package com.dark.webshop.controller.dto;
 
-import com.dark.webshop.validation.PhoneIsCorrect;
 import com.dark.webshop.validation.UserNotExist;
 import com.dark.webshop.validation.marker_interface.OnCreate;
 
@@ -20,14 +19,6 @@ public class UserReq {
     @NotEmpty(message = "Обязательное поле")
     @Size(min = 8, message = "Пароль должен быть длиной не менее 8 символов")
     private String password;
-    @NotNull(groups = OnCreate.class)
-    @NotEmpty(message = "Обязательное поле", groups = OnCreate.class)
-    @PhoneIsCorrect(groups = OnCreate.class)
-    @Size(min = 11, max = 11, message = "Длина не соответствует", groups = OnCreate.class)
-    private String phoneNumber;
-    @NotNull(groups = OnCreate.class)
-    @NotEmpty(message = "Обязательное поле", groups = OnCreate.class)
-    private String address;
     List<OrderedFoodReq> orderedFoodCard = new ArrayList<>();
     public Integer getId() {
         return id;
@@ -51,22 +42,6 @@ public class UserReq {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public List<OrderedFoodReq> getOrderedFoodCard() {

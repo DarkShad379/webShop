@@ -16,10 +16,6 @@ public class User {
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "phonenumber")
-    private String phoneNumber;
-    @Column(name = "adress")
-    private String address;
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "joinorderedfoodusercard", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "orderedfoodid"))
     List<OrderedFood> orderedFoodCard;
@@ -35,21 +31,6 @@ public class User {
         this.orderedFoodCard = orderedFoodCard;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public Integer getId() {
         return id;
