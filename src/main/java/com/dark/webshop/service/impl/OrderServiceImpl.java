@@ -1,5 +1,6 @@
 package com.dark.webshop.service.impl;
 
+import com.dark.webshop.controller.dto.OrderDetailsReq;
 import com.dark.webshop.database.entity.food.OrderedFood;
 import com.dark.webshop.database.repository.OrderRepository;
 import com.dark.webshop.database.repository.OrderedFoodRepository;
@@ -9,11 +10,14 @@ import com.dark.webshop.service.OrderService;
 import com.dark.webshop.service.UserService;
 import com.dark.webshop.service.mapper.OrderServiceMapper;
 import com.dark.webshop.service.mapper.OrderedFoodServiceMapper;
+import com.dark.webshop.service.model.OrderModel;
 import com.dark.webshop.service.model.OrderedFoodModel;
 import com.dark.webshop.service.model.UserModel;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -37,6 +41,22 @@ public class OrderServiceImpl implements OrderService {
         this.orderedFoodServiceMapper = orderedFoodServiceMapper;
         this.orderServiceMapper = orderServiceMapper;
         this.additionalService = additionalService;
+    }
+
+    @Override
+    public void convertUserCartToOrder(OrderDetailsReq orderDetailsReq, String username) {
+        UserModel userModel = userService.findUserByUsername(username);
+
+        OrderModel order = new OrderModel();
+        order.setPhone(orderDetailsReq.getPhoneNumber());
+        order.setAddress(orderDetailsReq.getAddress());
+        order.setOrderedFoodList(userModel.getOrderedFoodCard());
+        Timestamp timestamp = Timestamp.from(Instant.now());
+        order.setTimestamp(timestamp);
+        order.setUser(userModel);
+        orderRepository.save(orderServiceMapper.modelToEntity(order));
+        userModel.getOrderedFoodCard().clear();
+        userService.updateUserAccount(userModel);
     }
 
     @Override

@@ -3,26 +3,26 @@ package com.dark.webshop.database.entity.food;
 import com.dark.webshop.database.entity.user.User;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "ordercatalog")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
     @OneToOne
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @JoinColumn(name = "userid", referencedColumnName = "id")
     private User user;
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "joinOrderedFoodOrder", joinColumns = @JoinColumn(name = "orderId"), inverseJoinColumns = @JoinColumn(name = "orderedFoodId"))
+    @ManyToMany
+    @JoinTable(name = "joinorderedfoodorder", joinColumns = @JoinColumn(name = "orderid"), inverseJoinColumns = @JoinColumn(name = "orderedfoodid"))
     List<OrderedFood> orderedFoodList;
-    @Column(name = "datetime")
-    private Date datetime;
+    @Column(name = "date")
+    private Timestamp timestamp;
     @Column(name = "adress")
-    private String adress;
+    private String address;
     @Column(name = "phone")
     private String phone;
 
@@ -37,20 +37,20 @@ public class Order {
         this.phone = phone;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Date getDatetime() {
-        return datetime;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Integer getId() {

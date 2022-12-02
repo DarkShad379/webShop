@@ -84,7 +84,6 @@
 
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
-    <form th:action="@{/cart/confirm}" method="post" th:object="${orderDetailsReq}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -123,40 +122,44 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__btns">
-                        <a th:href="@{/}" class="primary-btn cart-btn">Продолжить покупки</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="shoping__continue">
-                        <div class="shoping__discount">
-                            <h5>Адрес</h5>
-                            <input type="text" th:field="*{address}" placeholder="Введите место доставки">
-                            <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}"></p>
+            <form th:action="@{/cart/confirm}" method="post" th:object="${orderDetailsReq}">
 
-                            <h5>Телефон</h5>
-                            <input type="text" th:field="*{phoneNumber}" placeholder="Введите номер для контакта">
-                            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="error" th:errors="*{phoneNumber}"></p>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shoping__cart__btns">
+                            <a th:href="@{/}" class="primary-btn cart-btn">Продолжить покупки</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="shoping__checkout">
-                        <h5>Всего:</h5>
-                        <ul>
-                            <span th:text="${cartPrice}+T">$454.98</span>
-                        </ul>
-                        <ul>
-                            <span>После подтверждение заказа ожидайте звонка нашего менджера</span>
-                        </ul>
-                        <button type="submit" th:if="${not #lists.isEmpty(cartList)}" class="primary-btn">Подтвердить заказ</button>
+                    <div class="col-lg-6">
+                        <div class="shoping__continue">
+                            <div class="shoping__discount">
+                                <h5>Адрес</h5>
+                                <input type="text" th:field="*{address}" placeholder="Введите место доставки">
+                                <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}"></p>
+
+                                <h5>Телефон</h5>
+                                <input type="text" th:field="*{phoneNumber}" placeholder="Введите номер для контакта">
+                                <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="error" th:errors="*{phoneNumber}"></p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="shoping__checkout">
+                            <h5>Всего:</h5>
+                            <ul>
+                                <span th:text="${cartPrice}+T">$454.98</span>
+                            </ul>
+                            <ul>
+                                <span>После подтверждение заказа ожидайте звонка нашего менджера</span>
+                            </ul>
+                            <button type="submit" th:if="${not #lists.isEmpty(cartList)}" class="primary-btn">Подтвердить заказ</button>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
+
 </section>
 <!-- Shoping Cart Section End -->
 

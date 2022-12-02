@@ -2,7 +2,6 @@ package com.dark.webshop.controller;
 
 import com.dark.webshop.controller.dto.OrderDetailsReq;
 import com.dark.webshop.service.OrderService;
-import com.dark.webshop.service.UserService;
 import com.dark.webshop.service.model.OrderedFoodModel;
 import com.dark.webshop.utils.ImageUtil;
 import org.springframework.stereotype.Controller;
@@ -19,11 +18,9 @@ import java.util.List;
 @RequestMapping("/cart")
 public class CartController {
     private final OrderService orderService;
-    private final UserService userService;
 
-    public CartController(OrderService orderService, UserService userService) {
+    public CartController(OrderService orderService) {
         this.orderService = orderService;
-        this.userService = userService;
     }
 
     @GetMapping
@@ -45,9 +42,10 @@ public class CartController {
     @PostMapping("/confirm")
     public String confirmOrderFromCart(@Valid @ModelAttribute("orderDetailsReq") OrderDetailsReq orderDetailsReq, BindingResult bindingResult, Principal principal, Model model) {
         if (!bindingResult.hasErrors()) {
-            System.out.println(orderDetailsReq.getAddress());
-            System.out.println(orderDetailsReq.getPhoneNumber());
-            return "redirect:";
+
+            orderService.convertUserCartToOrder(orderDetailsReq, principal.getName());
+
+            return "redirect:/";
         } else {
             model.addAttribute("imgUtil", new ImageUtil());
             model.addAttribute("cartPrice", orderService.getUserCartPrice(principal.getName()));
