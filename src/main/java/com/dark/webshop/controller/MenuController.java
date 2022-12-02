@@ -12,6 +12,7 @@ import com.dark.webshop.utils.ImageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,6 +48,12 @@ public class MenuController {
         model.addAttribute("phone", userService.getUserPhone(principal.getName()));
         model.addAttribute("address", userService.getUserAddress(principal.getName()));
         return "cart";
+    }
+
+    @PostMapping("/cart/remove")
+    public String removeOrderedFoodFromCart(@RequestParam(value = "ordFoodId") Integer ordFoodId, Principal principal) {
+        orderService.removeOrderedFood(principal.getName(), ordFoodId);
+        return "redirect:../cart";
     }
 
     @GetMapping

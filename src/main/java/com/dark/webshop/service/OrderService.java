@@ -13,4 +13,6 @@ public interface OrderService {
     Integer getUserCartPrice(String username);
 
     List<OrderedFoodModel> getUserCart(String username);
+
+    void removeOrderedFood(String username, Integer orderedFoodId);
 }

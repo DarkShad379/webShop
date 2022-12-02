@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
@@ -41,6 +43,16 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderedFoodModel> getUserCart(String username) {
         UserModel userModel = userService.findUserByUsername(username);
         return userModel.getOrderedFoodCard();
+    }
+
+    @Override
+    public void removeOrderedFood(String username, Integer orderedFoodId) {
+        UserModel userModel = userService.findUserByUsername(username);
+        userModel.getOrderedFoodCard().removeIf(it -> Objects.equals(it.getId(), orderedFoodId));
+        userService.updateUserAccount(userModel);
+        Optional<OrderedFood> orderedFood = orderedFoodRepository.findById(orderedFoodId);
+        orderedFood.ifPresent(food -> orderedFoodRepository.delete(food));
+
     }
 
     @Override

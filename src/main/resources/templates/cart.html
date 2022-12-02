@@ -107,7 +107,7 @@
                         <tr th:each="ordFood:${cartList}">
                             <td class="shoping__cart__item">
                                 <img width="150" height="150" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(ordFood.food.image)}">
-                                <h4 th:text=${ordFood.food.name}>Vegetable’s Package</h4>
+                                <h5 th:text=${ordFood.food.name}>Vegetable’s Package</h5>
                             </td>
                             <td class="shoping__cart__quantity">
                                 <div th:each="add:${ordFood.additionalList}">
@@ -118,7 +118,9 @@
                                 $55.00
                             </td>
                             <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
+                                <form th:action="@{cart/remove(ordFoodId=${ordFood.id})}" method="post">
+                                    <button class="btn btn-danger" type="submit" value="Submit">Убрать</button>
+                                </form>
                             </td>
                         </tr>
                         </tbody>
