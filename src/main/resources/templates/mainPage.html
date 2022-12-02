@@ -172,9 +172,9 @@ window.onclick = function(event) {
                             </i> Logout</a>
                     </div>
                 </div>
-                <div class="header__cart__price">Корзина: <span>0 T</span></div>
+                <div class="header__cart__price">Корзина: <span th:text="${cartPrice}+ T">0 T</span></div>
                 <ul>
-                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+                    <li><a th:href="@{/cart}"><i class="fa fa-shopping-bag"></i> <span th:text="${cartSize}">0</span></a></li>
                 </ul>
 
             </div>

@@ -16,8 +16,8 @@ import java.security.Principal;
 @Controller
 @RequestMapping("order")
 public class OrderController {
-    OrderService orderService;
-    OrderedFoodReqMapper orderedFoodReqMapper;
+    private final OrderService orderService;
+    private final OrderedFoodReqMapper orderedFoodReqMapper;
 
     public OrderController(OrderService orderService, OrderedFoodReqMapper orderedFoodReqMapper) {
         this.orderService = orderService;
@@ -33,7 +33,7 @@ public class OrderController {
         }
         orderedFoodReq.setFoodId(foodId);
         OrderedFoodModel orderedFood = orderedFoodReqMapper.reqToModel(orderedFoodReq);
-        orderService.addOrderedFoodToUserCard(principal.getName(), orderedFood);
+        orderService.addOrderedFoodToUserCart(principal.getName(), orderedFood);
         return "redirect:../../../?catId=" + foodCat;
     }
 }

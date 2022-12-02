@@ -36,6 +36,18 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
+    public String getUserAddress(String username) {
+        User user = userRepository.findByUsername(username);
+        return user.getAddress();
+    }
+
+    @Override
+    public String getUserPhone(String username) {
+        User user = userRepository.findByUsername(username);
+        return user.getPhoneNumber();
+    }
+
     public boolean userPasswordIsValid(UserModel userModel) {
         User user = userRepository.findByUsername(userModel.getUsername());
         return passwordEncoder.matches(userModel.getPassword(), user.getPassword());

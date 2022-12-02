@@ -14,6 +14,7 @@ import com.dark.webshop.service.model.UserModel;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
@@ -36,9 +37,29 @@ public class OrderServiceImpl implements OrderService {
         this.additionalService = additionalService;
     }
 
+    @Override
+    public List<OrderedFoodModel> getUserCart(String username) {
+        UserModel userModel = userService.findUserByUsername(username);
+        return userModel.getOrderedFoodCard();
+    }
+
+    @Override
+    public Integer getUserCartSize(String username) {
+        UserModel userModel = userService.findUserByUsername(username);
+        return userModel.getOrderedFoodCard().size();
+    }
+
+    @Override
+    public Integer getUserCartPrice(String username) {
+        UserModel userModel = userService.findUserByUsername(username);
+        AtomicReference<Integer> cost = new AtomicReference<>(0);
+        userModel.getOrderedFoodCard().forEach(it -> cost.updateAndGet(v -> v + it.getTotalfoodcost()));
+        return cost.get();
+    }
+
     @Transactional
     @Override
-    public void addOrderedFoodToUserCard(String username, OrderedFoodModel orderedFoodModel) {
+    public void addOrderedFoodToUserCart(String username, OrderedFoodModel orderedFoodModel) {
         AtomicReference<Integer> cost = new AtomicReference<>(0);
         cost.updateAndGet(v -> v + foodService.findFoodById(orderedFoodModel.getFood().getId()).getCost());
         orderedFoodModel.getAdditionalList().forEach(it -> cost.updateAndGet(v -> v + additionalService.findAdditionalById(it.getId()).getCost()));

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Pizza House Корзина">
+    <title>Pizza House - Корзина</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Humberger Begin -->
+<div class="humberger__menu__overlay"></div>
+<div class="humberger__menu__wrapper">
+    <div class="humberger__menu__logo">
+        <a href="#"><img src="./img/logo.png" alt=""></a>
+    </div>
+    <div class="humberger__menu__cart">
+        <ul>
+            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+        </ul>
+        <div class="header__cart__price">item: <span>$150.00</span></div>
+    </div>
+</div>
+</div>
+<!-- Humberger End -->
+
+<header class="header">
+    <div class="container">
+        <div class="col-lg-3">
+            <div class="header__logo">
+                <a href="./"><img src="./img/logo.png" alt=""></a>
+            </div>
+            <div class="header__cart">
+                <div class="header__top__right__auth">
+                    <div sec:authorize="isAnonymous">
+                        <a th:href="@{/login}"><i class="fa fa-user"></i> Login</a>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <span sec:authentication="name">Bob</span>
+                        <a th:href="@{/category}"><i class="fa fa-user"></i> Config</a>
+                        <a th:href="@{/logout}">
+                            <i class="fa fa-user">
+                            </i> Logout</a>
+                    </div>
+                </div>
+                <div class="header__cart__price">Корзина: <span th:text="${cartPrice}+T">0 T</span></div>
+                <ul>
+                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span th:text="${cartSize}">0</span></a></li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</header>
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="../img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Корзина</h2>
+                    <div class="breadcrumb__option">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Shoping Cart Section Begin -->
+<section class="shoping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="shoping__product">Еда</th>
+                            <th>Добавки</th>
+                            <th>Цена</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="ordFood:${cartList}">
+                            <td class="shoping__cart__item">
+                                <img width="150" height="150" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(ordFood.food.image)}">
+                                <h4 th:text=${ordFood.food.name}>Vegetable’s Package</h4>
+                            </td>
+                            <td class="shoping__cart__quantity">
+                                <div th:each="add:${ordFood.additionalList}">
+                                    <h5 th:text="${add.name}">Добавка</h5>
+                                </div>
+                            </td>
+                            <td th:text="${ordFood.totalfoodcost}" class="shoping__cart__price">
+                                $55.00
+                            </td>
+                            <td class="shoping__cart__item__close">
+                                <span class="icon_close"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns">
+                    <a href="#" class="primary-btn cart-btn">Продолжить покупки</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__continue">
+                    <div class="shoping__discount">
+                        <h5>Адрес</h5>
+                        <form action="#">
+                            <input type="text" th:text="${address}" placeholder="Введите место доставки">
+                        </form>
+                        <h5>Телефон</h5>
+                        <form action="#">
+                            <input type="text" th:text="${phone}" placeholder="Введите номер для контакта">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__checkout">
+                    <h5>Всего:</h5>
+                    <ul>
+                        <span th:text="${cartPrice}+T">$454.98</span>
+                    </ul>
+                    <a href="#" class="primary-btn">Подтвердить заказ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shoping Cart Section End -->
+
+<!-- Footer Section Begin -->
+<section class="contact spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_phone"></span>
+                    <h4>Заказывайте по номеру</h4>
+                    <p>+8-800-535-3535</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_pin_alt"></span>
+                    <h4>Наш адресс</h4>
+                    <p>Г. Нурсултан Ул. Нурсултана</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_clock_alt"></span>
+                    <h4>Время работы</h4>
+                    <p>С 12:00 До 23:00</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_mail_alt"></span>
+                    <h4>Email</h4>
+                    <p>housepizza@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+
+
+</body>
+
+</html>
