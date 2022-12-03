@@ -43,7 +43,7 @@ public class AdditionalController {
             AdditionalModel additionalModel = additionalReqMapper.reqToModel(additionalReq);
             additionalService.saveOrUpdateAdditional(additionalModel);
             return "redirect:";
-        } else return "additionals/add";
+        } else return "redirect:..";
     }
 
     @GetMapping("/edit/{id}")

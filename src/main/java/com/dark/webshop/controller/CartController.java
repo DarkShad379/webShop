@@ -1,6 +1,8 @@
 package com.dark.webshop.controller;
 
 import com.dark.webshop.controller.dto.OrderDetailsReq;
+import com.dark.webshop.controller.dto.OrderedFoodReq;
+import com.dark.webshop.controller.dto.mapper.OrderedFoodReqMapper;
 import com.dark.webshop.service.OrderService;
 import com.dark.webshop.service.model.OrderedFoodModel;
 import com.dark.webshop.utils.ImageUtil;
@@ -18,9 +20,11 @@ import java.util.List;
 @RequestMapping("/cart")
 public class CartController {
     private final OrderService orderService;
+    private final OrderedFoodReqMapper orderedFoodReqMapper;
 
-    public CartController(OrderService orderService) {
+    public CartController(OrderService orderService, OrderedFoodReqMapper orderedFoodReqMapper) {
         this.orderService = orderService;
+        this.orderedFoodReqMapper = orderedFoodReqMapper;
     }
 
     @GetMapping("/complete")
@@ -29,6 +33,19 @@ public class CartController {
         model.addAttribute("cartSize", orderService.getUserCartSize(principal.getName()));
 
         return "orderComplete";
+    }
+
+    @PostMapping("add/{foodCat}/{foodId}")
+    public String addFoodToCard(Principal principal, @ModelAttribute("currentOrderedFood") OrderedFoodReq orderedFoodReq,
+                                @PathVariable int foodId, @PathVariable int foodCat
+    ) {
+        if (principal == null) {
+            return "redirect:../../../login";
+        }
+        orderedFoodReq.setFoodId(foodId);
+        OrderedFoodModel orderedFood = orderedFoodReqMapper.reqToModel(orderedFoodReq);
+        orderService.addOrderedFoodToUserCart(principal.getName(), orderedFood);
+        return "redirect:../../../?catId=" + foodCat;
     }
 
     @GetMapping

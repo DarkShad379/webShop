@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<style>
+
+</style>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+</head>
+<body>
+<div>
+    <section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="shoping__product">Еда</th>
+                                <th>Добавки</th>
+                                <th>Цена</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="ordFood:${order.orderedFoodList}">
+                                <td class="shoping__cart__item">
+                                    <img width="150" height="150" th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(ordFood.food.image)}">
+                                    <h5 th:text=${ordFood.food.name}>Vegetable’s Package</h5>
+                                </td>
+                                <td class="shoping__cart__quantity">
+                                    <div th:each="add:${ordFood.additionalList}">
+                                        <h5 th:text="${add.name}">Добавка</h5>
+                                    </div>
+                                </td>
+                                <td th:text="${ordFood.totalfoodcost}" class="shoping__cart__price">
+                                    $55.00
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a th:href="@{/order}" class="primary-btn cart-btn">Вернуться к списку</a>
+                    </div>
+                    <div class="shoping__cart__btns">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                            <h5>Адрес заказчика</h5>
+                            <h5 th:text="${order.address}"></h5>
+                            <h5>Телефон заказчика</h5>
+                            <h5 th:text="${order.phone}"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout">
+                        <h5>Всего:</h5>
+                        <ul>
+                            <span th:text="${orderCost}+T">$454.98</span>
+                        </ul>
+                        <ul>
+                            <span>Принимайте заказ только после согласования деталей с клиентом!</span>
+                        </ul>
+                        <form th:if="${order.confirmed == false}" th:action="@{/order/confirm/{id}(id=${order.id})}" method="post">
+                            <button class="btn btn-success" type="submit" value="Submit">Принять заказ</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            </form>
+        </div>
+
+    </section>
+</div>
+</body>
+</html>

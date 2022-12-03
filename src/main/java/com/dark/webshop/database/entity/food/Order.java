@@ -25,8 +25,18 @@ public class Order {
     private String address;
     @Column(name = "phone")
     private String phone;
+    @Column(name = "confirmed")
+    private boolean confirmed = false;
 
     public Order() {
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
     }
 
     public String getPhone() {

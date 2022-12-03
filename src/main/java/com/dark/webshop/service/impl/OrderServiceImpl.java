@@ -1,6 +1,7 @@
 package com.dark.webshop.service.impl;
 
 import com.dark.webshop.controller.dto.OrderDetailsReq;
+import com.dark.webshop.database.entity.food.Order;
 import com.dark.webshop.database.entity.food.OrderedFood;
 import com.dark.webshop.database.repository.OrderRepository;
 import com.dark.webshop.database.repository.OrderedFoodRepository;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -42,6 +44,42 @@ public class OrderServiceImpl implements OrderService {
         this.orderServiceMapper = orderServiceMapper;
         this.additionalService = additionalService;
     }
+
+    @Override
+    public void removeOrderById(int id) {
+        orderRepository.findById(id).ifPresent(order -> orderRepository.delete(order));
+    }
+
+    @Override
+    public int getOrderCost(int id) {
+        Order order = orderRepository.findById(id).orElse(null);
+        if (order != null) {
+            AtomicReference<Integer> cost = new AtomicReference<>(0);
+            order.getOrderedFoodList().forEach(it -> cost.updateAndGet(v -> v + it.getTotalfoodcost()));
+            return cost.get();
+        } else return 0;
+    }
+
+    @Override
+    public void confirmOrder(int id) {
+        Order order = orderRepository.findById(id).orElse(null);
+        if (order != null) {
+            order.setConfirmed(true);
+            orderRepository.save(order);
+        }
+    }
+
+    @Override
+    public OrderModel findOrderById(int id) {
+        return orderServiceMapper.entityToModel(orderRepository.findById(id).orElse(new Order()));
+    }
+
+    @Override
+    public List<OrderModel> getAllOrders() {
+        List<Order> orderList = orderRepository.findAllByOrderByIdDesc();
+        return orderList.stream().map(orderServiceMapper::entityToModel).collect(Collectors.toList());
+    }
+
 
     @Override
     public void convertUserCartToOrder(OrderDetailsReq orderDetailsReq, String username) {

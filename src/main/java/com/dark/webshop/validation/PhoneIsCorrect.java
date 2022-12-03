@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Constraint(validatedBy = PhoneIsCorrectValidator.class)
 public @interface PhoneIsCorrect {
-    String message() default "Неверный номер";
+    String message() default "Неверный формат номера";
 
     Class<?>[] groups() default {};
 

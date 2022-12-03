@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
+    List<Order> findAllByOrderByIdDesc();
+
     @Query("select ord from Order ord where ord.user.id= ?1")
     List<Order> findOrdersByUserId(Integer id);
 
