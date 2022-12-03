@@ -51,7 +51,9 @@
                     </div>
                     <div sec:authorize="isAuthenticated()">
                         <span sec:authentication="name">Bob</span>
-                        <a th:href="@{/category}"><i class="fa fa-user"></i> Config</a>
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                            <a th:href="@{/category}"><i class="fa fa-user"></i> Config</a>
+                        </div>
                         <a th:href="@{/logout}">
                             <i class="fa fa-user">
                             </i> Logout</a>
