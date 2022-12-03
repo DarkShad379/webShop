@@ -1,6 +1,5 @@
 package com.dark.webshop.controller;
 
-import com.dark.webshop.controller.dto.mapper.OrderedFoodReqMapper;
 import com.dark.webshop.service.OrderService;
 import com.dark.webshop.service.model.OrderModel;
 import com.dark.webshop.utils.ImageUtil;
@@ -21,7 +20,7 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
-    public OrderController(OrderService orderService, OrderedFoodReqMapper orderedFoodReqMapper) {
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 

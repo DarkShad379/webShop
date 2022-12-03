@@ -25,7 +25,7 @@ public class AdditionalServiceImpl implements AdditionalService {
     @Override
     public AdditionalModel findAdditionalById(int id) {
         Optional<Additional> additionalOpt = additionalRepository.findById(id);
-        return additionalOpt.map(additional -> additionalMapper.entityToModel(additional)).orElse(null);
+        return additionalOpt.map(additionalMapper::entityToModel).orElse(null);
     }
 
     @Transactional

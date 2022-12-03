@@ -4,7 +4,6 @@ import com.dark.webshop.controller.dto.UserReq;
 import com.dark.webshop.controller.dto.mapper.UserReqMapper;
 import com.dark.webshop.service.UserService;
 import com.dark.webshop.validation.marker_interface.OnCreate;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,12 +16,11 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
-    private final UserDetailsService userDetailsService;
     private final UserReqMapper userReqMapper;
     private final UserService userService;
 
-    public UserController(UserDetailsService userDetailsService, UserReqMapper userReqMapper, UserService userService) {
-        this.userDetailsService = userDetailsService;
+    public UserController(UserReqMapper userReqMapper, UserService userService) {
+
         this.userReqMapper = userReqMapper;
         this.userService = userService;
     }
