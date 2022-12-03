@@ -23,6 +23,14 @@ public class CartController {
         this.orderService = orderService;
     }
 
+    @GetMapping("/complete")
+    public String orderCompletePage(Principal principal, Model model) {
+        model.addAttribute("cartPrice", orderService.getUserCartPrice(principal.getName()));
+        model.addAttribute("cartSize", orderService.getUserCartSize(principal.getName()));
+
+        return "orderComplete";
+    }
+
     @GetMapping
     public String getUserCartPage(Principal principal, Model model) {
         if (principal == null) {
@@ -45,7 +53,7 @@ public class CartController {
 
             orderService.convertUserCartToOrder(orderDetailsReq, principal.getName());
 
-            return "redirect:/";
+            return "redirect:/cart/complete";
         } else {
             model.addAttribute("imgUtil", new ImageUtil());
             model.addAttribute("cartPrice", orderService.getUserCartPrice(principal.getName()));

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Pizza House Корзина">
+    <title>Pizza House - Корзина</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+</head>
+
+<body>
+
+<!-- Humberger Begin -->
+<div class="humberger__menu__overlay"></div>
+<div class="humberger__menu__wrapper">
+    <div class="humberger__menu__logo">
+        <a href="#"><img src="/img/logo.png" alt=""></a>
+    </div>
+    <div class="humberger__menu__cart">
+        <ul>
+            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+        </ul>
+        <div class="header__cart__price">item: <span>$150.00</span></div>
+    </div>
+</div>
+</div>
+<!-- Humberger End -->
+
+<header class="header">
+    <div class="container">
+        <div class="col-lg-3">
+            <div class="header__logo">
+                <a href="/"><img src="/img/logo.png" alt=""></a>
+            </div>
+            <div class="header__cart">
+                <div class="header__top__right__auth">
+                    <div sec:authorize="isAnonymous">
+                        <a th:href="@{/login}"><i class="fa fa-user"></i> Login</a>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <span sec:authentication="name">Bob</span>
+                        <a th:href="@{/category}"><i class="fa fa-user"></i> Config</a>
+                        <a th:href="@{/logout}">
+                            <i class="fa fa-user">
+                            </i> Logout</a>
+                    </div>
+                </div>
+                <div class="header__cart__price">Корзина: <span th:text="${cartPrice}+T">0 T</span></div>
+                <ul>
+                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span th:text="${cartSize}">0</span></a></li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</header>
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg">
+    <div class="container">
+        <div class="row">
+            <img src="/img/breadcrumb.jpg">
+            <div class="col-lg-12 text-center">
+                <h2>Спасибо за заказ</h2>
+                <div class="breadcrumb__option">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Shoping Cart Section Begin -->
+<div class="about">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="titlepage">
+                    <span>Благодарим вас за заказ в нашей доставке. Наш менджер свяжется с вами в течении 5 мин. для уточнения деталей вашего заказа и способа его оплаты. Мы доставим ваш заказ как можно скорее.</span>
+                    <img src="/img/order.png"/>
+                    <div class="shoping__cart__btns">
+                        <a th:href="@{/}" class="primary-btn cart-btn">Продолжить покупки</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shoping Cart Section End -->
+
+<!-- Footer Section Begin -->
+<section class="contact spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_phone"></span>
+                    <h4>Заказывайте по номеру</h4>
+                    <p>+8-800-535-3535</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_pin_alt"></span>
+                    <h4>Наш адресс</h4>
+                    <p>Г. Нурсултан Ул. Нурсултана</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_clock_alt"></span>
+                    <h4>Время работы</h4>
+                    <p>С 12:00 До 23:00</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                <div class="contact__widget">
+                    <span class="icon_mail_alt"></span>
+                    <h4>Email</h4>
+                    <p>housepizza@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+
+
+</body>
+
+</html>

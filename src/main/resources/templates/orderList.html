@@ -2,7 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <title>Редактирование еды</title>
+    <title>Список заказов</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
@@ -24,13 +24,13 @@
                     <a class="nav-link" th:href="@{/}">На главную</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/order}">Список заказов </a>
+                    <a class="nav-link" th:href="@{/order}">Список заказов <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/category}">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/food}">Еда <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/food}">Еда </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/additionals}">Добавки</a>
@@ -43,15 +43,13 @@
 <body>
 <!-- partial:index.partial.html -->
 <div class="table-style">
-    <div class="header">Еда</div>
+    <div class="header">Заказы</div>
     <table cellspacing="0">
         <tr>
-            <th>Название</th>
-            <th>Описание</th>
-            <th>Цена</th>
-            <th>Изображение</th>
-            <th>Категория</th>
-            <th>Добавки</th>
+            <th>Пользователь</th>
+            <th>Время заказа</th>
+            <th>Сумма заказа</th>
+            <th>Состояние</th>
         </tr>
         <tr>
         <tr th:each="food:${foodList}">
@@ -59,7 +57,7 @@
             <td th:text="${food.description}"> TEST</td>
             <td th:text="${food.cost}">TEST</td>
             <td><img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(food.image)}"></td>
-                <td th:text="${food.foodCategory.name}">Отсутствует</td>
+            <td th:text="${food.foodCategory.name}">Отсутствует</td>
             <td>
                 <p th:each="add:${food.availableAdditionalList}" th:text="${add.name}">Нет добавок</p>
             </td>
