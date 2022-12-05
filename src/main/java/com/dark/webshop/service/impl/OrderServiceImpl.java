@@ -27,13 +27,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    FoodService foodService;
-    UserService userService;
-    OrderRepository orderRepository;
-    OrderedFoodRepository orderedFoodRepository;
-    OrderedFoodServiceMapper orderedFoodServiceMapper;
-    OrderServiceMapper orderServiceMapper;
-    AdditionalService additionalService;
+    private final FoodService foodService;
+    private final UserService userService;
+    private final OrderRepository orderRepository;
+    private final OrderedFoodRepository orderedFoodRepository;
+    private final OrderedFoodServiceMapper orderedFoodServiceMapper;
+    private final OrderServiceMapper orderServiceMapper;
+    private final AdditionalService additionalService;
 
     public OrderServiceImpl(FoodService foodService, UserService userService, OrderRepository orderRepository, OrderedFoodRepository orderedFoodRepository, OrderedFoodServiceMapper orderedFoodServiceMapper, OrderServiceMapper orderServiceMapper, AdditionalService additionalService) {
         this.foodService = foodService;
