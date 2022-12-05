@@ -11,6 +11,7 @@ import com.dark.webshop.service.OrderService;
 import com.dark.webshop.service.UserService;
 import com.dark.webshop.service.mapper.OrderServiceMapper;
 import com.dark.webshop.service.mapper.OrderedFoodServiceMapper;
+import com.dark.webshop.service.model.AdditionalModel;
 import com.dark.webshop.service.model.OrderModel;
 import com.dark.webshop.service.model.OrderedFoodModel;
 import com.dark.webshop.service.model.UserModel;
@@ -23,6 +24,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void removeOrderById(int id) {
-        orderRepository.findById(id).ifPresent(order -> orderRepository.delete(order));
+        orderRepository.findById(id).ifPresent(orderRepository::delete);
     }
 
     @Override
@@ -84,7 +87,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void convertUserCartToOrder(OrderDetailsReq orderDetailsReq, String username) {
         UserModel userModel = userService.findUserByUsername(username);
-
         OrderModel order = new OrderModel();
         order.setPhone(orderDetailsReq.getPhoneNumber());
         order.setAddress(orderDetailsReq.getAddress());
@@ -109,7 +111,7 @@ public class OrderServiceImpl implements OrderService {
         userModel.getOrderedFoodCard().removeIf(it -> Objects.equals(it.getId(), orderedFoodId));
         userService.updateUserAccount(userModel);
         Optional<OrderedFood> orderedFood = orderedFoodRepository.findById(orderedFoodId);
-        orderedFood.ifPresent(food -> orderedFoodRepository.delete(food));
+        orderedFood.ifPresent(orderedFoodRepository::delete);
 
     }
 
@@ -122,21 +124,36 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Integer getUserCartPrice(String username) {
         UserModel userModel = userService.findUserByUsername(username);
-        AtomicReference<Integer> cost = new AtomicReference<>(0);
-        userModel.getOrderedFoodCard().forEach(it -> cost.updateAndGet(v -> v + it.getTotalfoodcost()));
-        return cost.get();
+        AtomicReference<Integer> mainCost = new AtomicReference<>(0);
+        userModel.getOrderedFoodCard().stream().map(OrderedFoodModel::getTotalfoodcost).forEach(foodCost -> mainCost.updateAndGet(cost -> cost + foodCost));
+        return mainCost.get();
     }
 
     @Transactional
     @Override
     public void addOrderedFoodToUserCart(String username, OrderedFoodModel orderedFoodModel) {
-        AtomicReference<Integer> cost = new AtomicReference<>(0);
-        cost.updateAndGet(v -> v + foodService.findFoodById(orderedFoodModel.getFood().getId()).getCost());
-        orderedFoodModel.getAdditionalList().forEach(it -> cost.updateAndGet(v -> v + additionalService.findAdditionalById(it.getId()).getCost()));
-        orderedFoodModel.setTotalfoodcost(cost.get());
+        AtomicReference<Integer> mainCost = getMainCost(orderedFoodModel);
+        orderedFoodModel.setTotalfoodcost(mainCost.get());
         UserModel userModel = userService.findUserByUsername(username);
         OrderedFood orderedFood = orderedFoodRepository.save(orderedFoodServiceMapper.modelToEntity(orderedFoodModel));
         userModel.getOrderedFoodCard().add(orderedFoodServiceMapper.entityToModel(orderedFood));
         userService.updateUserAccount(userModel);
+    }
+
+    private AtomicReference<Integer> getMainCost(OrderedFoodModel orderedFoodModel) {
+        AtomicReference<Integer> mainCost = new AtomicReference<>(0);
+        Integer orderedFoodId = orderedFoodModel.getFood().getId();
+        Integer orderedFoodCost = foodService.findFoodById(orderedFoodId).getCost();
+        mainCost.updateAndGet(cost -> cost + orderedFoodCost);
+        orderedFoodModel.getAdditionalList().forEach(calculateMainCostFromAdditionalList(mainCost));
+        return mainCost;
+    }
+
+    private Consumer<AdditionalModel> calculateMainCostFromAdditionalList(AtomicReference<Integer> mainCost) {
+        return additionalObject -> mainCost.updateAndGet(addAdditionalCostToMainCost(additionalObject));
+    }
+
+    private UnaryOperator<Integer> addAdditionalCostToMainCost(AdditionalModel additionalObject) {
+        return costAdditional -> costAdditional + additionalService.findAdditionalById(additionalObject.getId()).getCost();
     }
 }

@@ -20,15 +20,7 @@ public class UserServiceImpl implements UserService {
     private final UserServiceMapper userServiceMapper;
     private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public UserModel findUserByUsername(String username) {
-        return userServiceMapper.entityToModel(userRepository.findByUsername(username));
-    }
 
-    @Override
-    public boolean userExist(String username) {
-        return userRepository.findByUsername(username) != null;
-    }
 
     public UserServiceImpl(UserRepository userRepository, UserServiceMapper userServiceMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -40,6 +32,16 @@ public class UserServiceImpl implements UserService {
     public boolean userPasswordIsValid(UserModel userModel) {
         User user = userRepository.findByUsername(userModel.getUsername());
         return passwordEncoder.matches(userModel.getPassword(), user.getPassword());
+    }
+
+    @Override
+    public UserModel findUserByUsername(String username) {
+        return userServiceMapper.entityToModel(userRepository.findByUsername(username));
+    }
+
+    @Override
+    public boolean userExist(String username) {
+        return userRepository.findByUsername(username) != null;
     }
 
     @Override
