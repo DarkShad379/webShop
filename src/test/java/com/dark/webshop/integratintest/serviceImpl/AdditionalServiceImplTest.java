@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -28,14 +26,5 @@ class AdditionalServiceImplTest {
         assertEquals(250, newAdditionalModel.getCost().intValue());
     }
 
-    @Test
-    void deleteAdditional() {
-        List<AdditionalModel> listModel = additionalService.findAll(false);
-
-    }
-
-    @Test
-    void findAll() {
-    }
 
 }
